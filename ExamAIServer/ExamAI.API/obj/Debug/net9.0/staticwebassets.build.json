@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "B9G+BlXMr2QF2NqzqtR6HO6j3aEbk0/5a5RXwNQlCh0=",
+  "Source": "ExamAI.API",
+  "BasePath": "_content/ExamAI.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

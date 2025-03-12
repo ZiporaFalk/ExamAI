@@ -1,0 +1,16 @@
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\bin\Debug\net9.0\ExamAI.Data.deps.json
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\bin\Debug\net9.0\ExamAI.Data.dll
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\bin\Debug\net9.0\ExamAI.Data.pdb
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\bin\Debug\net9.0\ExamAI.Core.dll
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\bin\Debug\net9.0\ExamAI.Core.pdb
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\ExamAI.Data.csproj.AssemblyReference.cache
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\ExamAI.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\ExamAI.Data.AssemblyInfoInputs.cache
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\ExamAI.Data.AssemblyInfo.cs
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\ExamAI.Data.csproj.CoreCompileInputs.cache
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\ExamAI.Data.sourcelink.json
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\ExamAI.D.2F114E47.Up2Date
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\ExamAI.Data.dll
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\refint\ExamAI.Data.dll
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\ExamAI.Data.pdb
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\ref\ExamAI.Data.dll
