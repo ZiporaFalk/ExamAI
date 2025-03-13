@@ -18,7 +18,7 @@ namespace ExamAI.Data.Repositories
         }
         public Submission Get(int id, int exam_id)
         {
-            return _context.Submissions.FirstOrDefault(x => x.Id == id && x.Exam_Id == exam_id);
+            return _context.Submissions.FirstOrDefault(x => x.Id == id && x.ExamId == exam_id);
         }
         public List<Submission> GetAllById(int id)
         {

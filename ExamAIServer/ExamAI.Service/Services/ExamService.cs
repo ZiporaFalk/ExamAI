@@ -1,7 +1,6 @@
 ﻿using ExamAI.Core.Models;
 using ExamAI.Core.Repositories;
 using ExamAI.Core.Services;
-using ExamAI.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,10 +12,10 @@ namespace ExamAI.Service.Services
 {
     public class ExamService: IExamService
     {
-        private readonly ExamRepository _examRepository;
+        private readonly IExamRepository _examRepository;
         private readonly IRepositoryManager _repositoryManager;
 
-        public ExamService(ExamRepository examRepository, IRepositoryManager repositoryManager)
+        public ExamService(IExamRepository examRepository, IRepositoryManager repositoryManager)
         {
             _examRepository = examRepository;
             _repositoryManager = repositoryManager;

@@ -9,7 +9,8 @@ namespace ExamAI.Core.Models
     public class Answer
     {
         public int Id { get; set; }
-        public int Exam_Id { get; set; }
+        public int ExamId { get; set; }
+        public Exam Exam { get; set; }
         public int QuestionNumber { get; set; }//מספר שאלה
         public int CorrectValue { get; set; }//התשובה הנכונה
         public int Value { get; set; }//  כמה שווה שאלה זו?
@@ -19,10 +20,11 @@ namespace ExamAI.Core.Models
 
         }
 
-        public Answer(int id, int exam_Id, int questionNumber, int correctValue, int value)
+        public Answer(int id, int examId, Exam exam, int questionNumber, int correctValue, int value)
         {
             Id = id;
-            Exam_Id = exam_Id;
+            ExamId = examId;
+            Exam = exam;
             QuestionNumber = questionNumber;
             CorrectValue = correctValue;
             Value = value;

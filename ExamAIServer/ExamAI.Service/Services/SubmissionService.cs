@@ -1,7 +1,6 @@
 ﻿using ExamAI.Core.Models;
 using ExamAI.Core.Repositories;
 using ExamAI.Core.Services;
-using ExamAI.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,10 +13,10 @@ namespace ExamAI.Service.Services
     public class SubmissionService: ISubmissionService
     {
 
-        private readonly SubmissionRepository _submissionRepository;
+        private readonly ISubmissionRepository _submissionRepository;
         private readonly IRepositoryManager _repositoryManager;
 
-        public SubmissionService(SubmissionRepository submissionRepository, IRepositoryManager repositoryManager)
+        public SubmissionService(ISubmissionRepository submissionRepository, IRepositoryManager repositoryManager)
         {
             _submissionRepository = submissionRepository;
             _repositoryManager = repositoryManager;

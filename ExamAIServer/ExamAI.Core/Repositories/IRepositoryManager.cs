@@ -11,7 +11,7 @@ namespace ExamAI.Core.Repositories
     {
         IUserRepository Users { get; }
         IExamRepository Exams { get; }
-        IFeedbackRepository Feedbacks { get; }
+        //IFeedbackRepository Feedbacks { get; }
         IAnswerRepository Answers { get; }
         IStudentRepository Students { get; }
         ISubmissionRepository Submissions { get; }

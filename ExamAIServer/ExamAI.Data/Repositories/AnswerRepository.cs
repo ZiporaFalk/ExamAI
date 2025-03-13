@@ -24,7 +24,7 @@ namespace ExamAI.Data.Repositories
             //Answer answer= _context.Answers.FirstOrDefault(x => x.Id == id && x.Exam_Id == exam_id);
             //if (answer == null)
             //    return NotFound(); 
-            return _context.Answers.FirstOrDefault(x => x.Id == id && x.Exam_Id == exam_id);
+            return _context.Answers.FirstOrDefault(x => x.Id == id && x.ExamId == exam_id);
         }
         public void Post(Answer newAnswer)
         {

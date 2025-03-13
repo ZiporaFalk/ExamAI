@@ -1,6 +1,7 @@
 C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Core\bin\Debug\net9.0\ExamAI.Core.deps.json
 C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Core\bin\Debug\net9.0\ExamAI.Core.dll
 C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Core\bin\Debug\net9.0\ExamAI.Core.pdb
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Core\obj\Debug\net9.0\ExamAI.Core.csproj.AssemblyReference.cache
 C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Core\obj\Debug\net9.0\ExamAI.Core.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Core\obj\Debug\net9.0\ExamAI.Core.AssemblyInfoInputs.cache
 C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Core\obj\Debug\net9.0\ExamAI.Core.AssemblyInfo.cs
@@ -10,4 +11,3 @@ C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI
 C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Core\obj\Debug\net9.0\refint\ExamAI.Core.dll
 C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Core\obj\Debug\net9.0\ExamAI.Core.pdb
 C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Core\obj\Debug\net9.0\ref\ExamAI.Core.dll
-C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Core\obj\Debug\net9.0\ExamAI.Core.csproj.AssemblyReference.cache

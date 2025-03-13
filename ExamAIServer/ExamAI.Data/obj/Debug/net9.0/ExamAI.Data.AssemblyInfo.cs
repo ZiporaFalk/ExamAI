@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ExamAI.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d80bcb48be8444ff17faf4cd3b1a518d9cbff7a4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0405aa0f5bb627457a2297d68a194923bfa9974")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExamAI.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExamAI.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

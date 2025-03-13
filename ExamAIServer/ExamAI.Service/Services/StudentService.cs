@@ -1,7 +1,6 @@
 ﻿using ExamAI.Core.Models;
 using ExamAI.Core.Repositories;
 using ExamAI.Core.Services;
-using ExamAI.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,19 +12,19 @@ namespace ExamAI.Service.Services
 {
     public class StudentService: IStudentService
     {
-        private readonly StudentRepository _studentRepository;
+        private readonly IStudentRepository _studentRepository;
         private readonly IRepositoryManager _repositoryManager;
 
-        public StudentService(StudentRepository studentRepository,IRepositoryManager repositoryManager)
+        public StudentService(IStudentRepository studentRepository,IRepositoryManager repositoryManager)
         {
             _studentRepository = studentRepository;
             _repositoryManager = repositoryManager;
         }
-        public List<User> GetAll()
+        public List<Student> GetAll()
         {
             return _studentRepository.GetAll();
         }
-        public User GetById(int id)
+        public Student GetById(int id)
         {
             return _studentRepository.GetById(id);
         }

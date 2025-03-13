@@ -9,9 +9,9 @@ namespace ExamAI.Core.Repositories
 {
     public interface IStudentRepository
     {
-        List<User> GetAll();
+        List<Student> GetAll();
 
-        User GetById(int id);
+        Student GetById(int id);
 
         void Delete(int id);
 

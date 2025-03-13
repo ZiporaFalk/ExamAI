@@ -1,5 +1,7 @@
-﻿using ExamAI.Core.Models;
-using ExamAI.Service.Services;
+﻿using AutoMapper;
+using ExamAI.Core.DTOs;
+using ExamAI.Core.Models;
+using ExamAI.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,27 +12,33 @@ namespace ExamAI.API.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private readonly StudentService _studentservice;
-        public StudentController(StudentService studentservice)
+        private readonly IStudentService _studentservice;
+        private readonly IMapper _mapper;
+
+        public StudentController(IStudentService studentservice, IMapper mapper)
         {
             _studentservice = studentservice;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public IEnumerable<User> Get()
+        public IEnumerable<UserDto> Get()
         {
-            return _studentservice.GetAll();
+            var list = _studentservice.GetAll();
+            return _mapper.Map<IEnumerable<UserDto>>(list);
         }
 
         [HttpGet("{id}")]
-        public User Get(int id)
+        public UserDto Get(int id)
         {
-            return _studentservice.GetById(id);
+            var user = _studentservice.GetById(id);
+            return _mapper.Map<UserDto>(user);
         }
         [HttpPost]
-        public void Post([FromBody] Student newstudent)//הרשמה
+        public void Post([FromBody] StudentDto newstudent)//הרשמה
         {
-            _studentservice.Post(newstudent);
+            var student = _mapper.Map<Student>(newstudent);
+            _studentservice.Post(student);
         }
 
         //[HttpPut("{id}")]

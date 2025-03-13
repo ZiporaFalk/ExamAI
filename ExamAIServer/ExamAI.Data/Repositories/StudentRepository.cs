@@ -1,5 +1,6 @@
 ﻿using ExamAI.Core.Models;
 using ExamAI.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,18 +17,21 @@ namespace ExamAI.Data.Repositories
         {
             _context = context;
         }
-        public List<User> GetAll()
+        public List<Student> GetAll()
         {
-            return _context.Users.ToList();
+            return _context.Users.OfType<Student>().ToList();
+            //IQueryable<User> users = _context.Users;
+            //List<Student> students = users.OfType<Student>().ToList();
+            //return students;
         }
-        public User GetById(int id)
+        public Student GetById(int id)
         {
-            return _context.Users.FirstOrDefault(x => x.Id == id);
+            return _context.Users.OfType<Student>().FirstOrDefault(x => x.Id == id);
         }
         public void Delete(int id)
         {
-            User user = _context.Users.FirstOrDefault(x => x.Id == id);
-            _context.Users.Remove(user);
+            Student student = _context.Users.OfType<Student>().FirstOrDefault(x => x.Id == id);
+            _context.Users.Remove(student);
         }
         public void Post(Student newstudent)//הרשמה
         {

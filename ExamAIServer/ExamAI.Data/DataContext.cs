@@ -14,15 +14,22 @@ namespace ExamAI.Data
         public DbSet<Exam> Exams { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Submission> Submissions { get; set; }
-        public DbSet<Feedback> Feedbacks { get; set; }
-        //public List<User> Users { get; set; }
-        //public List<Exam> Exams { get; set; }
-        //public List<Answer> Answers { get; set; }
-        //public List<Submission> Submissions { get; set; }
-        //public List<Feedback> Feedbacks { get; set; }
+        //public DbSet<Feedback> Feedbacks { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=sample_db");
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // פתרון בעיית ה-Discriminator
+            modelBuilder.Entity<User>()
+                .HasDiscriminator<string>("Discriminator")
+                .HasValue<User>("User")
+                .HasValue<Student>("Student")
+                .HasValue<Management>("Management");
         }
         //public DataContext()
         //{

@@ -14,17 +14,17 @@ namespace ExamAI.Data.Repositories
         private readonly DataContext _context;
         public IUserRepository Users { get; }
         public IExamRepository Exams { get; }
-        public IFeedbackRepository Feedbacks { get; }
+        //public IFeedbackRepository Feedbacks { get; }
         public IAnswerRepository Answers { get; }
         public IStudentRepository Students { get; }
         public ISubmissionRepository Submissions { get; }
 
-        public RepositoryManager(DataContext context, IUserRepository users, IExamRepository exams, IFeedbackRepository feedbacks, IAnswerRepository answers, IStudentRepository students, ISubmissionRepository submissions)
+        public RepositoryManager(DataContext context, IUserRepository users, IExamRepository exams, IAnswerRepository answers, IStudentRepository students, ISubmissionRepository submissions)
         {
             _context = context;
             Users = users;
             Exams = exams;
-            Feedbacks = feedbacks;
+            //Feedbacks = feedbacks;
             Answers = answers;
             Students = students;
             Submissions = submissions;
