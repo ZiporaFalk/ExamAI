@@ -1,4 +1,5 @@
 ﻿using ExamAI.Core.Models;
+using ExamAI.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExamAI.Data.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
 
@@ -17,7 +18,7 @@ namespace ExamAI.Data.Repositories
         }
         public List<User> GetAll()
         {
-            return _context.Users;
+            return _context.Users.ToList();
         }
         public User GetById(int id)
         {

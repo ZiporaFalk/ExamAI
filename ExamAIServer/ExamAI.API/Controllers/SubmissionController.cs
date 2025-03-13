@@ -24,25 +24,25 @@ namespace ExamAI.API.Controllers
         }
 
         [HttpGet("{id}")] 
-        public List<Submission> GetAllById(int id)
+        public List<Submission> Get(int id)
         {
             return _submissionservice.GetAllById(id);
         }
-        /// ///////////////////////////////////////////////////
-       
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Submission newSubmission)
         {
+            _submissionservice.Post(newSubmission);
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

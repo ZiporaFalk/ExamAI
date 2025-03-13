@@ -1,4 +1,5 @@
 ﻿using ExamAI.Core.Models;
+using ExamAI.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExamAI.Data.Repositories
 {
-    public class FeedbackRepository
+    public class FeedbackRepository : IFeedbackRepository
     {
         private readonly DataContext _context;
 
@@ -19,6 +20,9 @@ namespace ExamAI.Data.Repositories
         {
             return _context.Feedbacks.FirstOrDefault(x => x.Id == id && x.Exam_Id == exam_id);
         }
-
+        public void Post(Feedback newFeedback)
+        {
+            _context.Feedbacks.Add(newFeedback);
+        }
     }
 }

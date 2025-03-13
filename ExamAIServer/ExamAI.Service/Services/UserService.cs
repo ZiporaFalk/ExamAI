@@ -1,4 +1,6 @@
 ﻿using ExamAI.Core.Models;
+using ExamAI.Core.Repositories;
+using ExamAI.Core.Services;
 using ExamAI.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -8,12 +10,15 @@ using System.Threading.Tasks;
 
 namespace ExamAI.Service.Services
 {
-    public class UserService
+    public class UserService: IUserService
     {
         private readonly UserRepository _userRepository;
-        public UserService(UserRepository userRepository)
+        private readonly IRepositoryManager _repositoryManager;
+
+        public UserService(UserRepository userRepository,IRepositoryManager repositoryManager)
         {
             _userRepository = userRepository;
+            _repositoryManager = repositoryManager;
         }
         public List<User> GetAll()
         {
@@ -26,6 +31,7 @@ namespace ExamAI.Service.Services
         public void Delete(int id)
         {
             _userRepository.Delete(id);
+            _repositoryManager.Save();
         }
     }
 }

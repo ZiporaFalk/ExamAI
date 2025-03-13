@@ -14,3 +14,5 @@ C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI
 C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\refint\ExamAI.Data.dll
 C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\ExamAI.Data.pdb
 C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\ref\ExamAI.Data.dll
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\bin\Debug\net9.0\ExamAI.Data.runtimeconfig.json
+C:\Users\user1\Desktop\תכנות\שנה ב\פרקטיקום\ExamAIServer\ExamAI.Data\obj\Debug\net9.0\ExamAI.Data.genruntimeconfig.cache

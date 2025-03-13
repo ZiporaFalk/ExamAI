@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExamAI.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,8 @@ namespace ExamAI.Core.Repositories
 {
     public interface IExamRepository
     {
+        Exam GetById(int id);
+        void Post(Exam newexam);
+
     }
 }

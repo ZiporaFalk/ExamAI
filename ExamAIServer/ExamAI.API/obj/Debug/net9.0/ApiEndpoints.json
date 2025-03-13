@@ -1,26 +1,6 @@
 [
   {
     "ContainingType": "ExamAI.API.Controllers.AnswerController",
-    "Method": "Get",
-    "RelativePath": "api/Answer",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.AnswerController",
     "Method": "Post",
     "RelativePath": "api/Answer",
     "HttpMethod": "POST",
@@ -28,8 +8,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "value",
-        "Type": "System.String",
+        "Name": "newAnswer",
+        "Type": "ExamAI.Core.Models.Answer",
         "IsRequired": true
       }
     ],
@@ -46,32 +26,6 @@
     "Method": "Get",
     "RelativePath": "api/Answer/{id}",
     "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.String",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.AnswerController",
-    "Method": "Put",
-    "RelativePath": "api/Answer/{id}",
-    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -81,52 +35,14 @@
         "IsRequired": true
       },
       {
-        "Name": "value",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.AnswerController",
-    "Method": "Delete",
-    "RelativePath": "api/Answer/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
+        "Name": "exam_id",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.ExamController",
-    "Method": "Get",
-    "RelativePath": "api/Exam",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "ExamAI.Core.Models.Answer",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -145,8 +61,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "value",
-        "Type": "System.String",
+        "Name": "newexam",
+        "Type": "ExamAI.Core.Models.Exam",
         "IsRequired": true
       }
     ],
@@ -174,76 +90,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.String",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.ExamController",
-    "Method": "Put",
-    "RelativePath": "api/Exam/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "value",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.ExamController",
-    "Method": "Delete",
-    "RelativePath": "api/Exam/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.FeedbackController",
-    "Method": "Get",
-    "RelativePath": "api/Feedback",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "ExamAI.Core.Models.Exam",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -262,8 +109,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "value",
-        "Type": "System.String",
+        "Name": "newFeedback",
+        "Type": "ExamAI.Core.Models.Feedback",
         "IsRequired": true
       }
     ],
@@ -280,32 +127,6 @@
     "Method": "Get",
     "RelativePath": "api/Feedback/{id}",
     "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.String",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.FeedbackController",
-    "Method": "Put",
-    "RelativePath": "api/Feedback/{id}",
-    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -315,52 +136,14 @@
         "IsRequired": true
       },
       {
-        "Name": "value",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.FeedbackController",
-    "Method": "Delete",
-    "RelativePath": "api/Feedback/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
+        "Name": "exam_id",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.SubmissionController",
-    "Method": "Get",
-    "RelativePath": "api/Submission",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "ExamAI.Core.Models.Feedback",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -371,106 +154,9 @@
     ]
   },
   {
-    "ContainingType": "ExamAI.API.Controllers.SubmissionController",
-    "Method": "Post",
-    "RelativePath": "api/Submission",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "value",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.SubmissionController",
+    "ContainingType": "ExamAI.API.Controllers.StudentController",
     "Method": "Get",
-    "RelativePath": "api/Submission/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.String",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.SubmissionController",
-    "Method": "Put",
-    "RelativePath": "api/Submission/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "value",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.SubmissionController",
-    "Method": "Delete",
-    "RelativePath": "api/Submission/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ExamAI.API.Controllers.UserController",
-    "Method": "Get",
-    "RelativePath": "api/User",
+    "RelativePath": "api/Student",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -488,16 +174,16 @@
     ]
   },
   {
-    "ContainingType": "ExamAI.API.Controllers.UserController",
+    "ContainingType": "ExamAI.API.Controllers.StudentController",
     "Method": "Post",
-    "RelativePath": "api/User",
+    "RelativePath": "api/Student",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "value",
-        "Type": "System.String",
+        "Name": "newstudent",
+        "Type": "ExamAI.Core.Models.Student",
         "IsRequired": true
       }
     ],
@@ -510,9 +196,31 @@
     ]
   },
   {
-    "ContainingType": "ExamAI.API.Controllers.UserController",
+    "ContainingType": "ExamAI.API.Controllers.StudentController",
+    "Method": "Delete",
+    "RelativePath": "api/Student",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ExamAI.API.Controllers.StudentController",
     "Method": "Get",
-    "RelativePath": "api/User/{id}",
+    "RelativePath": "api/Student/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -525,7 +233,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.String",
+        "Type": "ExamAI.Core.Models.User",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -536,21 +244,47 @@
     ]
   },
   {
-    "ContainingType": "ExamAI.API.Controllers.UserController",
-    "Method": "Put",
-    "RelativePath": "api/User/{id}",
-    "HttpMethod": "PUT",
+    "ContainingType": "ExamAI.API.Controllers.SubmissionController",
+    "Method": "Get",
+    "RelativePath": "api/Submission",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
-        "Name": "value",
-        "Type": "System.String",
+        "Name": "exam_id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ExamAI.Core.Models.Submission",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ExamAI.API.Controllers.SubmissionController",
+    "Method": "Post",
+    "RelativePath": "api/Submission",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newSubmission",
+        "Type": "ExamAI.Core.Models.Submission",
         "IsRequired": true
       }
     ],
@@ -563,10 +297,10 @@
     ]
   },
   {
-    "ContainingType": "ExamAI.API.Controllers.UserController",
-    "Method": "Delete",
-    "RelativePath": "api/User/{id}",
-    "HttpMethod": "DELETE",
+    "ContainingType": "ExamAI.API.Controllers.SubmissionController",
+    "Method": "Get",
+    "RelativePath": "api/Submission/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -578,8 +312,12 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Void",
-        "MediaTypes": [],
+        "Type": "System.Collections.Generic.List\u00601[[ExamAI.Core.Models.Submission, ExamAI.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 200
       }
     ]

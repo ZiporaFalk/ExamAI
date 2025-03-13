@@ -16,36 +16,29 @@ namespace ExamAI.API.Controllers
         {
             _examservice = examservice;
         }
-        
-        [HttpGet] 
-        public Exam GetById(int id)
+
+        [HttpGet("{id}")]
+        public Exam Get(int id)
         {
             return _examservice.GetById(id);
         }
 
-        // GET api/<ExamController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<ExamController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Exam newexam)
         {
+            _examservice.Post(newexam);
         }
 
-        // PUT api/<ExamController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //// PUT api/<ExamController>/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
-        // DELETE api/<ExamController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //// DELETE api/<ExamController>/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

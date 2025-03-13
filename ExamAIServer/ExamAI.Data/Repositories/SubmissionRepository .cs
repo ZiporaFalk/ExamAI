@@ -1,4 +1,5 @@
 ﻿using ExamAI.Core.Models;
+using ExamAI.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExamAI.Data.Repositories
 {
-    public class SubmissionRepository
+    public class SubmissionRepository: ISubmissionRepository
     {
         private readonly DataContext _context;
 
@@ -21,7 +22,11 @@ namespace ExamAI.Data.Repositories
         }
         public List<Submission> GetAllById(int id)
         {
-            return _context.Submissions.FindAll(x => x.Id == id);
+            return _context.Submissions.Where(x => x.Id == id).ToList();
+        }
+        public void Post(Submission newSubmission)
+        {
+            _context.Submissions.Add(newSubmission);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ExamAI.Service.Services;
+﻿using ExamAI.Core.Models;
+using ExamAI.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -16,35 +17,32 @@ namespace ExamAI.API.Controllers
             _answerservice = answerservice;
         }
 
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
-        // GET api/<AnswerController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Answer Get(int id, int exam_id)
         {
-            return "value";
+            return _answerservice.GetById(id, exam_id);
         }
 
-        // POST api/<AnswerController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Answer newAnswer)
         {
+            _answerservice.Post(newAnswer);
         }
 
-        // PUT api/<AnswerController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
-        // DELETE api/<AnswerController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

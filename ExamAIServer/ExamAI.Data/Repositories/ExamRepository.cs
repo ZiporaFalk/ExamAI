@@ -1,4 +1,5 @@
 ﻿using ExamAI.Core.Models;
+using ExamAI.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExamAI.Data.Repositories
 {
-    public class ExamRepository
+    public class ExamRepository: IExamRepository
     {
         private readonly DataContext _context;
 
@@ -18,6 +19,10 @@ namespace ExamAI.Data.Repositories
         public Exam GetById(int id)
         {
             return _context.Exams.FirstOrDefault(x => x.Id == id);
+        }
+        public void Post(Exam newexam)
+        {
+           _context.Exams.Add(newexam);
         }
     }
 }

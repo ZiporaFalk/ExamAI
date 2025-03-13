@@ -17,36 +17,33 @@ namespace ExamAI.API.Controllers
             _feedbackService = feedbackService;
         }
 
-        [HttpGet]///int id, int exam_id
-        public Feedback GetById(int id, int exam_id)
+        [HttpGet("{id}")]//int id, int exam_id
+        public Feedback Get(int id, int exam_id)
         {
             return _feedbackService.GetById(id, exam_id);
         }
 
-        /// ////////////////////////////////////////////////////////
-        // GET api/<FeedbackController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+      
+        //[HttpGet("{id}")]
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
-        // POST api/<FeedbackController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Feedback newFeedback)
         {
+            _feedbackService.Post(newFeedback);
         }
 
-        // PUT api/<FeedbackController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
-        // DELETE api/<FeedbackController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }
