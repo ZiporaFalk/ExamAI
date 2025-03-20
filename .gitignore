@@ -5,11 +5,7 @@
 
 # dotenv files
 .env
-<<<<<<< HEAD
 
-=======
-appsettings.json
->>>>>>> 450371c (ExamUploadFilesAWS)
 # User-specific files
 *.rsuser
 *.suo

@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-=======
+
 using Amazon.S3;
->>>>>>> 450371c (ExamUploadFilesAWS)
 using AutoMapper;
 using ExamAI.API.Controllers;
 using ExamAI.API.Extensions;
@@ -16,10 +14,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-<<<<<<< HEAD
-=======
+
 using System.Text.Json.Serialization;
->>>>>>> 450371c (ExamUploadFilesAWS)
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,10 +30,7 @@ builder.Services.AddOpenApi();
 builder.Services.ConfigureSwagger();
 
 builder.Services.ConfigureServices();
-<<<<<<< HEAD
-=======
 //builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
->>>>>>> 450371c (ExamUploadFilesAWS)
 
 builder.Services.ConfigureJwt(builder.Configuration);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
@@ -56,10 +49,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
     app.MapOpenApi();
-<<<<<<< HEAD
-
-=======
->>>>>>> 450371c (ExamUploadFilesAWS)
 }
 app.UseCors("AllowAnyOrigin");
 
@@ -72,7 +61,3 @@ app.MapControllers();
 
 app.Run();
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 450371c (ExamUploadFilesAWS)
