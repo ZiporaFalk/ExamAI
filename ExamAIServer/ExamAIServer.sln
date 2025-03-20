@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35728.132 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamAI.API", "ExamAI.API\ExamAI.API.csproj", "{0A04CF8C-7437-4A68-99D5-46B8D6E9CBE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamAI.Core", "ExamAI.Core\ExamAI.Core.csproj", "{F19C699A-6B8E-42E0-BC39-78D07195218A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamAI.Data", "ExamAI.Data\ExamAI.Data.csproj", "{B5B98473-6143-4BB8-BC9E-8DE29369C3DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamAI.Service", "ExamAI.Service\ExamAI.Service.csproj", "{FBE7E974-2C19-466F-8ECC-9E283E9D7250}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A04CF8C-7437-4A68-99D5-46B8D6E9CBE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A04CF8C-7437-4A68-99D5-46B8D6E9CBE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A04CF8C-7437-4A68-99D5-46B8D6E9CBE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A04CF8C-7437-4A68-99D5-46B8D6E9CBE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F19C699A-6B8E-42E0-BC39-78D07195218A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F19C699A-6B8E-42E0-BC39-78D07195218A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F19C699A-6B8E-42E0-BC39-78D07195218A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F19C699A-6B8E-42E0-BC39-78D07195218A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5B98473-6143-4BB8-BC9E-8DE29369C3DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5B98473-6143-4BB8-BC9E-8DE29369C3DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5B98473-6143-4BB8-BC9E-8DE29369C3DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5B98473-6143-4BB8-BC9E-8DE29369C3DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBE7E974-2C19-466F-8ECC-9E283E9D7250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE7E974-2C19-466F-8ECC-9E283E9D7250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE7E974-2C19-466F-8ECC-9E283E9D7250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE7E974-2C19-466F-8ECC-9E283E9D7250}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
