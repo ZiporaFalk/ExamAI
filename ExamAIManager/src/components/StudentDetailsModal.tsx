@@ -1,7 +1,8 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from "@mui/material";
 import axios from "axios";
-import studentStore, { Student } from "./StudentStore";
+import { Student } from "./types";
+import studentStore from "./StudentStore";
 
 interface StudentModalProps {
     open: boolean;
@@ -12,7 +13,6 @@ interface StudentModalProps {
 // const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:7083/api';
 const apiUrl = 'https://localhost:7083/api';
 
-// const StudentDetailsModal: React.FC<StudentModalProps> = ({ open, onClose, onSave, student }) => {
 const StudentDetailsModal: React.FC<StudentModalProps> = ({ open, onClose, student }) => {
     const [formData, setFormData] = useState<Student>(student || { id: 0, name: "", email: "", class: "", password: "" });
 
