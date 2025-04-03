@@ -30,7 +30,7 @@ namespace ExamAI.API.Controllers
             return _mapper.Map<IEnumerable<AnswerDto>>(list);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<AnswerDto> Get(int id, int exam_id)
         {
@@ -38,7 +38,7 @@ namespace ExamAI.API.Controllers
             return _mapper.Map<AnswerDto>(answer);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AnswerDto newAnswerDto)
         {
@@ -47,7 +47,7 @@ namespace ExamAI.API.Controllers
             return Ok("Answer added successfully");
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -12,7 +12,7 @@ namespace ExamAI.API.Controllers
     public class ExamUploadController : ControllerBase
     {
         private readonly IAmazonS3 _s3Client;
-        private readonly string _bucketName; 
+        private readonly string _bucketName;
 
         public ExamUploadController(IAmazonS3 s3Client, IConfiguration configuration)
         {
@@ -31,11 +31,13 @@ namespace ExamAI.API.Controllers
             {
                 BucketName = _bucketName,
                 Key = $"exams/{fileName}", // קבצים נשמרים בתיקיית exams
-                //Key = $"{fileName}", // קבצים נשמרים בתיקיית exams
                 Verb = HttpVerb.PUT,
                 Expires = DateTime.UtcNow.AddMinutes(20),
                 //ContentType = "application/pdf" // ניתן לשנות לסוג קובץ אחר
-                ContentType = "image/jpeg"
+                //ContentType = "image/jpeg"
+                ContentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                //ContentType = "application/octet-stream"
+
             };
             request.Headers["x-amz-acl"] = "bucket-owner-full-control";
 

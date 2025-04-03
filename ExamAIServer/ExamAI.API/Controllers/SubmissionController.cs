@@ -21,14 +21,21 @@ namespace ExamAI.API.Controllers
             _submissionservice = submissionservice;
             _mapper = mapper;
         }
-
-        [HttpGet] // int id, int exam_id
-        public async Task<ActionResult<SubmissionDto>> Get(int id, int exam_id)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<SubmissionDto>>> GetAllAsync()
         {
-            var submission = await _submissionservice.GetAsync(id, exam_id);
+            var list = await _submissionservice.GetAllAsync();
+
+            return Ok(_mapper.Map<IEnumerable<SubmissionDto>>(list));
+        }
+
+        [HttpGet("{student_id}/{exam_id}")]
+        public async Task<ActionResult<SubmissionDto>> Get(int student_id, int exam_id)
+        {
+            var submission = await _submissionservice.GetAsync(student_id, exam_id);
             if (submission == null)
             {
-                return NotFound();
+                return NotFound($"Submission not found for student {student_id} and exam {exam_id}");
             }
             return Ok(_mapper.Map<SubmissionDto>(submission));
         }
@@ -48,13 +55,47 @@ namespace ExamAI.API.Controllers
             return CreatedAtAction(nameof(Get), new { id = submission.Id }, submission);
         }
         //[HttpPut("{id}")]
-        //        //public void Put(int id, [FromBody] string value)
-        //        //{
-        //        //}
+        //public void Put(int id, [FromBody] SubmissionDto newSubmission)
+        //{
+        //}
 
-        //        //[HttpDelete("{id}")]
-        //        //public void Delete(int id)
-        //        //{
-        //        //}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] SubmissionDto updatedSubmission)
+        {
+            var existingSubmission = await _submissionservice.GetByIdAsync(id);
+            if (existingSubmission == null)
+            {
+                return NotFound();
+            }
+            Console.WriteLine(existingSubmission.Id + "iiiiiiiiiiiiiiiiiiiii");
+
+            if (id != existingSubmission.Id)
+            {
+                return BadRequest("ID mismatch");
+            }
+
+            //_mapper.Map(updatedSubmission, existingSubmission);
+            var submission = _mapper.Map<Submission>(updatedSubmission);
+            await _submissionservice.UpdateAsync(id, submission);
+
+            return NoContent();
+        }
+        //[HttpPut("score/{id}")]
+        //public async Task<IActionResult> Put(int studentId, int examId, int newScore)
+        //{
+        //    if (Get(studentId, examId) == null) return NotFound();
+        //    await _submissionservice.UpdateScoreAsync(studentId, examId, newScore);
+
+        //    return NoContent();
+        //}
+
+        //[HttpPut("urls/{id}")]
+        //public async Task<IActionResult> Put(int studentId, int examId, string urlFile, string urlFeedback)
+        //{
+        //    if (Get(studentId, examId) == null) return NotFound();
+        //    await _submissionservice.UpdateUrlsAsync(studentId, examId, urlFile, urlFeedback);
+        //    return NoContent();
+        //}
+
     }
 }

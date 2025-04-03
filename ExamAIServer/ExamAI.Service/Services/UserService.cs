@@ -2,6 +2,8 @@
 using ExamAI.Core.Models;
 using ExamAI.Core.Repositories;
 using ExamAI.Core.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -27,7 +29,6 @@ namespace ExamAI.Service.Services
         {
             return await _userRepository.GetByIdAsync(id);
         }
-
         public async Task<List<Student>> GetAllStudentsAsync()
         {
             return await _userRepository.GetAllStudentsAsync();
@@ -40,12 +41,22 @@ namespace ExamAI.Service.Services
         {
             return await _userRepository.GetManagerAsync();
         }
-
-        public async Task UpdateAsync(int id, User newuser)
+        public async Task<Student> AddStudentAsync(Student student)
         {
-            await _userRepository.UpdateAsync(id, newuser);
-            await _repositoryManager.SaveAsync();
+            return await _userRepository.AddStudentAsync(student);
         }
+        public async Task<User> UpdateAsync(int id, User newUser)
+        {
+            // לא קוראים ל SaveAsync לפני, כי ה Save צריך לקרות אחרי העדכון
+            var updatedUser = await _userRepository.UpdateAsync(id, newUser);
+            if (updatedUser != null)
+            {
+                await _repositoryManager.SaveAsync(); // מבצע את השמירה אחרי העדכון
+            }
+            return updatedUser;
+        }
+
+
 
         public async Task DeleteAsync(int id)
         {

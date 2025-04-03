@@ -17,10 +17,14 @@ namespace ExamAI.Service.Services
             _submissionRepository = submissionRepository;
             _repositoryManager = repositoryManager;
         }
-
-        public async Task<Submission> GetAsync(int id, int exam_id)
+        public async Task<List<Submission>> GetAllAsync()
         {
-            return await _submissionRepository.GetAsync(id, exam_id);
+            return await _submissionRepository.GetAllAsync();
+        }
+
+        public async Task<Submission> GetAsync(int student_id, int exam_id)
+        {
+            return await _submissionRepository.GetAsync(student_id, exam_id);
         }
 
         public async Task<List<Submission>> GetAllByIdAsync(int id)
@@ -28,11 +32,31 @@ namespace ExamAI.Service.Services
             return await _submissionRepository.GetAllByIdAsync(id);
         }
 
+
+        public async Task<Submission> GetByIdAsync(int id)
+        {
+            return await _submissionRepository.GetByIdAsync(id);
+        }
         public async Task PostAsync(Submission newSubmission)
         {
             await _submissionRepository.PostAsync(newSubmission);
             await _repositoryManager.SaveAsync();
         }
+        public async Task UpdateAsync(int id, Submission submission)
+        {
+            await _submissionRepository.UpdateAsync(id, submission);
+            await _repositoryManager.SaveAsync();
+        }
+        //public async Task UpdateScoreAsync(int studentId, int examId, int newScore)
+        //{
+        //    await _submissionRepository.UpdateScoreAsync(studentId, examId, newScore);
+        //    await _repositoryManager.SaveAsync();
+        //}
+        //public async Task UpdateUrlsAsync(int studentId, int examId, string urlFile, string urlFeedback)
+        //{
+        //    await _submissionRepository.UpdateUrlsAsync(studentId, examId, urlFile, urlFeedback);
+        //    await _repositoryManager.SaveAsync();
+        //}
     }
 }
 

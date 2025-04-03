@@ -9,7 +9,7 @@ namespace ExamAI.Core.Services
 {
     public interface IExamService
     {
-        
+        Task<List<Exam>> GetAsync();
         Task<Exam> GetByIdAsync(int id);
         Task PostAsync(Exam newexam);
     }

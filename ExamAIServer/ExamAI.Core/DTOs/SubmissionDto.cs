@@ -9,7 +9,7 @@ namespace ExamAI.Core.DTOs
 {
     public class SubmissionDto
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
         public int StudentId { get; set; }
         //public Student Student { get; set; }
         public int ExamId { get; set; }

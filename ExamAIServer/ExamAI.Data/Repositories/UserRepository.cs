@@ -1,6 +1,7 @@
 ﻿
 using ExamAI.Core.Models;
 using ExamAI.Core.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +40,23 @@ namespace ExamAI.Data.Repositories
         {
             return await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
+        public async Task<Student> AddStudentAsync(Student student)
+        {
+            if (student == null)
+                throw new ArgumentNullException(nameof(student));
 
-        public async Task DeleteAsync(int id)
+            // בדיקה אם כתובת האימייל כבר קיימת
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == student.Email);
+            if (existingUser != null)
+                throw new InvalidOperationException("A user with this email already exists.");
+
+            // הוספת התלמיד למסד הנתונים
+            _context.Users.Add(student);
+            await _context.SaveChangesAsync();
+
+            return student;
+        }
+        public async Task DeleteAsync(int id) 
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
             if (user != null)
@@ -49,14 +65,31 @@ namespace ExamAI.Data.Repositories
             }
         }
 
-        public async Task UpdateAsync(int id, User newuser)
+        //public async Task<ActionResult> UpdateAsync(int id, User newuser)
+        //{
+        //    var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+        //    if (user != null)
+        //    {
+        //        _context.Users.Remove(user);
+        //        _context.Users.Add(newuser);
+        //    }
+        //}
+        public async Task<User> UpdateAsync(int id, User newUser)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
-            if (user != null)
+            var existingUser = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if (existingUser == null)
             {
-                _context.Users.Remove(user);
-                _context.Users.Add(newuser);
+                return null; // אם המשתמש לא נמצא
             }
+            existingUser.Name = newUser.Name;
+            existingUser.Email = newUser.Email;
+            existingUser.Password = newUser.Password;
+
+            _context.Users.Update(existingUser);
+            await _context.SaveChangesAsync();
+
+            return existingUser;
         }
+
     }
 }

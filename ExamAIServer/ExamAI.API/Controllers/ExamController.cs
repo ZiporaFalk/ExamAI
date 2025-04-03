@@ -21,8 +21,17 @@ namespace ExamAI.API.Controllers
             _examservice = examservice;
             _mapper = mapper;
         }
-
-        [Authorize(Roles = "Student")]
+        [HttpGet()]
+        public async Task<ActionResult<IEnumerable<ExamDto>>> Get()
+        {
+            var exams = await _examservice.GetAsync();
+            if (exams == null)
+            {
+                return NotFound();
+            }
+            return Ok(_mapper.Map<IEnumerable<ExamDto>>(exams));
+        }
+        //[Authorize(Roles = "Student")]
         [HttpGet("{id}")]
         public async Task<ActionResult<ExamDto>> Get(int id)
         {

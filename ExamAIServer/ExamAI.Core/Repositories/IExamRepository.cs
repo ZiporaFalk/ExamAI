@@ -9,7 +9,8 @@ namespace ExamAI.Core.Repositories
 {
     public interface IExamRepository
     {
-       
+        Task<List<Exam>> GetAsync();
+
         Task<Exam> GetByIdAsync(int id);
         Task PostAsync(Exam newexam);
     }

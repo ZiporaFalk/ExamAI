@@ -15,20 +15,17 @@ namespace ExamAI.API.Extensions
 {
     public static class ServiceExtensions
     {
-        //public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryManager, RepositoryManager>();
 
             services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<ISubmissionRepository, SubmissionRepository>();
             services.AddScoped<IAnswerRepository, AnswerRepository>();
             services.AddScoped<IExamRepository, ExamRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
 
             services.AddScoped<IUserService, UserService>();
-            //services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IExamService, ExamService>();
             services.AddScoped<IAnswerService, AnswerService>();
             services.AddScoped<ISubmissionService, SubmissionService>();
@@ -38,7 +35,6 @@ namespace ExamAI.API.Extensions
 
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddDbContext<DataContext>();
-            //        services.AddDbContext<DataContext>(options =>
             services.AddSingleton<IAmazonS3>(sp =>
             {
                 var configuration = sp.GetRequiredService<IConfiguration>();

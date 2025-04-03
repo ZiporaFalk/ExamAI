@@ -2,6 +2,7 @@
 using ExamAI.Core.Models;
 using ExamAI.Core.Repositories;
 using ExamAI.Core.Services;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace ExamAI.Service.Services
@@ -16,7 +17,10 @@ namespace ExamAI.Service.Services
             _examRepository = examRepository;
             _repositoryManager = repositoryManager;
         }
-
+        public async Task<List<Exam>> GetAsync()
+        {
+            return await _examRepository.GetAsync();
+        }
         public async Task<Exam> GetByIdAsync(int id)
         {
             return await _examRepository.GetByIdAsync(id);
