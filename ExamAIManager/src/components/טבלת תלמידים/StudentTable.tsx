@@ -102,7 +102,7 @@ const StudentTable = observer(() => {
                                 })}
                                 <TableCell align="right">{student.email}</TableCell>
                                 <TableCell align="right">{student.password}</TableCell>
-                                <TableCell align="right">{student.class}</TableCell>
+                                <TableCell align="right">{student.studentClass}</TableCell>
                                 <TableCell align="right">{student.name}</TableCell>
                                 <TableCell align="right">{student.id}</TableCell>
                                 <TableCell align="right">

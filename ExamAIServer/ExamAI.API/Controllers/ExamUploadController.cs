@@ -34,8 +34,8 @@ namespace ExamAI.API.Controllers
                 Verb = HttpVerb.PUT,
                 Expires = DateTime.UtcNow.AddMinutes(20),
                 //ContentType = "application/pdf" // ניתן לשנות לסוג קובץ אחר
-                //ContentType = "image/jpeg"
-                ContentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                ContentType = "image/jpeg"
+                //ContentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 //ContentType = "application/octet-stream"
 
             };

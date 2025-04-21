@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from "@mui/material";
 import { observer } from "mobx-react-lite";
-import { StudentScoresModalProps, Submission } from "./types";
+import { StudentScoresModalProps, Submission } from "../types";
 import studentStore from "./StudentStore";
 
 // const apiUrl = "https://localhost:7083/api";

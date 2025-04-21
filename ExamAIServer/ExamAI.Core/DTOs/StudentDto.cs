@@ -11,7 +11,7 @@ namespace ExamAI.Core.DTOs
     {
         public int Id { get; set; }
 
-        public string Class { get; set; }
+        public string studentClass { get; set; }
         //public List<Submission> submissions { get; set; }
     }
 }

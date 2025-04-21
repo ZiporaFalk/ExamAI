@@ -29,7 +29,7 @@ namespace ExamAI.Data.Repositories
         }
         public async Task<List<Student>> GetStudentsByClassAsync(string class_id)
         {
-            return await _context.Users.OfType<Student>().Where(s => s.Class == class_id).ToListAsync();
+            return await _context.Users.OfType<Student>().Where(s => s.studentClass == class_id).ToListAsync();
         }
         public async Task<Manager> GetManagerAsync()
         {
@@ -56,7 +56,7 @@ namespace ExamAI.Data.Repositories
 
             return student;
         }
-        public async Task DeleteAsync(int id) 
+        public async Task DeleteAsync(int id)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
             if (user != null)
@@ -84,7 +84,10 @@ namespace ExamAI.Data.Repositories
             existingUser.Name = newUser.Name;
             existingUser.Email = newUser.Email;
             existingUser.Password = newUser.Password;
-
+            if (existingUser is Student existingStudent && newUser is Student newStudent)
+            {
+                existingStudent.studentClass = newStudent.studentClass;
+            }
             _context.Users.Update(existingUser);
             await _context.SaveChangesAsync();
 

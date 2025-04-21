@@ -1,7 +1,8 @@
 
-import  { useState } from 'react';
+import { useState } from 'react';
 import { TextField, Button, Box, Typography, Alert } from '@mui/material';
 import axios from 'axios';
+import studentStore from './טבלת תלמידים/StudentStore';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -9,30 +10,64 @@ const LoginForm = () => {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('success'); // success or error
 
+  // const handleLogin = async () => {
+  //   // בדיקת קלט
+  //   if (!email || !password) {
+  //     setMessageType('error');
+  //     setMessage('אנא מלא את כל השדות');
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await axios.post('https://localhost:7083/api/Auth/login', {
+  //       email,
+  //       password,
+  //     });
+
+  //     if (response.status === 200) {
+  //       setMessageType('success');
+  //       setMessage( 'התחברת בהצלחה!');
+  //       // studentStore.IsLogin = true
+  //       // console.log(studentStore.IsLogin+"okk");
+
+  //     } else {
+
+  //       setMessageType('error');
+  //       setMessage('ההתחברות נכשלה');
+  //     }
+  //   } catch (error) {
+  //     setMessageType('error');
+  //     setMessage('הייתה שגיאה בתקשורת');
+  //   }
+  // };
   const handleLogin = async () => {
     // בדיקת קלט
     if (!email || !password) {
-      setMessageType('error');
-      setMessage('אנא מלא את כל השדות');
+      setMessageType("error");
+      setMessage("אנא מלא את כל השדות");
       return;
     }
 
     try {
-      const response = await axios.post('https://localhost:7083/api/Auth/login', {
+      const response = await axios.post("https://localhost:7083/api/Auth/login", {
         email,
         password,
       });
 
       if (response.status === 200) {
-        setMessageType('success');
-        setMessage('התחברת בהצלחה!');
-      } else {
-        setMessageType('error');
-        setMessage('ההתחברות נכשלה');
+        setMessageType("success");
+        setMessage("התחברת בהצלחה!");
+        studentStore.IsLogin = true;
+        localStorage.setItem("isLogin", "true"); // שמירת הסטטוס
       }
-    } catch (error) {
-      setMessageType('error');
-      setMessage('הייתה שגיאה בתקשורת');
+    } catch (error: any) {
+      setMessageType("error");
+      // אם יש תגובה מהשרת עם הודעת שגיאה, נציג אותה
+      if (error.response) {
+        setMessage(error.response.data || "ההתחברות נכשלה");
+      } else {
+        setMessage("הייתה שגיאה בתקשורת");
+      }
     }
   };
 
@@ -41,7 +76,7 @@ const LoginForm = () => {
       <Typography variant="h5" gutterBottom align="center">
         התחבר לחשבון שלך
       </Typography>
-      
+
       <TextField
         label="מייל"
         type="email"
@@ -58,7 +93,7 @@ const LoginForm = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      
+
       <Button
         variant="contained"
         color="primary"

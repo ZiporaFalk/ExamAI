@@ -8,7 +8,7 @@ namespace ExamAI.Core.Models
 {
     public class Student : User
     {
-        public string Class { get; set; }
+        public string studentClass { get; set; }
         public List<Submission> submissions { get; set; }
         public Student()
         {

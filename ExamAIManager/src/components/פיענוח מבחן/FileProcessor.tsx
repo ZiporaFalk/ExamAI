@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { analyzeImage } from "./AnalyzeImag";
 
 const FileProcessor: React.FC = () => {
@@ -29,7 +29,7 @@ const FileProcessor: React.FC = () => {
           const base64String = reader.result?.toString().split(",")[1] || "";
           setSelectedImage(base64String);
         };
-      }
+      } 
     }
   };
 
@@ -72,12 +72,11 @@ const FileProcessor: React.FC = () => {
   // };
 
 
-  return (
+  return ( 
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Google Vision OCR & File Uploader</h1>
       <input type="file" multiple onChange={handleFileChange} />
       <button onClick={handleAnalyze} disabled={!selectedImage}>פענח טקסט</button>
-      {/* <button onClick={handleUpload} disabled={files.length === 0}>העלה קבצים</button> */}
 
       {textResult && (
         <div>

@@ -27,7 +27,7 @@ namespace ExamAI.API.Controllers
             // יצירת משתמש חדש
             User newUser = model.Role.ToLower() switch
             {
-                "student" => new Student { Name = model.Name, Email = model.Email, Password = model.Password, Class = model.Class },
+                "student" => new Student { Name = model.Name, Email = model.Email, Password = model.Password, studentClass = model.Class },
                 "admin" => new Manager { Name = model.Name, Email = model.Email, Password = model.Password },
                 _ => throw new Exception("Invalid role")
             };
@@ -47,7 +47,8 @@ namespace ExamAI.API.Controllers
 
             if (user == null)
                 return Unauthorized("Invalid credentials");
-
+            if (user.Password != model.Password)
+                return BadRequest("הפרטים שהוזנו אינם נכונים");
             var token = _authService.GenerateJwtToken(user);
             return Ok(new { Token = token });
         }

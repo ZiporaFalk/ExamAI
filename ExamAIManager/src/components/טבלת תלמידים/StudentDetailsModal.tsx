@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from "@mui/material";
 import axios from "axios";
-import { Student } from "./types";
+import { Student } from "../types";
 import studentStore from "./StudentStore";
 
 interface StudentModalProps {
@@ -14,13 +14,13 @@ interface StudentModalProps {
 const apiUrl = 'https://localhost:7083/api';
 
 const StudentDetailsModal: React.FC<StudentModalProps> = ({ open, onClose, student }) => {
-    const [formData, setFormData] = useState<Student>(student || { id: 0, name: "", email: "", class: "", password: "" });
+    const [formData, setFormData] = useState<Student>(student || { id: 0, name: "", email: "", studentClass: "", password: "" });
 
     useEffect(() => {
         if (student) {
             setFormData(student);
         } else {
-            setFormData({ id: 0, name: "", email: "", class: "", password: "" });
+            setFormData({ id: 0, name: "", email: "", studentClass: "", password: "" });
         }
     }, [student]);
 
@@ -31,6 +31,8 @@ const StudentDetailsModal: React.FC<StudentModalProps> = ({ open, onClose, stude
 
     const handleSubmit = async () => {
         try {
+            console.log("Submitting:", formData); // ✅ בדיקה
+
             const url = student ? `${apiUrl}/Student/${student.id}` : `${apiUrl}/Student`;
             const method = student ? axios.put : axios.post;
             await method(url, formData);
@@ -65,8 +67,8 @@ const StudentDetailsModal: React.FC<StudentModalProps> = ({ open, onClose, stude
                 />
                 <TextField
                     label="כיתה"
-                    name="class"
-                    value={formData.class}
+                    name="studentClass"
+                    value={formData.studentClass}
                     onChange={handleChange}
                     fullWidth
                     margin="dense"

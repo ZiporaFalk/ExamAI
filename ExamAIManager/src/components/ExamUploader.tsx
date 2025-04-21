@@ -94,9 +94,6 @@ const ExamUploader = () => {
 
             const presignedUrl = response.data.url;
             console.log(presignedUrl);
-            console.log("000000000000000000000000");
-
-
             // שלב 2: העלאת הקובץ ישירות ל-S3
             await axios.put(presignedUrl, file, {
                 // headers: {
@@ -115,13 +112,11 @@ const ExamUploader = () => {
                 },
             });
 
-            alert('המבחן הועלה בהצלחה!');
+            alert('✅  המבחן הועלה בהצלחה!');
         } catch (error) {
             console.error('שגיאה בהעלאה:', error);
-            alert('אירעה שגיאה בהעלאה');
+            alert('❌ אירעה שגיאה בהעלאה');
             console.log(file.name);
-
-
         }
     };
 
