@@ -10,6 +10,7 @@ export interface Student {
 export interface Exam {
     id: number;
     subject: string;
+    dateExam:string;
 }
 
 export interface Submission {
@@ -33,3 +34,11 @@ export interface StudentModalProps {
     onSave: (student: Student) => void;
     student?: Student | null;
 }
+
+export interface Answer {
+    id: number;
+    examId: number;
+    questionNumber: string//מספר שאלה
+    correctValue: number//התשובה הנכונה
+}
+

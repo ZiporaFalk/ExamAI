@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import AppLayuot from "./components/AppLayuot";
 import ExamUploader from "./components/ExamUploader";
 import FileProcessor from "./components/פיענוח מבחן/FileProcessor";
+import ExampleExam from "./components/מבחן דוגמא/ExampleExam";
 
 
 export const myRouter = createBrowserRouter([
@@ -35,7 +36,12 @@ export const myRouter = createBrowserRouter([
             {
                 path: 'UploadSampleTest',
                 element: <>!כאן מעלים מבחן לדוגמא</>
+            },
+            {
+                path: 'ExampleExam',
+                element: <ExampleExam />
             }
+
         ]
     }
 ])

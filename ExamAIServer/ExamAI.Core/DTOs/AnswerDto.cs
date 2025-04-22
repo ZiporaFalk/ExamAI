@@ -9,12 +9,11 @@ namespace ExamAI.Core.DTOs
 {
     public class AnswerDto
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public int ExamId { get; set; }
         //public Exam Exam { get; set; }
-        public int QuestionNumber { get; set; }//מספר שאלה
+        public char QuestionNumber { get; set; }//מספר שאלה
         public int CorrectValue { get; set; }//התשובה הנכונה
-        public int Value { get; set; }//  כמה שווה שאלה זו?
 
     }
 }
