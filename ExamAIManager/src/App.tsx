@@ -1,9 +1,9 @@
 
 import './App.css'
-import ExamUploader from './components/ExamUploader'
+import ExamUploader from './components/העלאת קובץ ל-AWS/ExamUploader'
 import Login from './components/Login'
 import StudentTable from './components/טבלת תלמידים/StudentTable'
-import FileProcessor from './components/פיענוח מבחן/FileProcessor'
+import FileProcessor from './components/בדיקת מבחן תלמיד/CheckStudentExams'
 import { RouterProvider } from 'react-router-dom'
 import { myRouter } from './Router'
 import NavBar from './components/NavBar'

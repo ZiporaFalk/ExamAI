@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using ExamAI.Core.DTOs;
+using ExamAI.Core.DTOs.GetDto;
 using ExamAI.Core.Models;
 using ExamAI.Core.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -22,29 +23,30 @@ namespace ExamAI.API.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SubmissionDto>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<GetSubmissionDto>>> GetAllAsync()
         {
             var list = await _submissionservice.GetAllAsync();
 
-            return Ok(_mapper.Map<IEnumerable<SubmissionDto>>(list));
+            return Ok(_mapper.Map<IEnumerable<GetSubmissionDto>>(list));
         }
 
         [HttpGet("{student_id}/{exam_id}")]
-        public async Task<ActionResult<SubmissionDto>> Get(int student_id, int exam_id)
+        public async Task<ActionResult<GetSubmissionDto>> Get(int student_id, int exam_id)
         {
             var submission = await _submissionservice.GetAsync(student_id, exam_id);
+            Console.WriteLine(submission);
             if (submission == null)
             {
                 return NotFound($"Submission not found for student {student_id} and exam {exam_id}");
             }
-            return Ok(_mapper.Map<SubmissionDto>(submission));
+            return Ok(_mapper.Map<GetSubmissionDto>(submission));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<SubmissionDto>>> Get(int id)
+        public async Task<ActionResult<List<GetSubmissionDto>>> Get(int id)
         {
             var list = await _submissionservice.GetAllByIdAsync(id);
-            return Ok(_mapper.Map<List<SubmissionDto>>(list));
+            return Ok(_mapper.Map<List<GetSubmissionDto>>(list));
         }
 
         [HttpPost]

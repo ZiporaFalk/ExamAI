@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using ExamAI.Core.DTOs;
+using ExamAI.Core.DTOs.GetDto;
 using ExamAI.Core.Models;
 using ExamAI.Core.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +23,10 @@ namespace ExamAI.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ManagerDto>> Get()
+        public async Task<ActionResult<GetManagerDto>> Get()
         {
             var manager = await _userService.GetManagerAsync();
-            var managerDto = _mapper.Map<ManagerDto>(manager);
+            var managerDto = _mapper.Map<GetManagerDto>(manager);
             return Ok(managerDto);
         }
 

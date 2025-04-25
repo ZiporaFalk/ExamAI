@@ -1,4 +1,5 @@
-﻿using ExamAI.Core.Models;
+﻿using ExamAI.Core.DTOs.GetDto;
+using ExamAI.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace ExamAI.Core.Services
 
         Task<List<User>> GetAllAsync();
         Task<List<Student>> GetAllStudentsAsync();
-        Task<List<Student>> GetStudentsByClassAsync(string class_id);
+        Task<List<Student>> GetStudentsByClassAsync(string classs);
+        Task<Student> GetStudentsByNameAndClassAsync(string classs, string name);
         Task<Manager> GetManagerAsync();
         Task<User> GetByIdAsync(int id);
         Task<Student> AddStudentAsync(Student student);

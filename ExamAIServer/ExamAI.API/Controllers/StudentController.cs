@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using ExamAI.Core.DTOs;
+using ExamAI.Core.DTOs.GetDto;
 using ExamAI.Core.Models;
 using ExamAI.Core.Services;
 using ExamAI.Service.Services;
@@ -26,32 +27,43 @@ namespace ExamAI.API.Controllers
 
         [HttpGet]
         //[Authorize(Roles = "Admin")]
-        public async Task<ActionResult<IEnumerable<StudentDto>>> GetStudents()
+        public async Task<ActionResult<IEnumerable<GetStudentDto>>> GetStudents()
         {
             var list = await _userService.GetAllStudentsAsync();
-            return Ok(_mapper.Map<IEnumerable<StudentDto>>(list));
+            return Ok(_mapper.Map<IEnumerable<GetStudentDto>>(list));
         }
-        [HttpGet("ByClass")]
+        [HttpGet("class/{classs}")]
         //[Authorize(Roles = "Admin")]
-        public async Task<ActionResult<IEnumerable<StudentDto>>> GetStudentsByClasss(string class_id)
+        public async Task<ActionResult<IEnumerable<GetStudentDto>>> GetStudentsByClasss(string classs)
         {
-            var list = await _userService.GetStudentsByClassAsync(class_id);
-            return Ok(_mapper.Map<IEnumerable<StudentDto>>(list));
+            var list = await _userService.GetStudentsByClassAsync(classs);
+            return Ok(_mapper.Map<IEnumerable<GetStudentDto>>(list));
         }
+        [HttpGet("classandname/{classs}/{name}")]
+        //[Authorize(Roles = "Admin")]
+        public async Task<ActionResult<GetStudentDto>> GetStudentsByNameAndClass(string classs, string name)
+        {
+            var student = await _userService.GetStudentsByNameAndClassAsync(classs, name);
+            if (student == null)
+            {
+                return NotFound();
+            }
 
+            return Ok(_mapper.Map<GetStudentDto>(student));
+        }
         [HttpGet("{id}")]
         //[Authorize(Roles = "Admin")]
-        public async Task<ActionResult<StudentDto>> Get(int id)
+        public async Task<ActionResult<GetStudentDto>> Get(int id)
         {
             var user = await _userService.GetByIdAsync(id);
             if (user is Student)
             {
-                return Ok(_mapper.Map<StudentDto>(user));
+                return Ok(_mapper.Map<GetStudentDto>(user));
             }
             return NotFound();
         }
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] StudentDto studentDto)
+        public async Task<ActionResult> Post([FromBody] GetStudentDto studentDto)
         {
             if (studentDto == null)
             {
@@ -66,13 +78,13 @@ namespace ExamAI.API.Controllers
                 return BadRequest("Failed to create student.");
             }
 
-            var createdStudentDto = _mapper.Map<StudentDto>(createdStudent);
+            var createdStudentDto = _mapper.Map<GetStudentDto>(createdStudent);
             return CreatedAtAction(nameof(Get), new { id = createdStudentDto.Id }, createdStudentDto);
         }
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, StudentDto studentDto)
         {
-       
+
             if (studentDto == null)
                 return BadRequest("Invalid student data.");
 

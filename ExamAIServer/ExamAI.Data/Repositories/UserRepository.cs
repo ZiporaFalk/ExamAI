@@ -1,4 +1,5 @@
 ﻿
+using ExamAI.Core.DTOs.GetDto;
 using ExamAI.Core.Models;
 using ExamAI.Core.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -27,9 +28,13 @@ namespace ExamAI.Data.Repositories
         {
             return await _context.Users.OfType<Student>().ToListAsync();
         }
-        public async Task<List<Student>> GetStudentsByClassAsync(string class_id)
+        public async Task<List<Student>> GetStudentsByClassAsync(string classs)
         {
-            return await _context.Users.OfType<Student>().Where(s => s.studentClass == class_id).ToListAsync();
+            return await _context.Users.OfType<Student>().Where(s => s.studentClass == classs).ToListAsync();
+        }
+        public async Task<Student> GetStudentsByNameAndClassAsync(string classs, string name)
+        {
+            return await _context.Users.OfType<Student>().FirstOrDefaultAsync(s => s.studentClass == classs && s.Name == name);
         }
         public async Task<Manager> GetManagerAsync()
         {

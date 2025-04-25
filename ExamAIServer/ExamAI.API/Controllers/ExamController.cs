@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using ExamAI.Core.DTOs;
+using ExamAI.Core.DTOs.GetDto;
 using ExamAI.Core.Models;
 using ExamAI.Core.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -22,25 +23,25 @@ namespace ExamAI.API.Controllers
             _mapper = mapper;
         }
         [HttpGet()]
-        public async Task<ActionResult<IEnumerable<ExamDto>>> Get()
+        public async Task<ActionResult<IEnumerable<GetExamDto>>> Get()
         {
             var exams = await _examservice.GetAsync();
             if (exams == null)
             {
                 return NotFound();
             }
-            return Ok(_mapper.Map<IEnumerable<ExamDto>>(exams));
+            return Ok(_mapper.Map<IEnumerable<GetExamDto>>(exams));
         }
         //[Authorize(Roles = "Student")]
         [HttpGet("{id}")]
-        public async Task<ActionResult<ExamDto>> Get(int id)
+        public async Task<ActionResult<GetExamDto>> Get(int id)
         {
             var exam = await _examservice.GetByIdAsync(id);
             if (exam == null)
             {
                 return NotFound();
             }
-            return Ok(_mapper.Map<ExamDto>(exam));
+            return Ok(_mapper.Map<GetExamDto>(exam));
         }
 
         [HttpPost]

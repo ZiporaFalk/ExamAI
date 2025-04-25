@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using ExamAI.Core.DTOs;
+using ExamAI.Core.DTOs.GetDto;
 using ExamAI.Core.Models;
 using ExamAI.Core.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -24,18 +25,18 @@ namespace ExamAI.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<AnswerDto>> Get(int exam_id)
+        public async Task<IEnumerable<GetAnswerDto>> Get([FromQuery] int exam_id)
         {
             var list = await _answerService.GetAllAsync(exam_id);
-            return _mapper.Map<IEnumerable<AnswerDto>>(list);
+            return _mapper.Map<IEnumerable<GetAnswerDto>>(list);
         }
 
         //[Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
-        public async Task<AnswerDto> Get(int id, int exam_id)
+        public async Task<GetAnswerDto> Get(int id, int exam_id)
         {
             var answer = await _answerService.GetByIdAsync(id, exam_id);
-            return _mapper.Map<AnswerDto>(answer);
+            return _mapper.Map<GetAnswerDto>(answer);
         }
 
         //[Authorize(Roles = "Admin")]

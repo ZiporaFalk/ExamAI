@@ -1,4 +1,5 @@
 ﻿
+using ExamAI.Core.DTOs.GetDto;
 using ExamAI.Core.Models;
 using ExamAI.Core.Repositories;
 using ExamAI.Core.Services;
@@ -33,9 +34,13 @@ namespace ExamAI.Service.Services
         {
             return await _userRepository.GetAllStudentsAsync();
         }
-        public async Task<List<Student>> GetStudentsByClassAsync(string class_id)
+        public async Task<List<Student>> GetStudentsByClassAsync(string classs)
         {
-            return await _userRepository.GetStudentsByClassAsync(class_id);
+            return await _userRepository.GetStudentsByClassAsync(classs);
+        }
+        public async Task<Student> GetStudentsByNameAndClassAsync(string classs, string name)
+        {
+            return await _userRepository.GetStudentsByNameAndClassAsync(classs, name);
         }
         public async Task<Manager> GetManagerAsync()
         {

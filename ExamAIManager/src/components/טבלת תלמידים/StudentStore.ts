@@ -108,6 +108,8 @@ class StudentStore {
         return this.scores.get(studentId) || new Map();
     }
 
+    //////אם בסוף אני לא צריכה כל העידכון זאת אומרת רק לעדכן הציון עצמו 
+    // אז לשנות פהה שיפעיל פונקציה חדשה בשרת שעושה עידכון ספציפי לציון ולא מקבלת אוביקט שלם
     async updateStudentScores(studentId: number, updatedScores: Map<number, Submission>) {
         try {
             await Promise.all(

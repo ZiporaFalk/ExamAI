@@ -38,12 +38,12 @@ const NavBar = observer(() => {
             <Link to="/login">Login</Link>
             <Link to="/">| Home</Link>
             {/* {studentStore.IsLogin && <Link to="/students">| Students</Link>} */}
-            <Link to="/file">       <button> | file</button>   </Link>
-            <Link to="/FileProcessor"> <button>| FileProcessor</button> </Link>
+            <Link to="/UploadAWS">       <button> | Upload file for AWS</button></Link>
+            <Link to="/CheckStudentExams"> <button>| Check Student Exams</button> </Link>
             {studentStore.IsLogin && <>
                 <button onClick={handleLogout}>התנתק</button>
-                <Link to="/UploadSampleTest"> <button >להעלאת מבחן לבדיקה | </button></Link>
-                <Link to="/UploadSampleTest">  <button >להעלאת מבחן דוגמא  | </button></Link>
+                {/* <Link to="/UploadSampleTest"> <button >להעלאת מבחן לבדיקה | </button></Link>
+                <Link to="/UploadSampleTest">  <button >להעלאת מבחן דוגמא  | </button></Link> */}
                 <Link to="/students"> <button>| ניהול תלמידים</button></Link>
                 <Link to="/ExampleExam"> <button>|ExampleExam</button></Link>
             </>}

@@ -22,15 +22,16 @@ namespace ExamAI.API.Controllers
         }
 
         [HttpGet("presigned-url")]
-        public async Task<IActionResult> GetPresignedUrl([FromQuery] string fileName)
+        public async Task<IActionResult> GetPresignedUrl([FromQuery] string fileName, string subject, string date)
         {
             if (string.IsNullOrEmpty(fileName))
                 return BadRequest("שם הקובץ נדרש");
-
+            Console.WriteLine(fileName);
             var request = new GetPreSignedUrlRequest
             {
                 BucketName = _bucketName,
-                Key = $"exams/{fileName}", // קבצים נשמרים בתיקיית exams
+                //Key = $"exams/{fileName}", 
+                Key = $"exams/{subject}/{date}/{fileName}",
                 Verb = HttpVerb.PUT,
                 Expires = DateTime.UtcNow.AddMinutes(20),
                 //ContentType = "application/pdf" // ניתן לשנות לסוג קובץ אחר

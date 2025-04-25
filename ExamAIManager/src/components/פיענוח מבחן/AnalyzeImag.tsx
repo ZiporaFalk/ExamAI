@@ -65,10 +65,9 @@ export const analyzeImage = async (base64Image: string) => {
         //     return acc;
         // }, []);
         // console.log(numbersAfterHeu + "------------------");
-        
-        const d=response.data.responses[0]?.textAnnotations.slice(1) || null
-        console.log(d);
-        return d
+
+        return response.data.responses[0]?.textAnnotations.slice(1) || null
+
         // return detectedText; 
         // return response;
     } catch (error: any) {

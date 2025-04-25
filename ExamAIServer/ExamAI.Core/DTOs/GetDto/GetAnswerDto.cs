@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExamAI.Core.DTOs
+namespace ExamAI.Core.DTOs.GetDto
 {
-    internal class GetAnswerDto
+    public class GetAnswerDto : AnswerDto
     {
+        public int Id { get; set; }
+
     }
 }
