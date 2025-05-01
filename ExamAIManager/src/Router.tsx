@@ -5,6 +5,10 @@ import AppLayuot from "./components/AppLayuot";
 import ExamUploader from "./components/העלאת קובץ ל-AWS/ExamUploader";
 import ExampleExam from "./components/מבחן דוגמא/ExampleExam";
 import CheckStudentExams from "./components/בדיקת מבחן תלמיד/CheckStudentExams";
+import Decoding from "./components/Decoding";
+import GetStarted from "./components/GetStarted";
+import TestType from "./components/TestType";
+import Stepper_upload from "./components/Steps";
 
 
 export const myRouter = createBrowserRouter([
@@ -26,22 +30,29 @@ export const myRouter = createBrowserRouter([
                 element: <Login />
             },
             // {
-            //     path: 'UploadAWS',
-            //     element: <ExamUploader studentId={1} IsExampleExam={false} />
+            //     path: 'CheckStudentExams',
+            //     element: <CheckStudentExams />
             // },
-            {
-                path: 'CheckStudentExams',
-                element: <CheckStudentExams />
-            },
             // {
-            //     path: 'UploadSampleTest',
-            //     element: <>!כאן מעלים מבחן לדוגמא</>
+            //     path: 'Decoding',
+            //     element: <Decoding/>
+            // },
+            // {
+            //     path: 'ExampleExam',
+            //     element: <ExampleExam />
+            // },
+            // {
+            //     path: 'TestType',
+            //     element: <TestType />
             // },
             {
-                path: 'ExampleExam',
-                element: <ExampleExam />
+                path: 'GetStarted',
+                element: <GetStarted />
+            },
+            {
+                path: 'Stepper',
+                element: <Stepper_upload />
             }
-
         ]
     }
 ])

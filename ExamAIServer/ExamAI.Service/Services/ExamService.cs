@@ -1,4 +1,5 @@
 ﻿
+using ExamAI.Core.DTOs.GetDto;
 using ExamAI.Core.Models;
 using ExamAI.Core.Repositories;
 using ExamAI.Core.Services;
@@ -25,7 +26,10 @@ namespace ExamAI.Service.Services
         {
             return await _examRepository.GetByIdAsync(id);
         }
-
+        public async Task<Exam> GetBySubjectAndDateAsync(string dateExam, string subject)
+        {
+            return await _examRepository.GetBySubjectAndDateAsync(dateExam, subject);
+        }
         public async Task PostAsync(Exam newexam)
         {
             await _examRepository.PostAsync(newexam);

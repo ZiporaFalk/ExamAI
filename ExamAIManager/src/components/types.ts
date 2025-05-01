@@ -1,20 +1,20 @@
 
 export interface Student {
-    id: number;
+    id?: number;
     name: string;
-    email: string;
+    email?: string;
     studentClass: string;
-    password: string;
+    password?: string;
 }
 
 export interface Exam {
-    id: number;
+    id?: number;
     subject: string;
     dateExam:string;
 }
 
 export interface Submission {
-    id: number;
+    id?: number;
     studentId: number;
     score: number;
     urlFile: string;
@@ -36,7 +36,7 @@ export interface StudentModalProps {
 }
 
 export interface Answer {
-    id: number;
+    id?: number;
     examId: number;
     questionNumber: string//מספר שאלה
     correctValue: number//התשובה הנכונה

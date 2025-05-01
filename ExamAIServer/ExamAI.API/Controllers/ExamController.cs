@@ -4,9 +4,11 @@ using ExamAI.Core.DTOs;
 using ExamAI.Core.DTOs.GetDto;
 using ExamAI.Core.Models;
 using ExamAI.Core.Services;
+using ExamAI.Service.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ExamAI.API.Controllers
 {
@@ -43,7 +45,13 @@ namespace ExamAI.API.Controllers
             }
             return Ok(_mapper.Map<GetExamDto>(exam));
         }
-
+        [HttpGet("BySubjectAndDate/{dateExam}/{subject}")]
+        public async Task<ActionResult<GetExamDto>> Get(string dateExam, string subject)
+        {
+            var exam = await _examservice.GetBySubjectAndDateAsync(dateExam, subject);
+            var examDto = _mapper.Map<GetExamDto>(exam);
+            return Ok(examDto);
+        }
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ExamDto newexam)
         {

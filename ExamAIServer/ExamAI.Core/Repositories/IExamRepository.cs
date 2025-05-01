@@ -1,4 +1,7 @@
-﻿using ExamAI.Core.Models;
+﻿using ExamAI.Core.DTOs.GetDto;
+using ExamAI.Core.Models;
+using ExamAI.Core.Services;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +16,7 @@ namespace ExamAI.Core.Repositories
 
         Task<Exam> GetByIdAsync(int id);
         Task PostAsync(Exam newexam);
+        Task<Exam> GetBySubjectAndDateAsync(string dateExam, string subject);
+
     }
 }

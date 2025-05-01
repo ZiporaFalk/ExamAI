@@ -63,7 +63,7 @@ namespace ExamAI.API.Controllers
             return NotFound();
         }
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] GetStudentDto studentDto)
+        public async Task<ActionResult> Post([FromBody] StudentDto studentDto)
         {
             if (studentDto == null)
             {

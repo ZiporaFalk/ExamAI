@@ -46,6 +46,8 @@ const NavBar = observer(() => {
                 <Link to="/UploadSampleTest">  <button >להעלאת מבחן דוגמא  | </button></Link> */}
                 <Link to="/students"> <button>| ניהול תלמידים</button></Link>
                 <Link to="/ExampleExam"> <button>|ExampleExam</button></Link>
+                <Link to="/Decoding"> <button>|Decoding</button></Link>
+                <Link to="/GetStarted"> <button>|GetStarted</button></Link>
             </>}
         </nav>
     );
