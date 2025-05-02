@@ -13,7 +13,6 @@ const AppLayuot = () => {
             <Outlet />
         </div>
     </>)
-
 }
 
 export default AppLayuot

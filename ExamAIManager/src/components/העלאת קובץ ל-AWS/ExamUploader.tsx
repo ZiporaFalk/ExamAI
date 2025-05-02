@@ -43,7 +43,14 @@ const ExamUploader = ({ student, exam, IsStudentTest, fileExam }: PropsExamUploa
             // const response = await axios.get(`${apiUrl}/ExamUpload/presigned-url`, { params });
 
             const response = await axios.get(`${apiUrl}/ExamUpload/presigned-url`, {
-                params: { fileName: renamedFile.name, subject: exam.subject, class: IsStudentTest ? student.studentClass : "null", date: exam.dateExam,IsStudentTest }
+                params: {
+                    fileName: renamedFile.name,
+                    subject: exam.subject,
+                    class: IsStudentTest ? student.studentClass : "null",
+                    date: exam.dateExam,
+                    IsStudentTest,
+                    contentType:"image/jpeg"
+                }
             });
 
             const presignedUrl = response.data.url;

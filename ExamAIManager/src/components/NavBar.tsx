@@ -48,6 +48,7 @@ const NavBar = observer(() => {
                 <Link to="/ExampleExam"> <button>|ExampleExam</button></Link>
                 <Link to="/Decoding"> <button>|Decoding</button></Link>
                 <Link to="/GetStarted"> <button>|GetStarted</button></Link>
+                <Link to="/Feadback"> <button>|Feadback</button></Link>
             </>}
         </nav>
     );

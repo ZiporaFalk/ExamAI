@@ -7,7 +7,7 @@ import { Exam, Student } from "../types";
 const apiUrl = 'https://localhost:7083/api';
 type CheckStudentExamsProps = {
   selectedImage: string;
-  setDataForStudent: (exam: Exam, student: Student) => void
+  setDataForStudent: (exam: Exam, student: Student, score: number) => void
 };
 
 const CheckStudentExams = ({ selectedImage, setDataForStudent }: CheckStudentExamsProps) => {
@@ -62,7 +62,7 @@ const CheckStudentExams = ({ selectedImage, setDataForStudent }: CheckStudentExa
       const exam = await extractDateAndSubject(result)
       const student = await extractStudent(result)
 
-      setDataForStudent(exam, student)
+      setDataForStudent(exam, student, score)
     }
   };
 

@@ -9,6 +9,7 @@ import Decoding from "./components/Decoding";
 import GetStarted from "./components/GetStarted";
 import TestType from "./components/TestType";
 import Stepper_upload from "./components/Steps";
+import WordFeadbackUploader from "./components/העלאת קובץ ל-AWS/WordFeadbackUploader";
 
 
 export const myRouter = createBrowserRouter([
@@ -52,6 +53,10 @@ export const myRouter = createBrowserRouter([
             {
                 path: 'Stepper',
                 element: <Stepper_upload />
+            },
+            {
+                path: 'Feadback',
+                element: <WordFeadbackUploader />
             }
         ]
     }
