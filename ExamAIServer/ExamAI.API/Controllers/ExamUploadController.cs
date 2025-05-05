@@ -55,6 +55,35 @@ namespace ExamAI.API.Controllers
                 return StatusCode(500, $"Error generating presigned URL: {ex.Message}");
             }
         }
+        [HttpGet("download-url")]
+        public async Task<IActionResult> GetDownloadPresignedUrl(string fileName, string subject, string @class, string date, bool IsStudentTest)
+        {
+            if (string.IsNullOrEmpty(fileName))
+                return BadRequest("שם הקובץ נדרש");
+
+            var key = IsStudentTest
+                ? $"exams/Students/{subject}-{date}/{@class}/{fileName}"
+                : $"exams/Results/{subject}/{fileName}";
+
+            var request = new GetPreSignedUrlRequest
+            {
+                BucketName = _bucketName,
+                Key = key,
+                Verb = HttpVerb.GET,
+                Expires = DateTime.UtcNow.AddMinutes(20)
+            };
+
+            try
+            {
+                string url = _s3Client.GetPreSignedURL(request);
+                return Ok(new { url });
+            }
+            catch (AmazonS3Exception ex)
+            {
+                return StatusCode(500, $"Error generating download URL: {ex.Message}");
+            }
+        }
+
     }
 }
 

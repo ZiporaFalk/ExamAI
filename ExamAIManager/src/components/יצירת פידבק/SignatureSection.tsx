@@ -8,6 +8,7 @@ export const createImageFromDataURL = async (dataURL: string): Promise<ImageRun>
     const [meta, base64] = dataURL.split(',');
     const byteArray = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
     const isSvg = meta.includes('image/svg+xml');
+    console.log("Image byte length:", byteArray.length);
 
     const imageOptions: any = {
         data: byteArray,
