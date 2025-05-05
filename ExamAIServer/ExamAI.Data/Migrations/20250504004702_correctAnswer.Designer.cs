@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamAI.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250422204209_GetDto")]
-    partial class GetDto
+    [Migration("20250504004702_correctAnswer")]
+    partial class correctAnswer
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,9 +33,6 @@ namespace ExamAI.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CorrectValue")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Created_at")
                         .HasColumnType("datetime2");
 
@@ -45,6 +42,9 @@ namespace ExamAI.Data.Migrations
                     b.Property<string>("QuestionNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
+
+                    b.Property<int>("correctAnswer")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

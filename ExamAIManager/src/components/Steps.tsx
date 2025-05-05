@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Stepper, Step, StepLabel, Button, Box } from "@mui/material";
 import Decoding from "./Decoding";
-import CheckStudentExams from "./בדיקת מבחן תלמיד/CheckStudentExams";
 import ExamUploader from "./העלאת קובץ ל-AWS/ExamUploader";
 import TestType from "./TestType";
 import ExampleExam from "./מבחן דוגמא/ExampleExam";
-import { Exam, Student } from "./types";
+import { Answer, Exam, Student } from "./types";
 import WordFeadbackUploader from "./העלאת קובץ ל-AWS/WordFeadbackUploader";
+import CheckStudentExams from "./בדיקת מבחן תלמיד/CheckStudentExams";
 
 const Stepper_upload = () => {
     const [activeStep, setActiveStep] = useState(0);
@@ -16,6 +16,8 @@ const Stepper_upload = () => {
     const [exam, setExam] = useState<Exam>({ dateExam: "", subject: " " })
     const [student, setStudent] = useState<Student>({ name: " ", studentClass: " " })
     const [score, setScore] = useState(0)
+    const [answersStudent, setanswersStudent] = useState<Answer[]>([])
+    answersStudent
     const handleselectedImage = (selectedImage: string) => {
         setSelectedImage(selectedImage);
     };
@@ -23,10 +25,11 @@ const Stepper_upload = () => {
         console.log(files.length)
         setFiles(files)
     }
-    const dataForStudent = (exam: Exam, student: Student, score: number) => {
+    const dataForStudent = (exam: Exam, student: Student, score: number, answersStudent: Answer[]) => {
         setExam(exam)
         setStudent(student)
         setScore(score)
+        setanswersStudent(answersStudent)
     }
     const setNewExam = (exam: Exam) => {
         setExam(exam)
@@ -48,7 +51,7 @@ const Stepper_upload = () => {
         ...(IsStudentTest ? [
             {
                 label: "צור פידבק",
-                component: <WordFeadbackUploader student={student} exam={exam} score={score} />
+                component: <WordFeadbackUploader student={student} exam={exam} score={score} answers={answersStudent}/>
             }
         ] : []),
         {
@@ -59,6 +62,9 @@ const Stepper_upload = () => {
 
     const handleNext = () => {
         if (activeStep < steps.length - 1) setActiveStep((prev) => prev + 1);
+        console.log(answersStudent);
+        console.log("answersStudent");
+        
     };
 
     const handleBack = () => {

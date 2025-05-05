@@ -37,8 +37,9 @@ export interface StudentModalProps {
 
 export interface Answer {
     id?: number;
-    examId: number;
-    questionNumber: string//מספר שאלה
-    correctValue: number//התשובה הנכונה
+    examId?: number;
+    questionNumber?: string//מספר שאלה
+    correctAnswer?: number//התשובה הנכונה
+    isCorrect?: boolean;
 }
 

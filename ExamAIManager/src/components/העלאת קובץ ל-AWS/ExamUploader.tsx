@@ -27,7 +27,7 @@ const ExamUploader = ({ student, exam, IsStudentTest, fileExam }: PropsExamUploa
     const handleUpload = async () => {
         if (!file) return alert("נא לבחור קובץ");
         // const renamedFile = {}
-        const nameFile: string = IsStudentTest ? student.name : exam.dateExam + '-' + exam.subject
+        const nameFile: string = IsStudentTest ? student.name : exam.subject + '-' + exam.dateExam
         const renamedFile = renameFile(file, `${nameFile}.jpg`); // כאן שימי את השם שאת רוצה
 
         try {
@@ -49,7 +49,7 @@ const ExamUploader = ({ student, exam, IsStudentTest, fileExam }: PropsExamUploa
                     class: IsStudentTest ? student.studentClass : "null",
                     date: exam.dateExam,
                     IsStudentTest,
-                    contentType:"image/jpeg"
+                    contentType: "image/jpeg"
                 }
             });
 

@@ -5,7 +5,7 @@
 namespace ExamAI.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Migasync : Migration
+    public partial class correctAnswer2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

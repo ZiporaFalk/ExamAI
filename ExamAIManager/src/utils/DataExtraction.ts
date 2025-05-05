@@ -99,7 +99,7 @@ export const GetStudentId = async (data: any[]) => {
 
 //     const answers = extractAnswersAfterHu(DecodedExam)
 //     for (let i = 0; i < answers.length; i++) {
-//         await axios.post(`${apiUrl}/Answer`, { examId, questionNumber: hebrewLetters[i], correctValue: answers[i] })
+//         await axios.post(`${apiUrl}/Answer`, { examId, questionNumber: hebrewLetters[i], correctAnswer: answers[i] })
 //     }
 
 //     console.log(hebrewLetters);

@@ -21,7 +21,7 @@ namespace ExamAI.Service.Services
         {
             _answerRepository = answerRepository;
             _repositoryManager = repositoryManager;
-        }
+        } 
 
         public async Task<List<Answer>> GetAllAsync(int exam_id)
         {

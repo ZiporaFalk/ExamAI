@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamAI.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250422014425_MigAnswer-value")]
-    partial class MigAnswervalue
+    [Migration("20250504182539_correctAnswer3")]
+    partial class correctAnswer3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace ExamAI.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CorrectValue")
+                    b.Property<int>("CorrectAnswer")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Created_at")

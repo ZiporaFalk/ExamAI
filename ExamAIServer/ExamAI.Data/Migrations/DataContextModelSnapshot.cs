@@ -30,7 +30,7 @@ namespace ExamAI.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CorrectValue")
+                    b.Property<int>("CorrectAnswer")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Created_at")

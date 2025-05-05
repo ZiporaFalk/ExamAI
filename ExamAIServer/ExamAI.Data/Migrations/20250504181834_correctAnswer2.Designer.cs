@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamAI.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250316212857_Mig2")]
-    partial class Mig2
+    [Migration("20250504181834_correctAnswer2")]
+    partial class correctAnswer2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,19 +33,17 @@ namespace ExamAI.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CorrectValue")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Created_at")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ExamId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuestionNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("QuestionNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
 
-                    b.Property<int>("Value")
+                    b.Property<int>("correctAnswer")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -70,11 +68,11 @@ namespace ExamAI.Data.Migrations
                     b.Property<DateTime>("Created_at")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Subject")
+                    b.Property<string>("DateExam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("Subject")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -168,7 +166,7 @@ namespace ExamAI.Data.Migrations
                 {
                     b.HasBaseType("ExamAI.Core.Models.User");
 
-                    b.Property<string>("Class")
+                    b.Property<string>("studentClass")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -5,24 +5,24 @@
 namespace ExamAI.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class MigstudentClass : Migration
+    public partial class correctAnswer : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "Class",
-                table: "Users",
-                newName: "studentClass");
+                name: "CorrectValue",
+                table: "Answers",
+                newName: "correctAnswer");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "studentClass",
-                table: "Users",
-                newName: "Class");
+                name: "correctAnswer",
+                table: "Answers",
+                newName: "CorrectValue");
         }
     }
 }
