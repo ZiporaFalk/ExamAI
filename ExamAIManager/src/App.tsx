@@ -7,14 +7,13 @@ import FileProcessor from './components/בדיקת מבחן תלמיד/CheckStud
 import { RouterProvider } from 'react-router-dom'
 import { myRouter } from './Router'
 import NavBar from './components/NavBar'
+import Stepper_upload from './components/Steps'
+import { StepperDataProvider } from './components/StepperDataContext'
 
 function App() {
 
   return (
     <>
-
-      <RouterProvider router={myRouter} />
-
       {/* .....העלאת מבחן/קובץ ל AWS....... */}
       {/* <ExamUploader></ExamUploader> */}
 
@@ -26,9 +25,10 @@ function App() {
 
       {/* .....טבלת התלמידים...... */}
       {/* <StudentTable/> */}
+      <StepperDataProvider>
+        <RouterProvider router={myRouter} />
 
-
-
+      </StepperDataProvider>
     </>
   )
 }

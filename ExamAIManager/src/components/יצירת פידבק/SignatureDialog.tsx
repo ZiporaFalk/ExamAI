@@ -1,5 +1,3 @@
-
-
 import React, { useRef } from 'react';
 import SignaturePad from 'react-signature-canvas';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
@@ -19,7 +17,6 @@ const SignatureDialog: React.FC<SignatureDialogProps> = ({ open, onClose, onSave
 
     const save = () => {
         if (sigPadRef.current && !sigPadRef.current.isEmpty()) {
-            //   const dataUrl = sigPadRef.current.getTrimmedCanvas().toDataURL('image/png');
             const dataUrl = sigPadRef.current.getCanvas().toDataURL('image/png');
             onSave(dataUrl);
             onClose();

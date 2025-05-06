@@ -67,7 +67,7 @@ import { observer } from "mobx-react-lite";
 import studentStore from "./StudentStore";
 
 interface UpdateUrlsModalProps {
-    open: boolean;
+    open: boolean; 
     onClose: () => void;
     examId: number;
     studentId: number;

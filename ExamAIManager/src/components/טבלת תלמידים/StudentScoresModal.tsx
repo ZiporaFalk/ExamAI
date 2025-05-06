@@ -10,10 +10,9 @@ const StudentScoresModal: React.FC<StudentScoresModalProps> = observer(({ open, 
     const [scores, setScores] = useState<Map<number, number>>(new Map());
     useEffect(() => {
         console.log(student);
-
         if (student) {
             const scoresMap = new Map<number, number>();
-            studentStore.getStudentScores(student.id).forEach((submission, examId) => {
+            student.id && studentStore.getStudentScores(student.id).forEach((submission, examId) => {
                 scoresMap.set(examId, submission.score);
             });
             setScores(scoresMap);
@@ -29,17 +28,16 @@ const StudentScoresModal: React.FC<StudentScoresModalProps> = observer(({ open, 
             if (!student) return;
             const submissionsMap = new Map<number, Submission>();
             scores.forEach((score, examId) => {
-                const existingSubmission = studentStore.scores.get(student.id)?.get(examId);
+                const existingSubmission = student.id && studentStore.scores.get(student.id)?.get(examId);
                 submissionsMap.set(examId, {
-                    id: existingSubmission?.id ?? 0,  // שמירה על ה-ID הקיים, אם יש
+                    id: existingSubmission ? existingSubmission?.id : 0,  // שמירה על ה-ID הקיים, אם יש
                     score,
-                    urlFile: existingSubmission?.urlFile ?? "",
-                    urlFeedback: existingSubmission?.urlFeedback ?? "",
-                    studentId: student.id,
-                    // examId
+                    urlFile: existingSubmission ? existingSubmission?.urlFile : "",
+                    urlFeedback: existingSubmission ? existingSubmission?.urlFeedback : "",
+                    studentId: student.id ? student.id : 0,
                 });
             });
-            await studentStore.updateStudentScores(student.id, submissionsMap);
+            student.id && await studentStore.updateStudentScores(student.id, submissionsMap);
             onClose();
         } catch (error) {
             console.error("Error updating student scores:", error);
@@ -55,8 +53,8 @@ const StudentScoresModal: React.FC<StudentScoresModalProps> = observer(({ open, 
                         <TextField
                             key={exam.id}
                             label={exam.subject}
-                            value={scores.get(exam.id) ?? ""}
-                            onChange={(e) => handleChange(exam.id, e.target.value)}
+                            value={scores.get(exam.id ? exam.id : 0)}
+                            onChange={(e) => handleChange(exam.id ? exam.id : 0, e.target.value)}
                             fullWidth
                             margin="dense"
                             type="number"

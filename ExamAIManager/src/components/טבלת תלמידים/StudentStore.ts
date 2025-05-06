@@ -53,9 +53,9 @@ class StudentStore {
                         .then((response) => {
                             const submission = response.data;
                             const newScores = new Map(this.scores);
-                            const studentScores = newScores.get(student.id) || new Map();
+                            const studentScores = student.id && newScores.get(student.id) || new Map();
                             studentScores.set(exam.id, submission);
-                            newScores.set(student.id, studentScores);
+                            student.id && newScores.set(student.id, studentScores);
                             this.scores = newScores;
                         })
                         .catch(() => { })
