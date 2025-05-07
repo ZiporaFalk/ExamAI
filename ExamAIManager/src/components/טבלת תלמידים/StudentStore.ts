@@ -40,6 +40,7 @@ class StudentStore {
             console.error("Error fetching exams:", error);
         }
     }
+
     async fetchScores() {
         const newScores = new Map<number, Map<number, Submission>>();
         const scorePromises = this.students.flatMap((student) =>
@@ -51,12 +52,13 @@ class StudentStore {
                             newScores.set(student.id!, new Map());
                         }
                         newScores.get(student.id!)!.set(exam.id!, submission);
+                        console.log(submission);
                     })
                     .catch(() => {
                         if (!newScores.has(student.id!)) {
                             newScores.set(student.id!, new Map());
                         }
-                        newScores.get(student.id!)!.set(exam.id!, { studentId: student.id!, score: 0, urlFile: '', urlFeedback: '' }); // נכניס "אין ציון"
+                        newScores.get(student.id!)!.set(exam.id!, { studentId: student.id!, score: 0, file_Url: '', file_Url_FeedBack: '' }); // נכניס "אין ציון"
                     })
             )
         );
@@ -144,9 +146,7 @@ class StudentStore {
         try {
             await axios.put(`${apiUrl}/Submission/${submission.id}/${newScore}`,
                 { score: newScore, }, { headers: { "Content-Type": "application/json", }, });
-
             const studentScores = new Map<number, Submission>(this.scores.get(studentId)!);
-
             studentScores.set(examId, updatedSubmission);
             this.scores.set(studentId, studentScores);
         } catch (error) {

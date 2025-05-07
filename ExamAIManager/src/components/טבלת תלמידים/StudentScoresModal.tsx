@@ -137,6 +137,8 @@ import { observer } from "mobx-react";
 import { useState } from "react";
 import { Visibility } from "@mui/icons-material";
 import studentStore from "./StudentStore";
+import axios from "axios";
+const apiUrl = 'https://localhost:7083/api';
 
 const StudentScoresModal = observer(({ open, onClose, student }: any) => {
     const [editedScores, setEditedScores] = useState<Map<number, Map<number, number>>>(new Map());
@@ -147,15 +149,13 @@ const StudentScoresModal = observer(({ open, onClose, student }: any) => {
     const handleScoreChange = (studentId: number, examId: number, score: string) => {
         const numericValue = parseFloat(score);
         if (!isNaN(numericValue)) {
-            // עדכון הציון עבור התלמיד והבחינה הספציפיים
             setEditedScores(prev => {
                 const newMap = new Map(prev);
-                // אם אין כבר Map עבור הstudentId, ניצור אחד חדש
                 if (!newMap.has(studentId)) {
                     newMap.set(studentId, new Map());
                 }
                 const studentMap = newMap.get(studentId)!;
-                studentMap.set(examId, numericValue); // השמת הציון החדש
+                studentMap.set(examId, numericValue); 
                 return newMap;
             });
         }
@@ -170,8 +170,25 @@ const StudentScoresModal = observer(({ open, onClose, student }: any) => {
         onClose();
     };
 
-    const openPreview = (url: string) => {
+    const openPreview = async (url: string) => {
+        console.log(url);
+        // url = `exams/Students/מערכות הפעלה-י' אייר תשפ"ג/ה3/ריקי_קראוס_feedback.docx`
+        // url = `exams/Students/מערכות הפעלה-י' אייר תשפ\"ג/ה3/ריקי קראוס.jpg`
         setPreviewUrl(url);
+        try {
+            const response = await axios.get(`${apiUrl}/ExamUpload/download-url`, {
+                params: {
+                    Url: encodeURIComponent(url),
+                    IsStudentTest: true
+                }
+            });
+            const presignedUrl = response.data.url;
+            setPreviewUrl(presignedUrl);
+            // window.open(presignedUrl, '_blank');
+        } catch (error) {
+            console.error('שגיאה בקבלת הקישור:', error);
+            alert('אירעה שגיאה בעת ניסיון לפתוח את הקובץ.');
+        }
     };
 
     const closePreview = () => {
@@ -193,40 +210,56 @@ const StudentScoresModal = observer(({ open, onClose, student }: any) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-
                             {studentStore.exams.map((exam) => {
+                                console.log(studentStore.scores.get(student.id)?.get(exam.id!));
                                 const submission = studentStore.scores.get(student.id!)?.get(exam.id!);
-
+                                console.log("urlFile:", submission?.file_Url);
+                                console.log("id:", submission?.id);
+                                console.log("ציון:", submission?.score);
+                                console.log("ציון:", submission?.studentId);
                                 const scoreValue = editedScores.get(student.id!)?.get(exam.id!)?.toString()
-                                ?? submission?.score?.toString() ?? '';
-                            
+                                    ?? submission?.score?.toString() ?? '';
                                 return (
                                     <TableRow key={exam.id}>
                                         <TableCell>
-                                            {submission?.urlFile ? (
-                                                <IconButton onClick={() => openPreview(submission.urlFile)} color="primary">
+                                            {submission?.file_Url ? (
+                                                <IconButton onClick={() => openPreview(submission.file_Url)} color="primary">
                                                     <Visibility />
                                                 </IconButton>
                                             ) : (
                                                 '-'
                                             )}
+                                            {/* <IconButton onClick={() => openPreview("exams/Students/מערכות הפעלה-י' אייר תשפ\"ג/ה3/ריקי קראוס.jpg")} color="primary">
+                                                <Visibility />
+                                            </IconButton> */}
+                                            <DialogContent>
+                                                {/* {previewUrl && (
+                                                    <Box sx={{// height: "80vh", display: 'flex', justifyContent: 'center', alignItems: 'center'
+                                                        // display: 'flex',
+                                                        // justifyContent: 'center',
+                                                        // alignItems: 'center',
+                                                        // maxHeight: '80vh',
+                                                        // overflow: 'hidden'
+                                                    }}>
+                                                        <img src={previewUrl} alt="preview" style={{ maxHeight: "100%", maxWidth: "100%" }} />
+                                                    </Box>
+                                                )} */}
+                                            </DialogContent>
                                         </TableCell>
                                         <TableCell>
                                             <TextField
                                                 size="small"
                                                 type="number"
                                                 value={scoreValue}
-                                                // onChange={(e) => handleScoreChange(exam.id!.toString(), e.target.value)}
-                                                onChange={(e) => handleScoreChange(student.id!, exam.id!, e.target.value)} // העברת גם studentId וגם examId
+                                                onChange={(e) => handleScoreChange(student.id!, exam.id!, e.target.value)} 
                                                 sx={{ width: 80 }}
                                             />
                                         </TableCell>
-                                        <TableCell>{new Date(exam.dateExam).toLocaleDateString()}</TableCell>
+                                        <TableCell>{exam.dateExam}</TableCell>
                                         <TableCell>{exam.subject}</TableCell>
                                     </TableRow>
                                 );
                             })}
-
                         </TableBody>
                     </Table>
                 </DialogContent>
@@ -235,25 +268,37 @@ const StudentScoresModal = observer(({ open, onClose, student }: any) => {
                     <Button onClick={handleSave} variant="contained" color="primary">שמור שינויים</Button>
                 </DialogActions>
             </Dialog>
-
             {/* תצוגת קובץ בגודל מלא */}
             <Dialog open={!!previewUrl} onClose={closePreview} maxWidth="lg" fullWidth>
-                <DialogTitle>צפייה בקובץ מבחן</DialogTitle>
+                <DialogTitle style={{ textAlign: 'right' }}>צפייה בקובץ מבחן</DialogTitle>
                 <DialogContent>
                     {previewUrl && (
-                        <Box sx={{ height: "80vh" }}>
-                            <iframe
+                        // לא טוב לתמונה
+                        // <Box sx={{ height: "80vh" }}>
+                        //     <iframe
+                        //         src={previewUrl}
+                        //         title="preview"
+                        //         width="100%"
+                        //         height="100%"
+                        //         style={{ border: "none" }}
+                        //     />
+                        // </Box>
+                        <Box
+                            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh', overflow: 'hidden', p: 2 }}>
+                            <img
                                 src={previewUrl}
-                                title="preview"
-                                width="100%"
-                                height="100%"
-                                style={{ border: "none" }}
-                            />
+                                alt="preview"
+                                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }} />
                         </Box>
                     )}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={closePreview}>סגור</Button>
+                    {previewUrl && (
+                        <a href={previewUrl} download style={{ textDecoration: 'none' }}>
+                            <Button variant="outlined" color="primary">הורד קובץ</Button>
+                        </a>
+                    )}
                 </DialogActions>
             </Dialog>
         </>
@@ -261,18 +306,6 @@ const StudentScoresModal = observer(({ open, onClose, student }: any) => {
 });
 
 export default StudentScoresModal;
-
-
-
-
-
-
-
-
-
-
-
-
 
 // לפני הבלאגן
 // // StudentScoresModal.tsx

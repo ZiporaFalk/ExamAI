@@ -17,8 +17,10 @@ export interface Submission {
     id?: number;
     studentId: number;
     score: number;
-    urlFile: string;
-    urlFeedback: string;
+    // urlFile: string;
+    file_Url: string;
+    // urlFeedback: string;
+    file_Url_FeedBack: string;
 }
 
 export interface StudentScoresModalProps {

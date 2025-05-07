@@ -6,6 +6,10 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import { School, Edit, Add, Delete, Clear, FilterList } from "@mui/icons-material";
 import StudentDetailsModal from "./StudentDetailsModal";
 import StudentScoresModal from "./StudentScoresModal";
+// import StudentScoresModal from "./StudentScoresModal";
+// import StudentScoresModal from "./StudentScoresModal";
+// // import StudentScoresModal from "./StudentScoresModal";
+// // import StudentScoresModal from "./StudentScoresModal";
 
 const StudentTable = observer(() => {
     const [filterClass, setFilterClass] = useState(""); // 🔹 הוספה: סטייט לכיתה מסוננת
