@@ -9,7 +9,7 @@ namespace ExamAI.Core.Services
 {
     public interface ISubmissionService
     {
-        
+
         Task<Submission> GetAsync(int student_id, int exam_id);
         Task<List<Submission>> GetAllByIdAsync(int id);
         Task PostAsync(Submission newSubmission);
@@ -17,6 +17,7 @@ namespace ExamAI.Core.Services
         ///
         Task<Submission> GetByIdAsync(int id);
         Task UpdateAsync(int id, Submission submission);
+        Task UpdateScoreAsync(int id, int score);
 
         //Task UpdateScoreAsync(int studentId, int examId, int newScore);
         //Task UpdateUrlsAsync(int studentId, int examId, string urlFile, string urlFeedback);

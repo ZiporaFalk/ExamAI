@@ -23,17 +23,17 @@ const Stepper_upload = () => {
         },
         {
             label: isStudentTest ? "בדיקת מבחן" : "פיענוח תשובות",
-            component: isStudentTest ? <CheckStudentExams /> : <ExampleExam />,
+            component: isStudentTest ? <CheckStudentExams /> : <ExampleExam />,//הוספה לשרת 
         },
         ...(isStudentTest ? [
             {
                 label: "צור פידבק",
-                component: <WordFeadbackUploader />
+                component: <WordFeadbackUploader />///פה מעלה פידבק לAWS
             }
         ] : []),
         {
             label: "אישור ושליחה",
-            component: <ExamUploader />
+            component: <ExamUploader />//פה מעלה קובץ מבחן תלמיד או דוגמא 
         }
     ];
 

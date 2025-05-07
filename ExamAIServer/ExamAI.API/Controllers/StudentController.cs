@@ -95,7 +95,6 @@ namespace ExamAI.API.Controllers
                 return NotFound("Student not found.");
 
             return Ok(_mapper.Map<StudentDto>(updatedStudent));
-
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)

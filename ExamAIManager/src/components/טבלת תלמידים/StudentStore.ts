@@ -1,8 +1,6 @@
-
 import { makeAutoObservable } from "mobx";
 import axios from "axios";
 import { Exam, Student, Submission } from "../types";
-
 const apiUrl = 'https://localhost:7083/api';
 
 class StudentStore {
@@ -10,13 +8,11 @@ class StudentStore {
     exams: Exam[] = [];
     scores: Map<number, Map<number, Submission>> = new Map();
     loading: boolean = false;
-
     currentStudent: Student | null = null;
     openAddDialog: boolean = false;
     openDetailsDialog: boolean = false;
     openScoresDialog: boolean = false;
     IsLogin: boolean = false
-
     filteredClass: string = ""; // משתנה לאחסון הכיתה המסוננת
 
     constructor() {
@@ -44,29 +40,29 @@ class StudentStore {
             console.error("Error fetching exams:", error);
         }
     }
-
     async fetchScores() {
-        try {
-            const scorePromises = this.students.flatMap((student) =>
-                this.exams.map((exam) =>
-                    axios.get<Submission>(`${apiUrl}/Submission/${student.id}/${exam.id}`)
-                        .then((response) => {
-                            const submission = response.data;
-                            const newScores = new Map(this.scores);
-                            const studentScores = student.id && newScores.get(student.id) || new Map();
-                            studentScores.set(exam.id, submission);
-                            student.id && newScores.set(student.id, studentScores);
-                            this.scores = newScores;
-                        })
-                        .catch(() => { })
-                )
-            );
-            await Promise.all(scorePromises);
-        } catch (error) {
-            console.error("Error fetching scores:", error);
-        }
+        const newScores = new Map<number, Map<number, Submission>>();
+        const scorePromises = this.students.flatMap((student) =>
+            this.exams.map((exam) =>
+                axios.get<Submission>(`${apiUrl}/Submission/${student.id}/${exam.id}`)
+                    .then((response) => {
+                        const submission = response.data;
+                        if (!newScores.has(student.id!)) {
+                            newScores.set(student.id!, new Map());
+                        }
+                        newScores.get(student.id!)!.set(exam.id!, submission);
+                    })
+                    .catch(() => {
+                        if (!newScores.has(student.id!)) {
+                            newScores.set(student.id!, new Map());
+                        }
+                        newScores.get(student.id!)!.set(exam.id!, { studentId: student.id!, score: 0, urlFile: '', urlFeedback: '' }); // נכניס "אין ציון"
+                    })
+            )
+        );
+        await Promise.all(scorePromises);
+        this.scores = newScores;
     }
-
     async fetchData() {
         await this.fetchStudents();
         await this.fetchExams();
@@ -110,24 +106,24 @@ class StudentStore {
 
     //////אם בסוף אני לא צריכה כל העידכון זאת אומרת רק לעדכן הציון עצמו 
     // אז לשנות פהה שיפעיל פונקציה חדשה בשרת שעושה עידכון ספציפי לציון ולא מקבלת אוביקט שלם
-    async updateStudentScores(studentId: number, updatedScores: Map<number, Submission>) {
-        try {
-            await Promise.all(
-                Array.from(updatedScores.entries()).map(([examId, submission]) => {
-                    return axios.put(`${apiUrl}/Submission/${submission.id}`, {
-                        id: submission.id,
-                        studentId: studentId,
-                        score: submission.score,
-                        file_Url: submission.urlFile,
-                        file_Url_FeedBack: submission.urlFeedback
-                    });
-                })
-            );
-            this.scores.set(studentId, new Map(updatedScores));
-        } catch (error) {
-            console.error("Error updating student scores:", error);
-        }
-    }
+    // async updateStudentScores(studentId: number, updatedScores: Map<number, Submission>) {
+    //     try {
+    //         await Promise.all(
+    //             Array.from(updatedScores.entries()).map(([examId, submission]) => {
+    //                 return axios.put(`${apiUrl}/Submission/${submission.id}`, {
+    //                     id: submission.id,
+    //                     studentId: studentId,
+    //                     score: submission.score,
+    //                     file_Url: submission.urlFile,
+    //                     file_Url_FeedBack: submission.urlFeedback
+    //                 });
+    //             })
+    //         );
+    //         this.scores.set(studentId, new Map(updatedScores));
+    //     } catch (error) {
+    //         console.error("Error updating student scores:", error);
+    //     }
+    // }
 
     setFilteredClass(className: string) {
         this.filteredClass = className;
@@ -136,8 +132,28 @@ class StudentStore {
     get filteredStudents() {
         return this.filteredClass ? this.students.filter(student => student.studentClass === this.filteredClass) : this.students;
     }
-}
+    async updateScore(studentId: number, examId: number, newScore: number) {
+        const submission = this.scores.get(studentId)?.get(examId);
+        if (!submission) return;
 
+        const updatedSubmission: Submission = {
+            ...submission,
+            score: newScore
+        };
+
+        try {
+            await axios.put(`${apiUrl}/Submission/${submission.id}/${newScore}`,
+                { score: newScore, }, { headers: { "Content-Type": "application/json", }, });
+
+            const studentScores = new Map<number, Submission>(this.scores.get(studentId)!);
+
+            studentScores.set(examId, updatedSubmission);
+            this.scores.set(studentId, studentScores);
+        } catch (error) {
+            console.error("Error updating score:", error);
+        }
+    }
+}
 const studentStore = new StudentStore();
 export default studentStore;
 

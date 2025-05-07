@@ -11,6 +11,7 @@ namespace ExamAI.Core.Models
         public int Id { get; set; }
         public string Class { get; set; }
         public string Subject { get; set; }
+        public string File_Url { get; set; }
         public string DateExam { get; set; }
         public DateTime Created_at { get; set; } = DateTime.UtcNow;
         public List<Answer> Answers { get; set; }

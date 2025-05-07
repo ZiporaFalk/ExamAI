@@ -24,6 +24,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAnyOrigin",
         builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
+builder.Services.AddHttpClient();
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();

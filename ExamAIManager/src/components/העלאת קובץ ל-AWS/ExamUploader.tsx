@@ -16,7 +16,8 @@ const ExamUploader = () => {
         });
     };
     const handleUpload = async () => {
-        if (!files.length) return alert("נא לבחור קבצים");
+        
+        if (!files.length) return alert("נא לבחור קבצים"); 
 
         for (let i = 0; i < students.length; i++) {
 

@@ -9,7 +9,7 @@ interface StudentModalProps {
     onClose: () => void;
     onSave: (student: Student) => void;
     student?: Student | null;
-}
+} 
 // const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:7083/api';
 const apiUrl = 'https://localhost:7083/api';
 

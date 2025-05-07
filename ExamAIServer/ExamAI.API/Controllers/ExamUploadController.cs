@@ -24,9 +24,6 @@ namespace ExamAI.API.Controllers
         [HttpGet("presigned-url")]
         public async Task<IActionResult> GetPresignedUrl(string fileName, string subject, string @class, string date, bool IsStudentTest, string contentType)
         {
-            Console.WriteLine(subject+ " subject");
-            Console.WriteLine(@class + " @class");
-            Console.WriteLine(date + " date");
 
             if (string.IsNullOrEmpty(fileName))
                 return BadRequest("שם הקובץ נדרש");

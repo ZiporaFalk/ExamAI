@@ -47,6 +47,12 @@ namespace ExamAI.Service.Services
             await _submissionRepository.UpdateAsync(id, submission);
             await _repositoryManager.SaveAsync();
         }
+        public async Task UpdateScoreAsync(int id, int score)
+        {
+            await _submissionRepository.UpdateScoreAsync(id, score);
+            await _repositoryManager.SaveAsync();
+        }
+        
         //public async Task UpdateScoreAsync(int studentId, int examId, int newScore)
         //{
         //    await _submissionRepository.UpdateScoreAsync(studentId, examId, newScore);

@@ -17,6 +17,8 @@ namespace ExamAI.Core.Repositories
         ///
         Task<Submission> GetByIdAsync(int id);
         Task UpdateAsync(int id,Submission submission);
+        Task UpdateScoreAsync(int id, int score);
+
         //Task UpdateScoreAsync(int studentId, int examId, int newScore);
         //Task UpdateUrlsAsync(int studentId, int examId, string urlFile, string urlFeedback);
         //

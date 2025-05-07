@@ -48,6 +48,12 @@ namespace ExamAI.Data.Repositories
             submission.File_Url_FeedBack = newSubmission.File_Url_FeedBack;
             await _context.SaveChangesAsync();
         }
+        public async Task UpdateScoreAsync(int id, int score)
+        {
+            var submission = await _context.Submissions.FirstOrDefaultAsync(s => s.Id == id);
+            submission.Score = score;
+
+        }
         //public async Task UpdateScoreAsync(int studentId, int examId, int newScore)
         //{
         //    var Submission = await GetAsync(studentId, examId);

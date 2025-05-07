@@ -69,8 +69,6 @@ namespace ExamAI.API.Controllers
             {
                 return NotFound();
             }
-            Console.WriteLine(existingSubmission.Id + "iiiiiiiiiiiiiiiiiiiii");
-
             if (id != existingSubmission.Id)
             {
                 return BadRequest("ID mismatch");
@@ -80,6 +78,21 @@ namespace ExamAI.API.Controllers
             var submission = _mapper.Map<Submission>(updatedSubmission);
             await _submissionservice.UpdateAsync(id, submission);
 
+            return NoContent();
+        }
+        [HttpPut("{id}/{score}")]
+        public async Task<IActionResult> Put(int id, int score)
+        {
+            var existingSubmission = await _submissionservice.GetByIdAsync(id);
+            if (existingSubmission == null)
+            {
+                return NotFound();
+            }
+            if (id != existingSubmission.Id)
+            {
+                return BadRequest("ID mismatch");
+            }
+            await _submissionservice.UpdateScoreAsync(id, score);
             return NoContent();
         }
         //[HttpPut("score/{id}")]
