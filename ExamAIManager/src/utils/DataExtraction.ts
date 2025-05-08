@@ -4,28 +4,59 @@ import { Exam } from "../components/types";
 const apiUrl = 'https://localhost:7083/api';
 
 // const extractExam = (words: any[]): Exam => { //מחלץ תאריך ומקצוע
-export const extractDateAndSubject = (words: any[]) => {
+// export const extractDateAndSubject = (words: any[]) => {
 
-    const getText = (start: number, count: number) =>
-        words.slice(start, start + count).map(w => w.description).join(" ");
+//     const getText = (start: number, count: number) =>
+//         words.slice(start, start + count).map(w => w.description).join(" ");
 
+//     const dateIdx = words.findIndex(w => w.description === "תאריך");
+//     const subjectIdx = words.findIndex(w => w.description === "מקצוע");
+//     console.log(dateIdx);
+//     console.log(subjectIdx);
+
+//     if (dateIdx === -1 || subjectIdx === -1) throw new Error("שדות חיוניים חסרים");
+
+//     return {
+//         dateExam: getText(dateIdx + 2, 4).replace(/([א-ת])\s'/, "$1'"),
+//         subject: getText(subjectIdx + 2, 2),
+//     };
+// };
+type Word = { description: string };
+
+export const extractDateAndSubject = (words: Word[]) => {
     const dateIdx = words.findIndex(w => w.description === "תאריך");
     const subjectIdx = words.findIndex(w => w.description === "מקצוע");
-    console.log(dateIdx);
-    console.log(subjectIdx);
 
-    if (dateIdx === -1 || subjectIdx === -1) throw new Error("שדות חיוניים חסרים");
+    if (dateIdx === -1 || subjectIdx === -1) {
+        throw new Error("שדות חיוניים חסרים");
+    }
+
+    // נתחיל מהמילה שאחרי הנקודתיים של "מקצוע" (כלומר subjectIdx + 2)
+    const subjectStart = subjectIdx + 2;
+    const subjectEnd = dateIdx; // עד המילה "תאריך" (לא כולל)
+    const subjectWords = words.slice(subjectStart, subjectEnd).map(w => w.description).join(" ");
+
+    // תאריך תמיד לפי אותו פורמט – 4 מילים אחרי "תאריך" (מדלגים על "תאריך" ו":" => +2)
+    const dateWords = words.slice(dateIdx + 2, dateIdx + 6).map(w => w.description).join(" ");
+    const formattedDate = dateWords.replace(/([א-ת])\s'/, "$1'");
+    console.log(formattedDate);
+    console.log(subjectWords);
+    console.log(subjectWords.trim());
 
     return {
-        dateExam: getText(dateIdx + 2, 4).replace(/([א-ת])\s'/, "$1'"),
-        subject: getText(subjectIdx + 2, 2),
+        dateExam: formattedDate,
+        subject: subjectWords.trim()
     };
 };
-export const extractStudent = (DecodedExam: any[]) => {
+
+export const extractStudent = async (DecodedExam: any[]) => {
     const classIndex = DecodedExam.findIndex(myclass => myclass.description.includes("כיתה"))
     const classs = DecodedExam[classIndex + 2].description + DecodedExam[classIndex + 3].description + '';
     const nameIndex = DecodedExam.findIndex(myname => myname.description.includes("שם"))
     const name = DecodedExam[nameIndex + 2].description + ' ' + DecodedExam[nameIndex + 3].description;
+    // const studentId = await GetStudentId(DecodedExam)
+    // const email = (await axios.get(`${apiUrl}/Student/classandname/${studentId}`))
+    // return { studentClass: classs, name, email }
     return { studentClass: classs, name }
 }
 // const AddNewExam = async (DecodedExam: any) => {// מוסיף מבחן דוגמא חדש

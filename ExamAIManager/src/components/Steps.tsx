@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import { Stepper, Step, StepLabel, Button, Box } from "@mui/material";
 import Decoding from "./Decoding";
-import ExamUploader from "./העלאת קובץ ל-AWS/ExamUploader";
+// import ExamUploader from "./העלאת קובץ ל-AWS/ExamUploader";
 import TestType from "./TestType";
 import ExampleExam from "./מבחן דוגמא/ExampleExam";
 import WordFeadbackUploader from "./העלאת קובץ ל-AWS/WordFeadbackUploader";
 import CheckStudentExams from "./בדיקת מבחן תלמיד/CheckStudentExams";
 import StepperDataContext from "./StepperDataContext";
+import ExamUploader from "./העלאת קובץ ל-AWS/ExamUploader";
 
 const Stepper_upload = () => {
     const [activeStep, setActiveStep] = useState(0);

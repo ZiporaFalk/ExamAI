@@ -72,7 +72,7 @@ const CheckStudentExams = () => {
         const { score, exam_id, answersStudent } = await CheckTheTest(result);
         console.log(exam_id);
         const exam = await extractDateAndSubject(result)
-        const student = await extractStudent(result)
+        const student: Student = await extractStudent(result)
         const url = `exams/Students/${exam.subject}-${exam.dateExam}/${student.studentClass}/`
         const fileNamefeedback = `${student.name.replace(/\s/g, "_")}_feedback.docx`;
         const feedbackurl = url + fileNamefeedback
@@ -80,6 +80,9 @@ const CheckStudentExams = () => {
         console.log(feedbackurl);
         console.log(fileurl);
         const studentId = await GetStudentId(result);
+        const email = (await axios.get(`${apiUrl}/Student/${studentId}`)).data.email
+        console.log(email);
+        student.email = email
         await SaveStudentExam(score, exam_id, feedbackurl, fileurl, studentId);
         exams.push(exam)
         students.push(student)

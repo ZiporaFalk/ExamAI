@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react';
 import axios from 'axios';
 import StepperDataContext from '../StepperDataContext';
+import { Exam, Student } from '../types';
 
 const apiUrl = 'https://localhost:7083/api';
 
 const ExamUploader = () => {
-    const { students, exams, isStudentTest, files } =  useContext(StepperDataContext)!
+    const { students, exams, isStudentTest, files } = useContext(StepperDataContext)!
     const [progress, setProgress] = useState(0);
 
     const renameFile = (originalFile: File, newName: string): File => {
@@ -16,8 +17,8 @@ const ExamUploader = () => {
         });
     };
     const handleUpload = async () => {
-        
-        if (!files.length) return alert("נא לבחור קבצים"); 
+
+        if (!files.length) return alert("נא לבחור קבצים");
 
         for (let i = 0; i < students.length; i++) {
 
@@ -47,6 +48,7 @@ const ExamUploader = () => {
                         setProgress(percent);
                     },
                 });
+                isStudentTest && sendMail(students[i], exams[i])
                 console.log(`✔️ ${renamedFile.name} הועלה בהצלחה`);
             } catch (error) {
                 console.error(`❌ שגיאה בהעלאת הקובץ ${renamedFile.name}:`, error);
@@ -54,7 +56,27 @@ const ExamUploader = () => {
         }
         alert("✅ כל הקבצים הועלו!");
     };
-
+    const sendMail = async (student: Student, exam: Exam) => {
+        try {
+            console.log(student);
+            await axios.post(`${apiUrl}/Email/send`, {
+                // to: `${student.email}`,
+                // to: `ruti8588@gmail.com`,
+                // to: `maof5728@gmail.com`,
+                // to: `z5799888@gmail.com`,
+                to: `z0548498935@gmail.com`,
+                subject: `שלום לך ${student.name}!`,
+                body: `📑שלום וברוך הבא למערכת בדיקת המבחנים שלנו!
+                רצינו לעדכן שהמבחן שעשית ב:${exam.subject} נבדק ונכנס למערכת😂
+                את מוזמנת להיכנס ולצפות בו🔭🔭
+                בהצלחה!!!🎉`,
+            });
+            alert(student.email + " הדוא״ל נשלח בהצלחה!");
+        } catch (err) {
+            console.error(err);
+            alert(student.email + "שליחת הדוא״ל נכשלה.");
+        }
+    };
     return (
         <div>
             <button onClick={handleUpload} disabled={!files}>העלה מבחן</button>
