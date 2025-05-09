@@ -12,6 +12,7 @@ namespace ExamAI.Core.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public bool IsGoogleUser { get; set; }
         public DateTime Created_at { get; set; } = DateTime.UtcNow;
 
         public User()

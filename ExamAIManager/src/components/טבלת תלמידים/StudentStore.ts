@@ -4,7 +4,7 @@ import { Exam, Student, Submission } from "../types";
 const apiUrl = 'https://localhost:7083/api';
 
 class StudentStore {
-    students: Student[] = [];
+    students: Student[] = []; 
     exams: Exam[] = [];
     scores: Map<number, Map<number, Submission>> = new Map();
     loading: boolean = false;
@@ -17,9 +17,11 @@ class StudentStore {
 
     constructor() {
         makeAutoObservable(this);
-        this.IsLogin = localStorage.getItem("isLogin") === "true";
+        // this.IsLogin = localStorage.getItem("isLogin") === "true";
     }
-
+    setLoginStatus(status: boolean) {
+        this.IsLogin = status;
+      }
     async fetchStudents() {
         this.loading = true;
         try {

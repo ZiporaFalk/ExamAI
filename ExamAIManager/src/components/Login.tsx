@@ -3,43 +3,16 @@ import { useState } from 'react';
 import { TextField, Button, Box, Typography, Alert } from '@mui/material';
 import axios from 'axios';
 import studentStore from './טבלת תלמידים/StudentStore';
+import { useNavigate } from 'react-router-dom';
+import GoogleLoginButton from './Sign With Google/GoogleLoginButton';
+const apiUrl = 'https://localhost:7083/api';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('success'); // success or error
-
-  // const handleLogin = async () => {
-  //   // בדיקת קלט
-  //   if (!email || !password) {
-  //     setMessageType('error');
-  //     setMessage('אנא מלא את כל השדות');
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await axios.post('https://localhost:7083/api/Auth/login', {
-  //       email,
-  //       password,
-  //     });
-
-  //     if (response.status === 200) {
-  //       setMessageType('success');
-  //       setMessage( 'התחברת בהצלחה!');
-  //       // studentStore.IsLogin = true
-  //       // console.log(studentStore.IsLogin+"okk");
-
-  //     } else {
-
-  //       setMessageType('error');
-  //       setMessage('ההתחברות נכשלה');
-  //     }
-  //   } catch (error) {
-  //     setMessageType('error');
-  //     setMessage('הייתה שגיאה בתקשורת');
-  //   }
-  // };
+  // const navigate = useNavigate();
   const handleLogin = async () => {
     // בדיקת קלט
     if (!email || !password) {
@@ -49,16 +22,15 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await axios.post("https://localhost:7083/api/Auth/login", {
+      const response = await axios.post(`${apiUrl}/Auth/login`, {
         email,
         password,
       });
-
       if (response.status === 200) {
         setMessageType("success");
         setMessage("התחברת בהצלחה!");
-        studentStore.IsLogin = true;
-        localStorage.setItem("isLogin", "true"); // שמירת הסטטוס
+        // navigate("/")
+        studentStore.setLoginStatus(true);
       }
     } catch (error: any) {
       setMessageType("error");
@@ -76,7 +48,6 @@ const LoginForm = () => {
       <Typography variant="h5" gutterBottom align="center">
         התחבר לחשבון שלך
       </Typography>
-
       <TextField
         label="מייל"
         type="email"
@@ -105,13 +76,11 @@ const LoginForm = () => {
       </Button>
 
       {message && (
-        <Alert
-          severity={messageType === 'success' ? 'success' : 'error'}
-          sx={{ marginTop: 2 }}
-        >
+        <Alert severity={messageType === 'success' ? 'success' : 'error'} sx={{ marginTop: 2 }}>
           {message}
         </Alert>
       )}
+      {/* <GoogleLoginButton /> */}
     </Box>
   );
 };
