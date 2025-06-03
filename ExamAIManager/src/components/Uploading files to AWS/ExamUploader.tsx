@@ -260,8 +260,8 @@ interface FileIconProps {
 
 const ExamUploader: React.FC = () => {
     const [progress, setProgress] = useState<{ [key: string]: number }>({});
-    const [isUploading, setIsUploading] = useState<boolean>(false);
-    const [uploadComplete, setUploadComplete] = useState<boolean>(false);
+    const [isUploading,] = useState<boolean>(false);
+    const [uploadComplete, ] = useState<boolean>(false);
     const { students, exams, isStudentTest, files, setIsAbleNext } = useContext(StepperDataContext)!
 
     // קבלת המידע מהקונטקסט

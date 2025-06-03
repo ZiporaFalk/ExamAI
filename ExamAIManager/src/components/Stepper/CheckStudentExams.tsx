@@ -19,7 +19,7 @@ const CheckStudentExams = () => {
   const [progress, setProgress] = useState<number>(0);
   const [averageMark, setAverageMark] = useState<number | null>(null);
   const [currentProcessing, setCurrentProcessing] = useState<string>("");
-  const [unregisteredStudents, setUnregisteredStudents] = useState<{ name: string }[]>([]);
+  const [unregisteredStudents, ] = useState<{ name: string }[]>([]);
   const [hasError, setHasError] = useState<boolean>(false);
   const [click, setClick] = useState(false)
 

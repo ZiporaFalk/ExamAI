@@ -17,7 +17,7 @@ const ExampleExam = () => {
     // const [isCompleted, setIsCompleted] = useState<boolean>(false);
   
     // .....
-    const { selectedImages, setExams, files ,setIsAbleNext} = useContext(StepperDataContext)!
+    const { selectedImages, setExams ,setIsAbleNext} = useContext(StepperDataContext)!
     // const [progress, setProgress] = useState<{ [key: string]: number }>({});
     const [isLoading, setIsLoading] = useState(false);
     const [isFinished, setIsFinished] = useState(false);

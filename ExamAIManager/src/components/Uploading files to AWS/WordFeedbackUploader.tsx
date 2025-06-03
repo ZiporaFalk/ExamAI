@@ -7,7 +7,7 @@ import "../../stylies/WordFeedbackUploader.css"
 import ExamUploadService from "../../services/ExamUploadService";
 const WordFeedbackUploader = () => {
     const { students, exams, scores, answersList, setIsAbleNext } = useContext(StepperDataContext)! // במקום props
-    const [teacherNote, setTeacherNote] = useState("");
+    const [teacherNote, ] = useState("");
     const [signature, setSignature] = useState<string | null>(null);
     const [isGenerating, setIsGenerating] = useState<boolean>(false);
     const [isSuccess, setIsSuccess] = useState<boolean>(false);

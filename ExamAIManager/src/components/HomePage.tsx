@@ -9,7 +9,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
-  const [scrolled, setScrolled] = useState(false);
+  const [, setScrolled] = useState(false);
   const navigate = useNavigate()
   const heroTextVariants = {
     hidden: { opacity: 0, x: -40 },
@@ -23,18 +23,6 @@ const HomePage = () => {
       transition: { duration: 0.3 }
     },
     tap: { scale: 0.95 }
-  };
-
-  const arrowVariants = {
-    initial: { x: 0 },
-    animate: {
-      x: [0, 8, 0],
-      transition: {
-        repeat: Infinity,
-        repeatType: "reverse",
-        duration: 1
-      }
-    }
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useRef, useState, DragEvent, useEffect } from "react";
+import { ChangeEvent, useContext, useRef, useState, DragEvent } from "react";
 import StepperDataContext from "./StepperDataContext";
 import { FileWithProgress } from "../../utils/types";
 import "../../stylies/Decoding.css"

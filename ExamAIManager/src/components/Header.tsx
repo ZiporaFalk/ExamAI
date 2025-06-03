@@ -12,7 +12,7 @@ import { observer } from 'mobx-react';
 const Header = observer(() => {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [api, contextHolder] = notification.useNotification();
-    const [scrolled, setScrolled] = useState(false);
+    const [scrolled, ] = useState(false);
     const navigate = useNavigate()
     const buttonVariants = {
         hover: {
@@ -31,16 +31,6 @@ const Header = observer(() => {
         setIsLoginModalOpen(false);
     };
 
-    const responseGoogle = (response: any) => {
-        console.log("Google login response:", response);
-        setIsLoginModalOpen(false);
-        api.success({
-            message: 'You have successfully signed in with Google.',
-            description: 'Welcome to the ExamAI system!',
-            placement: 'topRight',
-            className: 'rtl-notification',
-        });
-    };
     const handleLogout = () => {
         authService.setLoginStatus(false); // התנתקות
         localStorage.removeItem('token')
