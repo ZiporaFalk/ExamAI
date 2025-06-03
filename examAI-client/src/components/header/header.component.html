@@ -2,7 +2,8 @@
 <nav class="navbar" [class.scrolled]="scrolled()">
   <div class="nav-container">
     <div class="logo" (click)="navigateTo('/h')">
-      <h1>logo</h1>
+      <!-- <h1>logo</h1> -->
+      <img src='/images/logo.png' alt="examai-logo" class="logo-img">
     </div>
 
     <div class="nav-menu">
@@ -34,7 +35,6 @@
         </svg>
         Exams
       </a>
-
 
       <a (click)="sendEmail()" class="nav-item">
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
