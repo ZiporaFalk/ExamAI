@@ -12,7 +12,7 @@ class StudentStore {
     openAddDialog: boolean = false;
     openDetailsDialog: boolean = false;
     openScoresDialog: boolean = false;
-    filteredClass: string = ""; // משתנה לאחסון הכיתה המסוננת
+    filteredClass: string = ""; 
 
     constructor() {
         makeAutoObservable(this);

@@ -1,5 +1,3 @@
-// "use client"
-
 import type React from "react"
 import { useRef } from "react"
 import SignaturePad from "react-signature-canvas"
@@ -30,7 +28,7 @@ const SignatureDialog: React.FC<SignatureDialogProps> = ({ open, onClose, onSave
         <Dialog
             open={open}
             onClose={onClose}
-            className="signature-dialog"  // הוסיפי את זה
+            className="signature-dialog"  
             PaperProps={{
                 style: {
                     borderRadius: "var(--radius)",
@@ -68,13 +66,11 @@ const SignatureDialog: React.FC<SignatureDialogProps> = ({ open, onClose, onSave
                         className="signature-instruction"
                         style={{
                             marginBottom: "1rem",
-                            // color: "var(--foreground)",
                             color: "white",
                             opacity: 0.7,
                             textAlign: "center",
                         }}
                     >
-                        {/* חתום באמצעות העכבר או מסך המגע */}
                         Sign using mouse or touchscreen
                     </p>
                     <SignaturePad
@@ -133,7 +129,6 @@ const SignatureDialog: React.FC<SignatureDialogProps> = ({ open, onClose, onSave
                             e.currentTarget.style.opacity = "0.7"
                         }}
                     >
-                        {/* בטל */}
                         Cancel
                     </Button>
                     <Button
@@ -157,7 +152,6 @@ const SignatureDialog: React.FC<SignatureDialogProps> = ({ open, onClose, onSave
                             e.currentTarget.style.boxShadow = "0 4px 14px rgba(58, 134, 255, 0.4)"
                         }}
                     >
-                        {/* שמור */}
                         Save
                     </Button>
                 </div>
@@ -169,53 +163,3 @@ const SignatureDialog: React.FC<SignatureDialogProps> = ({ open, onClose, onSave
 export default SignatureDialog
 
 
-
-// import React, { useRef } from 'react';
-// import SignaturePad from 'react-signature-canvas';
-// import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
-
-// interface SignatureDialogProps {
-//     open: boolean;
-//     onClose: () => void;
-//     onSave: (dataUrl: string) => void;
-// }
-
-// const SignatureDialog: React.FC<SignatureDialogProps> = ({ open, onClose, onSave }) => {
-//     const sigPadRef = useRef<SignaturePad>(null);
-
-//     const clear = () => {
-//         sigPadRef.current?.clear();
-//     };
-
-//     const save = () => {
-//         if (sigPadRef.current && !sigPadRef.current.isEmpty()) {
-//             const dataUrl = sigPadRef.current.getCanvas().toDataURL('image/png');
-//             onSave(dataUrl);
-//             onClose();
-//         }
-//     };
-
-//     return (
-//         <Dialog open={open} onClose={onClose} >
-//             <DialogTitle>חתום כאן</DialogTitle>
-//             <DialogContent>
-//                 <SignaturePad
-//                     ref={sigPadRef}
-//                     canvasProps={{
-//                         width: 500,
-//                         height: 200,
-//                         className: 'signature-canvas',
-//                         style: { border: '1px solid #ccc' },
-//                     }}
-//                 />
-//             </DialogContent>
-//             <DialogActions>
-//                 <Button onClick={clear}>נקה</Button>
-//                 <Button onClick={onClose}>בטל</Button>
-//                 <Button onClick={save} variant="contained" color="primary">שמור</Button>
-//             </DialogActions>
-//         </Dialog>
-//     );
-// };
-
-// export default SignatureDialog;

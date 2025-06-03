@@ -6,7 +6,7 @@ const GoogleLoginButton = () => {
     const tokenId = credentialResponse.credential;
     console.log("window.origin:", window.origin);
     console.log("window.location.origin:" + window.location.origin);
-    console.log("window.location.href:", window.location.href);  // כאן, אם יש סלאש בסוף - יוסר
+    console.log("window.location.href:", window.location.href);
     try {
       const response = await axiosInstance.post(`/auth/google`, {
         token: tokenId,
@@ -24,7 +24,6 @@ const GoogleLoginButton = () => {
 
   return (
     <div>
-      {/* <h3>התחברות עם Google</h3> */}
       <br></br>
       <GoogleLogin
         onSuccess={handleLogin}

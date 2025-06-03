@@ -14,7 +14,7 @@ import StudentSheetService from "../../services/StudentSheetService";
 import AnalyzeImageService from "../../services/AnalyzeImagService";
 const CheckStudentExams = () => {
   const { selectedImages, setExams, setAnswersList, setStudents, setScores, setIsAbleNext } = useContext(StepperDataContext)!
-  const [isLoading, setIsLoading] = useState(false); // <-- סטייט חדש
+  const [isLoading, setIsLoading] = useState(false); 
   const [isFinished, setIsFinished] = useState(false);
   const [progress, setProgress] = useState<number>(0);
   const [averageMark, setAverageMark] = useState<number | null>(null);
@@ -35,12 +35,10 @@ const CheckStudentExams = () => {
     console.log(data);
     const dateAndSubject = extractDateAndSubject(data);
     console.log(dateAndSubject);
-    // const exam = (await axios.get(`${apiUrl}/Exam/BySubjectAndDate/${dateAndSubject.dateExam}/${dateAndSubject.subject}`)).data;
     const exam = await ExamService.getBySubjectAndDate(dateAndSubject)
     console.log(exam);
     const letters = extractHebrewLettersWithDot(data);
     const numbersAnswer = extractAnswersAfterHu(data);
-    // const CorrectAnswers = (await axios.get(`${apiUrl}/Answer`, { params: { exam_id: exam.id } })).data;
     const CorrectAnswers = await ExamService.getCorrectAnswers(exam);
     console.log(CorrectAnswers);
     console.log(letters);
@@ -67,13 +65,12 @@ const CheckStudentExams = () => {
 
   const handleAnalyze = async () => {
     setClick(true)
-    setIsLoading(true); // מתחיל ריענון
+    setIsLoading(true); 
     setIsFinished(false);
     const exams: Exam[] = []
     const students: Student[] = []
     const scores: number[] = []
     const answersStudents: Answer[][] = []
-    // for (const image of selectedImages) {
     selectedImages.forEach(async (image, i) => {
       const progressPercentage = Math.round(((i + 1) / selectedImages.length) * 100);
       setProgress(progressPercentage);

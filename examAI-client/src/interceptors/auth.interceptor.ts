@@ -4,7 +4,6 @@ import { environment } from '../environments/environment';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = localStorage.getItem('token');
-console.log("opoiiouytrerdfgh");
 
   // const isRelative = !/^http/.test(req.url);
   // const fullUrl = isRelative ? API_BASE_URL + req.url : req.url;
