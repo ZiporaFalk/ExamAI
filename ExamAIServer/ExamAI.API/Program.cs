@@ -45,12 +45,12 @@ builder.Services.AddAuthorization(options =>
 });
 
 var app = builder.Build();
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
     app.MapOpenApi();
-}
+//}
 app.UseCors("AllowAnyOrigin");
 
 app.UseHttpsRedirection();
@@ -59,7 +59,7 @@ app.UseAuthentication();//JWT
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapGet("/", () => "AuthServer API is running!");
 app.Run();
 
 
