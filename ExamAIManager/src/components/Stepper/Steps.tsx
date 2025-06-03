@@ -56,7 +56,6 @@ const Stepper_upload = () => {
 
     return (
         <div className="stepper-container">
-
             <div className="stepper-wrapper">
                 <div className="stepper-progress">
                     {steps.map((step, index) => (

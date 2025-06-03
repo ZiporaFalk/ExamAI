@@ -13,13 +13,13 @@ import EmailService from "../../services/EmailService";
 import StudentSheetService from "../../services/StudentSheetService";
 import AnalyzeImageService from "../../services/AnalyzeImagService";
 const CheckStudentExams = () => {
-  const { selectedImages, setExams, setAnswersList, setStudents, setScores, setIsAbleNext } = useContext(StepperDataContext)!
+  const { selectedImages, files, setFiles, setExams, setAnswersList, setStudents, setScores, setIsAbleNext } = useContext(StepperDataContext)!
   const [isLoading, setIsLoading] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [progress, setProgress] = useState<number>(0);
   const [averageMark, setAverageMark] = useState<number | null>(null);
   const [currentProcessing, setCurrentProcessing] = useState<string>("");
-  const [unregisteredStudents,] = useState<{ name: string }[]>([]);
+  const [unregisteredStudents, setUnregisteredStudents] = useState<{ name: string }[]>([]);
   const [hasError, setHasError] = useState<boolean>(false);
   const [click, setClick] = useState(false)
 
@@ -65,12 +65,15 @@ const CheckStudentExams = () => {
 
   const handleAnalyze = async () => {
     setClick(true)
+    setUnregisteredStudents([])
     setIsLoading(true);
     setIsFinished(false);
+    setProgress(0)
     const exams: Exam[] = []
     const students: Student[] = []
     const scores: number[] = []
     const answersStudents: Answer[][] = []
+    const updatedFiles = [...files]
     selectedImages.forEach(async (image, i) => {
       const progressPercentage = Math.round(((i + 1) / selectedImages.length) * 100);
       setProgress(progressPercentage);
@@ -104,7 +107,7 @@ const CheckStudentExams = () => {
         unregisteredStudents.push({ name: student.name })//////////////////////////////////////////////////////////////
         console.log(unregisteredStudents);
         console.log("unregisteredStudents");
-        // updatedFiles[i] = null;
+        updatedFiles[i] = null;
         const email = await StudentSheetService.getStudentEmail(student.name, student.studentClass);
         await EmailService.sendMail(
           " :לרישום נא להיכנס ללינק הבא : \nעליך להרשם בהקדם\n 📑שלום וברוך הבא למערכת בדיקת המבחנים שלנו!",
@@ -126,7 +129,7 @@ const CheckStudentExams = () => {
     setAnswersList(answersStudents)
     setStudents(students)
     setScores(scores)
-    // setIsLoading(false);
+    setFiles(updatedFiles)
     setIsFinished(true);
     setIsAbleNext(true)
   };

@@ -78,6 +78,7 @@ html {
     backdrop-filter: blur(20px);
     position: relative;
     z-index: 1;
+    scale: 90%;
 }
 
 .stepper-wrapper::before {

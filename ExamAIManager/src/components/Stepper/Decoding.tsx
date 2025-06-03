@@ -20,7 +20,7 @@ const Decoding = () => {
                     const updated = prev.map((f, i) =>
                         i === fileIndex && f ? { ...f, progress: 100, uploading: false } : f
                     );
-                    // אם כולם סיימו – אפשר להמשיך
+
                     const allDone = updated.every((f) => f && f.progress === 100);
                     setIsAbleNext(allDone);
                     return updated;

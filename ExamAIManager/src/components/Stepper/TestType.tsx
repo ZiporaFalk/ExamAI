@@ -10,7 +10,6 @@ const TestType = () => {
     return (
         <>
             <div id="upload-container">
-                <h1>TestType</h1>
                 <h1 className="title">Choose Your Action</h1>
                 <p className="subtitle">
                     Our system allows you to check exams and view results quickly and efficiently
