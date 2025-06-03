@@ -3,13 +3,13 @@ using ExamAI.Core.Services;
 using ExamAI.Core;
 using ExamAI.Data.Repositories;
 using ExamAI.Service.Services;
-using ExamAI.Data;
+//using ExamAI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-
 using Amazon.S3;
 using Amazon;
 using Amazon.Runtime;
+using ExamAI.Data;  // וודא שיש רק using אחד עם DataContext מתאים
 
 namespace ExamAI.API.Extensions
 {
@@ -30,11 +30,11 @@ namespace ExamAI.API.Extensions
             services.AddScoped<IAnswerService, AnswerService>();
             services.AddScoped<ISubmissionService, SubmissionService>();
             services.AddScoped<IAuthService, AuthService>();
-
-
+            services.AddScoped<IDashBoardService, DashBoardService>();
+            services.AddScoped<IGoogleSheetService, GoogleSheetService>();
+            services.AddScoped<IOcrService, OcrService>();
 
             services.AddAutoMapper(typeof(MappingProfile));
-            services.AddDbContext<DataContext>();
             services.AddSingleton<IAmazonS3>(sp =>
             {
                 var configuration = sp.GetRequiredService<IConfiguration>();
@@ -51,7 +51,21 @@ namespace ExamAI.API.Extensions
                 return new AmazonS3Client(credentials, clientConfig);
             });
             services.AddAutoMapper(typeof(MappingProfile));
-            services.AddDbContext<DataContext>();
+            //services.AddDbContext<DataContext>();
+            services.AddDbContext<DataContext>(options =>
+            {
+                var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
+                var connectionString = configuration.GetConnectionString("ExamAIDB");
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            });
+            /////
+            ///
+            //builder.Services.AddDbContext<DataContext>(options =>
+            //{
+            //    var configuration = builder.Configuration;
+            //    var connectionString = configuration.GetConnectionString("CheckPointDB");
+            //    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            //});
             //services.AddDbContext<DataContext>(options =>
             //options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 

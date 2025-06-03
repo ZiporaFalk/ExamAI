@@ -1,0 +1,864 @@
+/* Signature.css */
+
+.signature-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.signature-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.signature-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.signature-button:hover::before {
+    left: 100%;
+}
+
+.signature-button:hover {
+    background-color: rgba(59, 130, 246, 0.15);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.signature-button:active {
+    transform: translateY(1px);
+}
+
+.signature-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.signature-preview span {
+    font-size: 0.8rem;
+    color: #10b981;
+}
+
+.signature-thumbnail {
+    width: 120px;
+    height: 60px;
+    border: 1px dashed rgba(59, 130, 246, 0.3);
+    border-radius: 4px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(59, 130, 246, 0.05);
+    overflow: hidden;
+}
+
+.signature-thumbnail img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+
+/* Signature Component Styles */
+.signature-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.signature-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.signature-preview span {
+    font-size: 14px;
+    color: #4caf50;
+}
+
+.signature-thumbnail {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 8px;
+    max-width: 150px;
+}
+
+.signature-thumbnail img {
+    width: 100%;
+    height: auto;
+}
+
+/* Signature Dialog Styles */
+.signature-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.signature-dialog {
+    width: 100%;
+    max-width: 550px;
+    background-color: #0f172a;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.signature-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #1e293b;
+}
+
+.signature-dialog-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+}
+
+.signature-dialog-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #64748b;
+}
+
+.signature-dialog-close:hover {
+    color: white;
+}
+
+.signature-dialog-content {
+    padding: 16px 20px;
+}
+
+.signature-dialog-instructions {
+    text-align: center;
+    margin-bottom: 16px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.signature-canvas-container {
+    border: 2px dashed #334155;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signature-canvas {
+    width: 100%;
+    height: 100%;
+    background-color: #1e293b;
+    touch-action: none;
+}
+
+.signature-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-top: 1px solid #1e293b;
+}
+
+.signature-button-group {
+    display: flex;
+    gap: 8px;
+}
+
+.signature-button-clear {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #111827;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.signature-button-cancel {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #1e293b;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.signature-button-save {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #3b82f6;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.signature-button-clear:hover {
+    background-color: #1e293b;
+}
+
+.signature-button-cancel:hover {
+    background-color: #334155;
+}
+
+.signature-button-save:hover {
+    background-color: #2563eb;
+}
+
+/* Signature Component Styles */
+.signature-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.signature-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.signature-preview span {
+    font-size: 14px;
+    color: #4caf50;
+}
+
+/* .signature-thumbnail {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 8px;
+    max-width: 150px;
+  }
+   */
+.signature-thumbnail img {
+    width: 100%;
+    height: auto;
+}
+
+/* Signature Dialog Styles */
+.signature-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.signature-dialog {
+    width: 100%;
+    max-width: 550px;
+    background-color: #0f172a;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.signature-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #1e293b;
+}
+
+.signature-dialog-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+}
+
+.signature-dialog-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #64748b;
+}
+
+.signature-dialog-close:hover {
+    color: white;
+}
+
+.signature-dialog-content {
+    padding: 16px 20px;
+}
+
+.signature-dialog-instructions {
+    text-align: center;
+    margin-bottom: 16px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.signature-canvas-container {
+    border: 2px dashed #334155;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signature-canvas {
+    width: 100%;
+    height: 100%;
+    background-color: #1e293b;
+    touch-action: none;
+}
+
+.signature-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-top: 1px solid #1e293b;
+}
+
+.signature-button-group {
+    display: flex;
+    gap: 8px;
+}
+
+/* .signature-button-clear {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #111827;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .signature-button-cancel {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #1e293b;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .signature-button-save {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #3b82f6;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .signature-button-clear:hover {
+    background-color: #1e293b;
+  }
+  
+  .signature-button-cancel:hover {
+    background-color: #334155;
+  }
+  
+  .signature-button-save:hover {
+    background-color: #2563eb;
+  } */
+/* Signature.css */
+
+.signature-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.signature-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.signature-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.signature-button:hover::before {
+    left: 100%;
+}
+
+.signature-button:hover {
+    background-color: rgba(59, 130, 246, 0.15);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.signature-button:active {
+    transform: translateY(1px);
+}
+
+.signature-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.signature-preview span {
+    font-size: 0.8rem;
+    color: #10b981;
+}
+
+.signature-thumbnail {
+    width: 120px;
+    height: 60px;
+    border: 1px dashed rgba(59, 130, 246, 0.3);
+    border-radius: 4px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(59, 130, 246, 0.05);
+    overflow: hidden;
+}
+
+.signature-thumbnail img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+
+/* Signature Component Styles */
+.signature-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.signature-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.signature-preview span {
+    font-size: 14px;
+    color: #4caf50;
+}
+
+.signature-thumbnail {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 8px;
+    max-width: 150px;
+}
+
+.signature-thumbnail img {
+    width: 100%;
+    height: auto;
+}
+
+/* Signature Dialog Styles */
+.signature-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.signature-dialog {
+    width: 100%;
+    max-width: 550px;
+    background-color: #0f172a;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.signature-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #1e293b;
+}
+
+.signature-dialog-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+}
+
+.signature-dialog-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #64748b;
+}
+
+.signature-dialog-close:hover {
+    color: white;
+}
+
+.signature-dialog-content {
+    padding: 16px 20px;
+}
+
+.signature-dialog-instructions {
+    text-align: center;
+    margin-bottom: 16px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.signature-canvas-container {
+    border: 2px dashed #334155;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signature-canvas {
+    width: 100%;
+    height: 100%;
+    background-color: #1e293b;
+    touch-action: none;
+}
+
+.signature-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-top: 1px solid #1e293b;
+}
+
+.signature-button-group {
+    display: flex;
+    gap: 8px;
+}
+
+.signature-button-clear {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #111827;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.signature-button-cancel {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #1e293b;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.signature-button-save {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #3b82f6;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.signature-button-clear:hover {
+    background-color: #1e293b;
+}
+
+.signature-button-cancel:hover {
+    background-color: #334155;
+}
+
+.signature-button-save:hover {
+    background-color: #2563eb;
+}
+
+
+
+
+
+
+
+
+
+/* Signature Component Styles */
+.signature-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.signature-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.signature-preview span {
+    font-size: 14px;
+    color: #4caf50;
+}
+
+/* .signature-thumbnail {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 8px;
+    max-width: 150px;
+  }
+   */
+.signature-thumbnail img {
+    width: 100%;
+    height: auto;
+}
+
+/* Signature Dialog Styles */
+.signature-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.signature-dialog {
+    width: 100%;
+    max-width: 550px;
+    background-color: #0f172a;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.signature-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #1e293b;
+}
+
+.signature-dialog-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+}
+
+.signature-dialog-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #64748b;
+}
+
+.signature-dialog-close:hover {
+    color: white;
+}
+
+.signature-dialog-content {
+    padding: 16px 20px;
+}
+
+.signature-dialog-instructions {
+    text-align: center;
+    margin-bottom: 16px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.signature-canvas-container {
+    border: 2px dashed #334155;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signature-canvas {
+    width: 100%;
+    height: 100%;
+    background-color: #1e293b;
+    touch-action: none;
+}
+
+.signature-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-top: 1px solid #1e293b;
+}
+
+.signature-button-group {
+    display: flex;
+    gap: 8px;
+}
+
+/* .signature-button-clear {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #111827;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .signature-button-cancel {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #1e293b;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .signature-button-save {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #3b82f6;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .signature-button-clear:hover {
+    background-color: #1e293b;
+  }
+  
+  .signature-button-cancel:hover {
+    background-color: #334155;
+  }
+  
+  .signature-button-save:hover {
+    background-color: #2563eb;
+  } */

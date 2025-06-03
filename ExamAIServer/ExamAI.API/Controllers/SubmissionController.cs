@@ -4,12 +4,14 @@ using ExamAI.Core.DTOs;
 using ExamAI.Core.DTOs.GetDto;
 using ExamAI.Core.Models;
 using ExamAI.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ExamAI.API.Controllers
 {
+    //[Authorize(Policy = "StudentOrAdmin")]
     [Route("api/[controller]")]
     [ApiController]
     public class SubmissionController : ControllerBase
@@ -28,6 +30,18 @@ namespace ExamAI.API.Controllers
             var list = await _submissionservice.GetAllAsync();
 
             return Ok(_mapper.Map<IEnumerable<GetSubmissionDto>>(list));
+        }
+        [HttpGet("student/{student_id}")]
+        public async Task<ActionResult<List<GetSubmissionDto>>> GetAllByStudent(int student_id)
+        {
+            var submissions = await _submissionservice.GetAllByStudentAsync(student_id);
+
+            if (submissions == null || !submissions.Any())
+            {
+                return NotFound($"No submissions found for student {student_id}");
+            }
+
+            return Ok(_mapper.Map<List<GetSubmissionDto>>(submissions));
         }
 
         [HttpGet("{student_id}/{exam_id}")]

@@ -13,7 +13,7 @@ namespace ExamAI.API.Extensions
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(options =>
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -23,9 +23,16 @@ namespace ExamAI.API.Extensions
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = configuration["JWT:Issuer"],
                     ValidAudience = configuration["JWT:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"])),
+                    //RoleClaimType = System.Security.Claims.ClaimTypes.Role,//...............................
+
                 };
             });
+   
+ 
+
+
+
         }
     }
 }

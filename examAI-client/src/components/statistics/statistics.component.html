@@ -1,0 +1,94 @@
+<div class="dashboard-container">
+  <!-- Header -->
+  <div class="header" @fadeInUp>
+    <h1 class="title">Academic Dashboard</h1>
+    <p class="subtitle">Track your performance and progress</p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-cards" @slideIn>
+    <div class="card average-card" @scaleIn>
+      <h3>Average Grade</h3>
+      <p class="subtitle">Across all subjects</p>
+      <div class="circular-progress">
+        <div class="progress-circle">
+          <span class="percentage">{{averageGrade}}%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card best-subject-card" @scaleIn>
+      <h3>Best Subject</h3>
+      <p class="subtitle">Your highest performance</p>
+      <div class="best-subject">
+        <h2 class="subject-name">{{bestSubject.name}}</h2>
+        <span class="grade-badge">{{bestSubject.grade}}% Grade</span>
+      </div>
+    </div>
+
+    <div class="card improvement-card" @scaleIn>
+      <h3>Areas for Improvement</h3>
+      <p class="subtitle">Subjects below 80%</p>
+      <div class="improvement-tags">
+        @for (area of improvementAreas; track area) {
+        <span class="tag">{{area}}</span>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs-container" @fadeInUp>
+    <div class="tabs">
+      <button class="tab" [class.active]="activeTab === 'performance'" (click)="switchTab('performance')" @pulse>
+        Subject Performance
+      </button>
+      <button class="tab" [class.active]="activeTab === 'progress'" (click)="switchTab('progress')" @pulse>
+        Progress Over Time
+      </button>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="charts-section">
+    @if (activeTab === 'performance') {
+    <div class="performance-view" @slideIn>
+      <div class="chart-container subject-performance">
+        <h3>Subject Performance</h3>
+        <p class="chart-subtitle">Grade breakdown by subject</p>
+        <div class="chart-wrapper">
+          <canvas id="subjectChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-container skill-breakdown">
+        <h3>Skill Breakdown</h3>
+        <p class="chart-subtitle">Your strengths by skill</p>
+        <div class="skill-chart-wrapper">
+          <canvas id="skillChart"></canvas>
+          <div class="skill-legend">
+            @for (skill of skillBreakdown; track skill.skill) {
+            <div class="legend-item">
+              <div class="color-dot" [style.background-color]="skill.color"></div>
+              <span class="skill-name">{{skill.skill}} {{skill.percentage}}%</span>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+
+    @if (activeTab === 'progress') {
+    <div class="progress-view" @slideIn>
+      <div class="chart-container progress-chart">
+        <h3>Progress Over Time</h3>
+        <p class="chart-subtitle">Your grade trend this academic year</p>
+        <div class="chart-wrapper">
+          <canvas id="progressChart"></canvas>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

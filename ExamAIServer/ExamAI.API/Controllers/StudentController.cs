@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CSharpFunctionalExtensions;
 
 namespace ExamAI.API.Controllers
 {
+    [Authorize(Policy = "StudentOrAdmin")]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ControllerBase
@@ -69,18 +71,38 @@ namespace ExamAI.API.Controllers
             {
                 return BadRequest("Invalid student data.");
             }
-
             var student = _mapper.Map<Student>(studentDto);
-            var createdStudent = await _userService.AddStudentAsync(student);
+            //var createdStudent = await _userService.AddStudentAsync(student);
+            //if (createdStudent == null)
+            //{
+            //    return BadRequest("Failed to create student.");
+            //}
+            var result = await _userService.AddStudentAsync(student);
 
-            if (createdStudent == null)
-            {
-                return BadRequest("Failed to create student.");
-            }
-
-            var createdStudentDto = _mapper.Map<GetStudentDto>(createdStudent);
+            if (result.IsFailure)
+                return BadRequest(result.Error);
+            var createdStudentDto = _mapper.Map<GetStudentDto>(result.Value);
             return CreatedAtAction(nameof(Get), new { id = createdStudentDto.Id }, createdStudentDto);
         }
+        //public async Task<ActionResult> Post([FromBody] StudentDto studentDto)
+        //{
+        //    if (studentDto == null)
+        //    {
+        //        return BadRequest("Invalid student data.");
+        //    }
+
+        //    var student = _mapper.Map<Student>(studentDto);
+        //    var result = await _userService.AddStudentAsync(student);
+
+        //    if (!result.IsSuccess)
+        //    {
+        //        return BadRequest(result.Error);
+        //    }
+
+        //    var createdStudentDto = _mapper.Map<GetStudentDto>(result.Value);
+        //    return CreatedAtAction(nameof(Get), new { id = createdStudentDto.Id }, createdStudentDto);
+        //}
+
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, StudentDto studentDto)
         {

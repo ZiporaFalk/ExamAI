@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExamAI.API.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize(Roles = "Admin")]
@@ -52,47 +53,19 @@ namespace ExamAI.API.Controllers
                 return StatusCode(500, $"Error generating presigned URL: {ex.Message}");
             }
         }
-        //[HttpGet("download-url")]
-        //public async Task<IActionResult> GetDownloadPresignedUrl(string fileName, string subject, string @class, string date, bool IsStudentTest)
-        //{
-        //    if (string.IsNullOrEmpty(fileName))
-        //        return BadRequest("שם הקובץ נדרש");
 
-        //    var key = IsStudentTest
-        //        ? $"exams/Students/{subject}-{date}/{@class}/{fileName}"
-        //        : $"exams/Results/{subject}/{fileName}";
-
-        //    var request = new GetPreSignedUrlRequest
-        //    {
-        //        BucketName = _bucketName,
-        //        Key = key,
-        //        Verb = HttpVerb.GET,
-        //        Expires = DateTime.UtcNow.AddMinutes(20)
-        //    };
-
-        //    try
-        //    {
-        //        string url = _s3Client.GetPreSignedURL(request);
-        //        return Ok(new { url });
-        //    }
-        //    catch (AmazonS3Exception ex)
-        //    {
-        //        return StatusCode(500, $"Error generating download URL: {ex.Message}");
-        //    }
-        //}
         [HttpGet("download-url")]
-        public async Task<IActionResult> GetDownloadPresignedUrl(string Url, bool IsStudentTest)
+        public async Task<IActionResult> GetDownloadPresignedUrl(string Url, bool IsStudentTest, bool IsDownload)
         {
-            Console.WriteLine("aaaaaaaaaaaaaaa");
-            //if (string.IsNullOrEmpty(fileName))
-            //    return BadRequest("שם הקובץ נדרש");
-
-            //var key = IsStudentTest
-            //    ? $"exams/Students/{subject}-{date}/{@class}/{fileName}"
-            //    : $"exams/Results/{subject}/{fileName}";
-            Console.WriteLine(Url);
             var decodedUrl = Uri.UnescapeDataString(Url);
-            Console.WriteLine(decodedUrl);
+            var fileName = Path.GetFileName(decodedUrl);
+            var encodedFileName = Uri.EscapeDataString(fileName);
+
+            // Content-Disposition לפי צורך: הצגה בדפדפן או הורדה
+            string disposition = IsDownload
+                ? $"attachment; filename=\"fallback.jpg\"; filename*=UTF-8''{encodedFileName}"
+                : "inline";
+            //string disposition = IsDownload ? $"attachment; filename=\"{fileName}\"" : "inline";
             var request = new GetPreSignedUrlRequest
             {
                 BucketName = _bucketName,
@@ -100,10 +73,12 @@ namespace ExamAI.API.Controllers
                 Key = decodedUrl,
                 Verb = HttpVerb.GET,
                 Expires = DateTime.UtcNow.AddMinutes(20),
-                   ResponseHeaderOverrides = new ResponseHeaderOverrides
-                   {
-                       ContentDisposition = "attachment"
-                   }
+                ResponseHeaderOverrides = new ResponseHeaderOverrides
+                {
+                    //ContentDisposition = "attachment"
+                    //ContentDisposition = "inline"
+                    ContentDisposition = disposition
+                }
             };
 
             try

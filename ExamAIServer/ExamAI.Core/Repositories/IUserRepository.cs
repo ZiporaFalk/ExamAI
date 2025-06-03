@@ -15,6 +15,7 @@ namespace ExamAI.Core.Repositories
         Task<List<User>> GetAllAsync();
         Task<List<Student>> GetAllStudentsAsync();
         Task<List<Student>> GetStudentsByClassAsync(string classs);
+        Task<User> GetStudentByEmailAsync(string email);
         Task<Student> GetStudentsByNameAndClassAsync(string classs, string name);
         Task<Manager> GetManagerAsync();
         Task<User> GetByIdAsync(int id);

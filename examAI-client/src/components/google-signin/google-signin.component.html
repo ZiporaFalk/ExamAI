@@ -1,0 +1,37 @@
+<div #googleBtn></div>
+
+<!-- הוסף את הקוד הזה בתחילת ה-template שלך -->
+<div class="notification-container">
+    @if (notification.visible) {
+    <div class="notification" [ngClass]="{
+          'notification-success': notification.type === 'success',
+          'notification-error': notification.type === 'error'
+        }">
+      <div class="notification-content">
+        @if (notification.type === 'success') {
+        <div class="notification-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="currentColor" />
+            <path d="m9 12 2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        } @else {
+        <div class="notification-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="currentColor" />
+            <line x1="15" y1="9" x2="9" y2="15" stroke="white" stroke-width="2" stroke-linecap="round" />
+            <line x1="9" y1="9" x2="15" y2="15" stroke="white" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+        }
+        <span class="notification-text">{{ notification.text }}</span>
+        <button class="notification-close" (click)="notification.visible = false" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    }
+  </div>

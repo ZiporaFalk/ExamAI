@@ -1,62 +1,37 @@
 import { createBrowserRouter } from "react-router-dom";
-import StudentTable from "./components/טבלת תלמידים/StudentTable";
-import Login from "./components/Login";
-import AppLayuot from "./components/AppLayuot";
-import ExamUploader from "./components/העלאת קובץ ל-AWS/ExamUploader";
-import ExampleExam from "./components/מבחן דוגמא/ExampleExam";
-import CheckStudentExams from "./components/בדיקת מבחן תלמיד/CheckStudentExams";
-import Decoding from "./components/Decoding";
+import AppLayout from "./components/AppLayout";
 import GetStarted from "./components/GetStarted";
-import TestType from "./components/TestType";
-import Stepper_upload from "./components/Steps";
-import WordFeadbackUploader from "./components/העלאת קובץ ל-AWS/WordFeadbackUploader";
+import Stepper_upload from "./components/Stepper/Steps";
+import HomePage from "./components/HomePage";
+import StudentTable from "./components/Dashboard/StudentTable";
+import StatisticsDashboard from "./components/statistics";
 
 
 export const myRouter = createBrowserRouter([
     {
         path: '/',
-        element: <AppLayuot />,
+        element: <AppLayout />,
         errorElement: <>main error </>,
         children: [
             {
-                path: 'students',
-                element: <StudentTable />,
-                // children: [{
-                //     path: ':id',
-                //     element: <RecipeDetails />
-                // }]
+                index: true,
+                element: <HomePage />
             },
             {
-                path: 'login',
-                element: <Login />
+                path: 'dashboard',
+                element: <StudentTable></StudentTable>,
             },
-            // {
-            //     path: 'CheckStudentExams',
-            //     element: <CheckStudentExams />
-            // },
-            // {
-            //     path: 'Decoding',
-            //     element: <Decoding/>
-            // },
-            // {
-            //     path: 'ExampleExam',
-            //     element: <ExampleExam />
-            // },
-            // {
-            //     path: 'TestType',
-            //     element: <TestType />
-            // },
+            {
+                path: 'statistics',
+                element: <StatisticsDashboard />
+            },
             {
                 path: 'GetStarted',
                 element: <GetStarted />
             },
             {
-                path: 'Stepper',
+                path: 'tests',
                 element: <Stepper_upload />
-            },
-            {
-                path: 'Feadback',
-                element: <WordFeadbackUploader />
             }
         ]
     }

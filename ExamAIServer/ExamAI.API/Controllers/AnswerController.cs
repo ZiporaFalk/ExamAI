@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace ExamAI.API.Controllers
 {
+    //[Authorize(Roles = "Admin")]
+    [Authorize(Policy = "AdminOnly")]
     [Route("api/[controller]")]
     [ApiController]
     public class AnswerController : ControllerBase
@@ -31,7 +33,6 @@ namespace ExamAI.API.Controllers
             return _mapper.Map<IEnumerable<GetAnswerDto>>(list);
         }
 
-        //[Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<GetAnswerDto> Get(int id, int exam_id)
         {
@@ -39,7 +40,6 @@ namespace ExamAI.API.Controllers
             return _mapper.Map<GetAnswerDto>(answer);
         }
 
-        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AnswerDto newAnswerDto)
         {
@@ -48,17 +48,12 @@ namespace ExamAI.API.Controllers
             return Ok("Answer added successfully");
         }
 
-        //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _answerService.DeleteAsync(id);
             return Ok("Answer deleted successfully");
         }
-        //[HttpPut("{id}")]
-        //        //public void Put(int id, [FromBody] string value)
-        //        //{
-        //        //}
     }
 }
 

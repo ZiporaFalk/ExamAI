@@ -1,0 +1,63 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <!-- <app-navbar/> -->
+  <section class="hero-section">
+    <div class="hero-background"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <!-- <div class="logo-container">
+          <div class="logo-year">2025</div>
+          <div class="logo-text">
+            <span class="logo-check">CHECK</span><span class="logo-point">-POINT</span>
+            <div class="logo-subtitle">manager</div>
+          </div>
+        </div> -->
+      <!-- <h1 class="hero-title">Track Your Academic Journey</h1>
+        <p class="hero-description">
+          Monitor your grades, receive feedback, and visualize your progress all in one place.
+        </p> -->
+      <img id="content-img" src="/images/home-content.png" alt="examai Students">
+      <button (click)="GetStarted()" class="cta-button">Get Started</button>
+    </div>
+    <div class="floating-elements">
+      <div class="floating-element float-1"></div>
+      <div class="floating-element float-2"></div>
+      <div class="floating-element float-3"></div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <h2 class="section-title">Everything You Need to Excel</h2>
+      <div class="features-grid">
+        @for (feature of features; track feature.title) {
+        <div class="feature-card" [style.animation-delay]="feature.delay">
+          <div class="feature-icon">
+            @switch (feature.icon) {
+            @case ('chart-bar') {
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 13h4v8H3v-8zm6-5h4v13H9V8zm6-5h4v18h-4V3z" />
+            </svg>
+            }
+            @case ('document-text') {
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+            </svg>
+            }
+            @case ('calendar') {
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z" />
+            </svg>
+            }
+            }
+          </div>
+          <h3 class="feature-title">{{ feature.title }}</h3>
+          <p class="feature-description">{{ feature.description }}</p>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+</div>

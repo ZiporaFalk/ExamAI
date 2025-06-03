@@ -1,0 +1,94 @@
+.login-modal .ant-modal-content {
+  background-color: rgba(22, 28, 51, 0.95);
+  border-radius: 20px;
+  color: white;
+}
+
+.login-modal .ant-modal-header {
+  background-color: transparent;
+  border-bottom: none;
+}
+
+.login-modal .ant-modal-title {
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.login-modal .ant-modal-close {
+  color: white;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 0 1rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-group label {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.input-group input {
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #9c27b0;
+  box-shadow: 0 0 0 2px rgba(156, 39, 176, 0.2);
+}
+
+.login-btn {
+  margin-top: 0.5rem;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #9c27b0, #3f51b5);
+  color: rgb(65, 64, 69);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.divider span {
+  padding: 0 10px;
+}
+
+.google-login-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+}

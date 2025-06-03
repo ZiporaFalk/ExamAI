@@ -1,0 +1,91 @@
+.footer {
+  background: linear-gradient(135deg, #0f0f23, #1a1a2e);
+  padding: 4rem 0 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-section h4 {
+  color: #fbbf24;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.footer-logo .checkpoint-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.footer-description {
+  color: #9ca3af;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #fbbf24;
+}
+
+.contact-info p {
+  color: #9ca3af;
+  margin-bottom: 0.5rem;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #6b7280;
+}
+
+@media (max-width: 768px) {
+
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    /* או space-around / center / flex-start לפי העדפה */
+    flex-wrap: wrap;
+    /* מאפשר ירידה לשורה חדשה במסכים קטנים */
+    gap: 2rem;
+    /* ריווח בין פריטים */
+    margin-bottom: 3rem;
+  }
+
+}
+
+#content-img {
+  width: 100%;
+  height: auto;
+  border: #9ca3af;
+}
+
+#checkpoint-icon {
+  position: relative;
+  width: 60%;
+  top: 40px;
+}

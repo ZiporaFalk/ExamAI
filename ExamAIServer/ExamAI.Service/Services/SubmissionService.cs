@@ -2,6 +2,8 @@
 using ExamAI.Core.Models;
 using ExamAI.Core.Repositories;
 using ExamAI.Core.Services;
+using ExamAI.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -21,6 +23,10 @@ namespace ExamAI.Service.Services
         {
             return await _submissionRepository.GetAllAsync();
         }
+        public async Task<List<Submission>> GetAllByStudentAsync(int student_id)
+        {
+            return await _submissionRepository.GetAllByStudentAsync(student_id);
+        }
 
         public async Task<Submission> GetAsync(int student_id, int exam_id)
         {
@@ -29,6 +35,8 @@ namespace ExamAI.Service.Services
 
         public async Task<List<Submission>> GetAllByIdAsync(int id)
         {
+            Console.WriteLine((await _submissionRepository.GetAllByIdAsync(id)).Count);
+            Console.WriteLine("pppppppppppp");
             return await _submissionRepository.GetAllByIdAsync(id);
         }
 
@@ -52,17 +60,13 @@ namespace ExamAI.Service.Services
             await _submissionRepository.UpdateScoreAsync(id, score);
             await _repositoryManager.SaveAsync();
         }
-        
-        //public async Task UpdateScoreAsync(int studentId, int examId, int newScore)
-        //{
-        //    await _submissionRepository.UpdateScoreAsync(studentId, examId, newScore);
-        //    await _repositoryManager.SaveAsync();
-        //}
-        //public async Task UpdateUrlsAsync(int studentId, int examId, string urlFile, string urlFeedback)
-        //{
-        //    await _submissionRepository.UpdateUrlsAsync(studentId, examId, urlFile, urlFeedback);
-        //    await _repositoryManager.SaveAsync();
-        //}
+        //שליפת התוצאה לפי נושא
+        public async Task<double> GetAvgAsync(int studentId, string sub = null)
+        {
+            return await _submissionRepository.GetAvgAsync(studentId, sub);
+        }
     }
 }
+
+
 

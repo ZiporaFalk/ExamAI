@@ -1,0 +1,281 @@
+/* עיצוב כללי למודל */
+/* עיצוב כללי של גלילה */
+.table-container::-webkit-scrollbar,
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* רקע של אזור הגלילה */
+.table-container::-webkit-scrollbar-track,
+.modal-content::-webkit-scrollbar-track {
+  background: var(--background-light);
+  border-radius: 8px;
+}
+
+/* פס הגלילה עצמו */
+.table-container::-webkit-scrollbar-thumb,
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border-radius: 8px;
+  border: 2px solid #020101;
+}
+
+/* בעת ריחוף */
+.table-container::-webkit-scrollbar-thumb:hover,
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.scores-modal-paper {
+    max-width: 700px;
+  background: linear-gradient(135deg, #0a1929 0%, #0f2942 100%);
+  color: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* כותרת המודל */
+.modal-header {
+  background: linear-gradient(90deg, #0c2137 0%, #1a3f5c 100%);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-title {
+  padding: 0 !important;
+  color: white;
+}
+
+.student-name {
+  font-weight: 600 !important;
+  color: #4cc9f0;
+}
+
+.close-button {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.close-button:hover {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* תוכן המודל */
+.modal-content {
+  padding: 24px !important;
+  background-color: rgba(10, 25, 41, 0.7);
+}
+
+.table-container {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  background-color: rgba(15, 41, 66, 0.5);
+}
+
+/* עיצוב הטבלה */
+.scores-table {
+  background-color: transparent;
+}
+
+.table-header {
+  background-color: rgba(15, 41, 66, 0.8) !important;
+  color: #4cc9f0 !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  border-bottom: 2px solid rgba(76, 201, 240, 0.3) !important;
+  padding: 16px !important;
+}
+
+.table-row {
+  transition: background-color 0.2s ease;
+}
+
+.table-row:hover {
+  background-color: rgba(76, 201, 240, 0.1) !important;
+}
+
+.table-row td {
+  color: white !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  text-align: center !important;
+  padding: 12px 16px !important;
+}
+
+/* תאים ספציפיים */
+.view-cell {
+  width: 80px;
+}
+
+.view-button {
+  color: #4cc9f0 !important;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.view-button:hover {
+  transform: scale(1.1);
+  background-color: rgba(76, 201, 240, 0.1) !important;
+}
+
+.no-file {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.score-cell {
+  width: 100px;
+}
+
+.score-input {
+  width: 80px;
+}
+
+.score-input-root {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white !important;
+}
+
+.score-input-root input {
+  color: white !important;
+  text-align: center;
+}
+
+.score-input-root:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.date-cell,
+.subject-cell {
+  font-weight: 500;
+}
+
+/* כפתורי פעולה */
+.modal-actions {
+  background: linear-gradient(90deg, #0c2137 0%, #1a3f5c 100%);
+  padding: 16px 24px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cancel-button {
+  color: rgba(255, 255, 255, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  transition: all 0.2s ease;
+}
+
+.cancel-button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.save-button {
+  background: linear-gradient(90deg, #4cc9f0 0%, #4361ee 100%) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  box-shadow: 0 4px 12px rgba(76, 201, 240, 0.3) !important;
+  transition: all 0.2s ease;
+}
+
+.save-button:hover {
+  box-shadow: 0 6px 16px rgba(76, 201, 240, 0.5) !important;
+  transform: translateY(-2px);
+}
+
+/* מודל תצוגת קובץ */
+.preview-modal-paper {
+  background: linear-gradient(135deg, #0a1929 0%, #0f2942 100%);
+  color: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  /* border: 1px solid rgba(255, 255, 255, 0.08); */
+}
+
+.preview-header {
+  background: linear-gradient(90deg, #0c2137 0%, #1a3f5c 100%);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preview-title {
+  padding: 0 !important;
+  color: white;
+  text-align: right;
+}
+
+.preview-content {
+  padding: 0 !important;
+  background-color: rgba(10, 25, 41, 0.9);
+}
+
+.preview-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  overflow: hidden;
+  padding: 16px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.preview-actions {
+  background: linear-gradient(90deg, #0c2137 0%, #1a3f5c 100%);
+  padding: 16px 24px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.close-preview-button {
+  color: rgba(255, 255, 255, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+}
+
+.download-button {
+  background-color: transparent !important;
+  border: 1px solid #4cc9f0 !important;
+  color: #4cc9f0 !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  transition: all 0.2s ease;
+}
+
+.download-button:hover {
+  background-color: rgba(76, 201, 240, 0.1) !important;
+  box-shadow: 0 0 12px rgba(76, 201, 240, 0.3) !important;
+}
+
+/* אנימציות */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.scores-modal-paper,
+.preview-modal-paper {
+  animation: fadeIn 0.3s ease-out;
+}

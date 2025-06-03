@@ -5,10 +5,11 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ExamAI.API.Controllers
 {
-
+    [Authorize(Policy = "StudentOrAdmin")]
     [ApiController]
     [Route("api/[controller]")]
     public class EmailController : ControllerBase
@@ -18,18 +19,19 @@ namespace ExamAI.API.Controllers
         {
             var email = new MimeMessage();
             email.From.Add(new MailboxAddress("ExamAI מערכת ציונים", "z0548498935@gmail.com"));
-            //email.From.Add(MailboxAddress.Parse("your_email@gmail.com"));
             email.To.Add(MailboxAddress.Parse(request.To));
             email.Subject = request.Subject;
-            email.Body = new TextPart(MimeKit.Text.TextFormat.Plain) { Text = request.Body };
+            var builder = new BodyBuilder
+            {
+                HtmlBody = $"<div style='direction: rtl; text-align: right; font-family: Arial;'> {request.Body} </div>"
+            };
 
-            //using var smtp = new SmtpClient();
-            using var smtp = new MailKit.Net.Smtp.SmtpClient(); 
+            email.Body = builder.ToMessageBody();
+            using var smtp = new MailKit.Net.Smtp.SmtpClient();
             await smtp.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            await smtp.AuthenticateAsync("z0548498935@gmail.com", "ggvq wqid dgmi xlhn"); 
+            await smtp.AuthenticateAsync("z0548498935@gmail.com", "ggvq wqid dgmi xlhn");
             await smtp.SendAsync(email);
             await smtp.DisconnectAsync(true);
-
             return Ok("Email sent");
         }
     }
@@ -39,6 +41,5 @@ namespace ExamAI.API.Controllers
         public string Subject { get; set; }
         public string Body { get; set; }
     }
-
 }
 

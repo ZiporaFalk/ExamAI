@@ -1,7 +1,7 @@
-import axios from "axios";
-import { Exam } from "../components/types";
+import { Exam } from "./types";
+import studentStore from "../components/Dashboard/StudentStore";
+// import StudentService from "../זבל/StudentService";
 
-const apiUrl = 'https://localhost:7083/api';
 
 // const extractExam = (words: any[]): Exam => { //מחלץ תאריך ומקצוע
 // export const extractDateAndSubject = (words: any[]) => {
@@ -30,19 +30,16 @@ export const extractDateAndSubject = (words: Word[]) => {
     if (dateIdx === -1 || subjectIdx === -1) {
         throw new Error("שדות חיוניים חסרים");
     }
-
     // נתחיל מהמילה שאחרי הנקודתיים של "מקצוע" (כלומר subjectIdx + 2)
     const subjectStart = subjectIdx + 2;
     const subjectEnd = dateIdx; // עד המילה "תאריך" (לא כולל)
     const subjectWords = words.slice(subjectStart, subjectEnd).map(w => w.description).join(" ");
-
     // תאריך תמיד לפי אותו פורמט – 4 מילים אחרי "תאריך" (מדלגים על "תאריך" ו":" => +2)
     const dateWords = words.slice(dateIdx + 2, dateIdx + 6).map(w => w.description).join(" ");
     const formattedDate = dateWords.replace(/([א-ת])\s'/, "$1'");
     console.log(formattedDate);
     console.log(subjectWords);
     console.log(subjectWords.trim());
-
     return {
         dateExam: formattedDate,
         subject: subjectWords.trim()
@@ -119,8 +116,8 @@ export const GetStudentId = async (data: any[]) => {
     const studentName = data[studentNameIndex + 2].description + " " + data[studentNameIndex + 3].description
     const studentClass = data[studentClassIndex + 2].description + data[studentClassIndex + 3].description
     console.log(studentName + " " + studentClass);
-
-    const studentbyclassandname = await axios.get(`${apiUrl}/Student/classandname/${studentClass}/${studentName}`)
+    // const studentbyclassandname = await axiosInstance.get(`/Student/classandname/${studentClass}/${studentName}`)
+    const studentbyclassandname = await studentStore.getStudentByClassAndName(studentClass, studentName)
     console.log(studentbyclassandname.data.id);
     return studentbyclassandname.data.id
 }
@@ -160,8 +157,8 @@ export const extractAnswers = (words: any[], exam: Exam | undefined) => {
     }
     return results;
 };
-const GetSubject = (data: any[]) => {
-    const subjectIndex = data.findIndex(mysubject => mysubject.description.includes("מקצוע"))
-    const subject = data[subjectIndex + 2].description + ' ' + data[subjectIndex + 3].description
-    return subject
-}
+// const GetSubject = (data: any[]) => {
+//     const subjectIndex = data.findIndex(mysubject => mysubject.description.includes("מקצוע"))
+//     const subject = data[subjectIndex + 2].description + ' ' + data[subjectIndex + 3].description
+//     return subject
+// }

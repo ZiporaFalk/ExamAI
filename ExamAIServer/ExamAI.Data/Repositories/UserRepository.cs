@@ -32,6 +32,12 @@ namespace ExamAI.Data.Repositories
         {
             return await _context.Users.OfType<Student>().Where(s => s.studentClass == classs).ToListAsync();
         }
+        public async Task<User> GetStudentByEmailAsync(string email)
+        {
+
+            return await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
+        }
+        //החזרת משתמש עם מייל מ
         public async Task<Student> GetStudentsByNameAndClassAsync(string classs, string name)
         {
             return await _context.Users.OfType<Student>().FirstOrDefaultAsync(s => s.studentClass == classs && s.Name == name);

@@ -5,6 +5,10 @@
 
 # dotenv files
 .env
+# Ignore Angular environment files
+/src/environments/environment.ts
+
+Resources/examai-*.json
 
 # User-specific files
 *.rsuser
@@ -482,7 +486,3 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
-<<<<<<< HEAD
-=======
-"ExamAIServer/ExamAI.API/appsettings.json" 
->>>>>>> 450371c (ExamUploadFilesAWS)

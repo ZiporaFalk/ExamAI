@@ -1,0 +1,733 @@
+/* Modal overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+
+/* Main modal container */
+.auth-modal {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 32px;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid #334155;
+
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    line-height: 1;
+    transition: color 0.2s;
+    border-radius: 4px;
+}
+
+.close-btn:hover {
+    color: #ffffff;
+    background: rgba(51, 65, 85, 0.5);
+}
+
+/* Header */
+.auth-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.auth-header h1 {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.auth-header p {
+    color: #94a3b8;
+    font-size: 16px;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* Tab buttons */
+.tab-buttons {
+    display: flex;
+    margin-bottom: 32px;
+    background: #0f172a;
+    border-radius: 8px;
+    padding: 4px;
+    gap: 4px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.tab-btn.active {
+    background: #334155;
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.tab-btn:not(.active):hover {
+    color: #94a3b8;
+    background: rgba(51, 65, 85, 0.3);
+}
+
+/* Form */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Name row for create account */
+.name-row {
+    display: flex;
+    gap: 16px;
+}
+
+.name-row .form-group {
+    flex: 1;
+}
+
+/* Form groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+
+.form-group label {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Form inputs */
+.form-input {
+    background: #334155;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    padding: 14px 16px;
+    color: #ffffff;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+    background: #3f4f63;
+}
+
+.form-input::placeholder {
+    color: #64748b;
+}
+
+.form-input:hover {
+    border-color: #64748b;
+}
+
+/* Forgot password link */
+.forgot-password {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #f59e0b;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.forgot-password:hover {
+    color: #d97706;
+    text-decoration: underline;
+}
+
+/* Submit button */
+.submit-btn {
+    background: #f59e0b;
+    border: none;
+    border-radius: 8px;
+    padding: 16px;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.submit-btn:hover {
+    background: #d97706;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    transform: translateY(-1px);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #475569;
+}
+
+.divider span {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0 16px;
+    letter-spacing: 0.5px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Google button */
+.google-btn {
+    background: #0f172a;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    padding: 14px 16px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.google-btn:hover {
+    background: #1e293b;
+    border-color: #64748b;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.google-btn:active {
+    transform: scale(0.98);
+}
+
+.google-btn img {
+    width: 18px;
+    height: 18px;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    .auth-modal {
+        margin: 16px;
+        padding: 24px;
+        max-width: none;
+    }
+
+    .name-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .auth-header h1 {
+        font-size: 24px;
+    }
+
+    .auth-header p {
+        font-size: 14px;
+    }
+
+    .tab-btn {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .form-input {
+        font-size: 16px;
+        /* Prevents zoom on iOS */
+    }
+}
+
+/* Animation for smooth transitions */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.auth-modal {
+    animation: fadeIn 0.2s ease-out;
+}
+
+/* Focus styles for accessibility */
+.tab-btn:focus,
+.form-input:focus,
+.submit-btn:focus,
+.google-btn:focus,
+.close-btn:focus {
+    outline: 2px solid #f59e0b;
+    outline-offset: 2px;
+}
+
+.auth-modal::-webkit-scrollbar {
+    width: 6px;
+}
+
+.auth-modal::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+.auth-modal::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 3px;
+}
+
+.auth-modal::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+.password-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.eye-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: -30px;
+    font-size: 16px;
+}
+
+.tabs button.active {
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+
+#password {
+    background: #334155;
+    border-radius: 8px;
+    padding: 14px 16px;
+    color: #ffffff;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    outline: none;
+    position: relative;
+    right: 15px;
+}
+
+#password:focus {
+    outline: 2px solid #f59e0b;
+    outline-offset: 2px;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    color: #f59e0b;
+    left: -15px;
+    top: 10px;
+}
+
+
+::ng-deep .mdc-notched-outline {
+    display: none !important;
+}
+
+.mdc-text-field__input {
+    FONT-VARIANT: JIS04;
+    width: 450px;
+    min-width: 0;
+    border: none;
+    border-radius: 0;
+    background: none;
+    padding: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    height: 28px;
+}
+
+.auth-modal {
+    transform: scale(0.75);
+    transform-origin: center;
+}
+.error{
+    color: red;
+}
+.error-message {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    border: 2px solid #f87171;
+    color: #dc2626;
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(248, 113, 113, 0.2);
+    position: relative;
+    overflow: hidden;
+    animation: slideIn 0.4s ease-out, shake 0.6s ease-in-out;
+}
+
+.error-message::before {
+    content: "⚠️";
+    margin-left: 10px;
+    font-size: 18px;
+    display: inline-block;
+}
+
+/* הודעת הצלחה - Toast קטן ומכובד */
+.success-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(16, 185, 129, 0.95);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    max-width: 280px;
+    font-size: 14px;
+    font-weight: 500;
+    animation: slideInFromRight 0.4s ease-out;
+    /* backdrop */
+}
+
+.success-alert::before {
+    content: "🎉";
+    margin-left: 10px;
+    font-size: 20px;
+    display: inline-block;
+    animation: bounce 1s infinite;
+}
+
+.success-alert::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ffffff, #a7f3d0, #ffffff);
+    animation: shimmer 2s linear infinite;
+}
+
+/* Close button for alert */
+.close-btn {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* אנימציות */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-3px);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(3px);
+    }
+}
+
+@keyframes successSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(50%) translateY(-100px) scale(0.3);
+    }
+
+    50% {
+        transform: translateX(50%) translateY(10px) scale(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(50%) translateY(0) scale(1);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(50%) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(50%) scale(0.8) translateY(-20px);
+    }
+}
+
+.fade-out {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+/* Overlay for backdrop effect */
+.alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 99999;
+    animation: overlayFadeIn 0.3s ease-out;
+}
+
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .success-alert {
+        right: 20px;
+        left: 20px;
+        transform: none;
+        min-width: auto;
+    }
+}
+
+/* ...................................................................................... */
+
+.notification-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    width: 100%;
+    max-width: 500px;
+    padding: 0 20px;
+}
+
+.notification {
+    background: #374151;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.3s ease-out;
+    margin-bottom: 10px;
+}
+
+.notification-success {
+    border-right: 4px solid #10b981;
+}
+
+.notification-error {
+    border-right: 4px solid #ef4444;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    padding: 20px 20px;
+    gap: 12px;
+}
+
+.notification-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.notification-success .notification-icon {
+    color: #10b981;
+}
+
+.notification-error .notification-icon {
+    color: #ef4444;
+}
+
+.notification-text {
+    flex: 1;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.4;
+    direction: rtl;
+    text-align: right;
+}
+
+.notification-close {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-close:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.notification.hide {
+    animation: slideUp 0.3s ease-in forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+}

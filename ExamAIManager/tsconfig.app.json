@@ -23,6 +23,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "src/utils/DataExtraction.ts"]
+  // "include": ["src", "src/utils/DataExtraction.ts"]
+  "include": ["src"]
 }
 

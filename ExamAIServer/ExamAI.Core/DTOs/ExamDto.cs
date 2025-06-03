@@ -10,7 +10,7 @@ namespace ExamAI.Core.DTOs
     public class ExamDto
     {
         //public int Id { get; set; }
-        public string Class { get; set; }
+        //public string Class { get; set; }
         public string Subject { get; set; }
         public string File_Url { get; set; }
         public string DateExam { get; set; }

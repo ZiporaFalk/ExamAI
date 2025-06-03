@@ -1,0 +1,81 @@
+@if (isOpen) {
+<div class="modal-backdrop" [@backdropAnimation]="isOpen ? 'open' : 'closed'" (click)="onBackdropClick($event)"
+    (keydown)="onKeyDown($event)" tabindex="0">
+
+    <div class="modal-container" [@modalAnimation]="isOpen ? 'open' : 'closed'" (click)="$event.stopPropagation()">
+
+        <div class="modal-header" @slideIn>
+            <div class="header-content">
+                <div class="exam-info">
+                    <h2 class="modal-title">{{exam?.subject}} - Exam</h2>
+                    <p class="exam-details">{{exam?.dateExam}} | Score:
+                        <span class="score" [style.color]="getScoreColor(exam?.score)">
+                            {{exam?.score || 'Pending'}}{{exam?.score ? '%' : ''}}
+                        </span>
+                    </p>
+                </div>
+                <div class="modal-actions">
+                    <button class="download-btn" (click)="downloadExam()" [disabled]="loading || error"
+                        title="Download Feedback">
+                        <i class="download-icon"></i>
+                        Download
+                    </button>
+                    <button class="close-btn" (click)="closeModal()" title="Close">
+                        <i class="close-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            @if (loading) {
+            <div class="loading-container" @slideIn>
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Loading feedback...</p>
+            </div>
+            }
+
+            @if (error) {
+            <div class="error-container" @slideIn>
+                <div class="error-icon"></div>
+                <h3>Error Loading Feedback</h3>
+                <p>{{error}}</p>
+                <button class="retry-btn" (click)="loadExamImage()">
+                    Try Again
+                </button>
+            </div>
+            }
+
+            @if (imageUrl && !loading && !error) {
+            <div class="image-container" @slideIn>
+                @if (!isImageLoaded) {
+                <div class="image-loading">                
+                    <div class="loading-spinner"></div>
+                </div>
+                }
+                <img [src]="imageUrl" [alt]="exam?.subject + ' Feedback'" class="feedback-image"
+                    [class.loaded]="isImageLoaded" (load)="onImageLoad()" (error)="onImageError()">
+            </div>
+            }
+        </div>
+
+        <div class="modal-footer" @slideIn>
+            <div class="footer-content">
+                <p class="footer-text">
+                    <i class="info-icon"></i>
+                    Click and drag to pan • Scroll to zoom
+                </p>
+                <div class="footer-actions">
+                    <button class="secondary-btn" (click)="closeModal()">
+                        Close
+                    </button>
+                    <button class="primary-btn" (click)="downloadExam()" [disabled]="loading || error">
+                        <i class="download-icon"></i>
+                        Download PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}

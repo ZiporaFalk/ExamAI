@@ -1,6 +1,8 @@
-﻿using ExamAI.Core.Models;
+﻿using CSharpFunctionalExtensions;
+using ExamAI.Core.Models;
 using ExamAI.Core.Repositories;
 using ExamAI.Core.Services;
+using ExamAI.Service.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,12 +15,15 @@ public class AuthService : IAuthService
     private readonly IConfiguration _configuration;
     private readonly IAuthRepository _authRepository;
     private readonly IRepositoryManager _repositoryManager;
-
-    public AuthService(IConfiguration configuration, IAuthRepository authRepository, IRepositoryManager repositoryManager)
+    private readonly IGoogleSheetService _googleSheetService;
+    public AuthService(IConfiguration configuration, IAuthRepository authRepository,
+        IRepositoryManager repositoryManager,
+        IGoogleSheetService googleSheetService)
     {
         _configuration = configuration;
         _authRepository = authRepository;
         _repositoryManager = repositoryManager;
+        _googleSheetService = googleSheetService;
     }
 
     public string GenerateJwtToken(User user)
@@ -57,10 +62,30 @@ public class AuthService : IAuthService
     {
         return await _authRepository.GetUserByEmailAsync(email);
     }
+    public async Task<Result> AddUserAsync(User user)
+    {
+        if (!await _googleSheetService.IsEmailExistsAsync(user.Email))
+        {
+            Console.WriteLine("-=-=-=-==-=-");
+            return Result.Failure("This user is not allowed to connect");
+        }
+        await _authRepository.AddUserAsync(user);
+        //await _userService.AddStudentAsync(user);
+        await _repositoryManager.SaveAsync();
 
-    public async Task AddUserAsync(User user)
+        return Result.Success(); // if applicable
+    }
+    public async Task AddUserAdminAsync(User user)
     {
         await _authRepository.AddUserAsync(user);
         await _repositoryManager.SaveAsync();
     }
+    //public async Task AddUserAsync(User user)
+    //{
+    //    if (!await _googleSheetService.IsEmailExistsAsync(user.Email))
+    //        return Result.Failure("This user is not allowed to connect");
+    //    await _authRepository.AddUserAsync(user);
+    //    //await _userService.AddStudentAsync(user);
+    //    await _repositoryManager.SaveAsync();
+    //}
 }

@@ -12,6 +12,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ExamAI.API.Controllers
 {
+    //[Authorize(Policy = "StudentOrAdmin")]
     [Route("api/[controller]")]
     [ApiController]
     public class ExamController : ControllerBase
@@ -59,16 +60,6 @@ namespace ExamAI.API.Controllers
             await _examservice.PostAsync(exam);
             return CreatedAtAction(nameof(Get), new { id = exam.Id }, exam);
         }
-        //// PUT api/<ExamController>/5
-        //        //[HttpPut("{id}")]
-        //        //public void Put(int id, [FromBody] string value)
-        //        //{
-        //        //}
-
-        //        //// DELETE api/<ExamController>/5
-        //        //[HttpDelete("{id}")]
-        //        //public void Delete(int id)
-        //        //{
-        //        //}
+   
     }
 }

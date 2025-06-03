@@ -20,6 +20,12 @@ namespace ExamAI.Data.Repositories
         {
             return await _context.Submissions.ToListAsync();
         }
+        public async Task<List<Submission>> GetAllByStudentAsync(int student_id)
+        {
+            return await _context.Submissions
+                                 .Where(x => x.StudentId == student_id)
+                                 .ToListAsync();
+        }
 
         public async Task<Submission> GetAsync(int student_id, int exam_id)
         {
@@ -28,7 +34,9 @@ namespace ExamAI.Data.Repositories
 
         public async Task<List<Submission>> GetAllByIdAsync(int id)
         {
-            return await _context.Submissions.Where(x => x.Id == id).ToListAsync();
+
+            return await _context.Submissions.Include(s => s.Exam).Where(s => s.StudentId == id).ToListAsync();
+            //return await _context.Submissions.Where(x => x.StudentId == id).ToListAsync();
         }
 
         public async Task PostAsync(Submission newSubmission)
@@ -54,20 +62,26 @@ namespace ExamAI.Data.Repositories
             submission.Score = score;
 
         }
-        //public async Task UpdateScoreAsync(int studentId, int examId, int newScore)
-        //{
-        //    var Submission = await GetAsync(studentId, examId);
-        //    Submission.Score = newScore;
-        //    _context.Update(Submission);
-        //    await _context.SaveChangesAsync();
-        //}
-        //public async Task UpdateUrlsAsync(int studentId, int examId, string urlFile, string urlFeedback)
-        //{
-        //    var Submission = await GetAsync(studentId, examId);
-        //    Submission.File_Url = urlFile;
-        //    Submission.File_Url_FeedBack = urlFeedback;
-        //    _context.Update(Submission);
-        //    await _context.SaveChangesAsync();
-        //}
+
+        public async Task<double> GetAvgAsync(int studentId, string sub = null)
+        {
+            var query = _context.Submissions
+                .Where(r => r.StudentId == studentId);
+
+            if (!string.IsNullOrEmpty(sub))
+            {
+                query = query.Where(r => r.Exam.Subject == sub);
+            }
+
+            var scores = await query
+                .Select(r => r.Score)
+                .ToListAsync();
+
+            if (!scores.Any())
+                return 0;
+
+            return (int)Math.Round(scores.Average());
+        }
+    
     }
 }
