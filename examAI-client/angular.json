@@ -11,6 +11,16 @@
       "prefix": "app",
       "architect": {
         "build": {
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          },
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/exam-ai-manager",
