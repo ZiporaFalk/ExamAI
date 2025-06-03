@@ -19,35 +19,3 @@ const AnalyzeImageService ={
    }
 }
 export default AnalyzeImageService 
-
-// const analyzeImage = async (base64Image: string) => {
-//     try {
-//         const response = await axiosInstance.post(`/Ocr/analyze-image`, { base64Image: base64Image })
-//         console.log(response.data);
-//         return response.data.responses[0]?.textAnnotations.slice(1) || null
-//     } catch (error: any) {
-//         console.error('Error calling server OCR endpoint:', error);
-//         return null;
-//     }
-// };
-// export default analyzeImage
-
-// services/AnalyzeImageService.ts
-// import axiosInstance from '../axiosInstance'; // ודא שזה הנתיב הנכון
-// const AnalyzeImageService = {
-//   analyzeImage: async (base64Image: string) => {
-//     try {
-//       const response = await axiosInstance.post(`/Ocr/analyze-image`, { base64Image });
-//       console.log(response.data);
-//       return response.data.responses[0]?.textAnnotations.slice(1) || null;
-//     } catch (error: any) {
-//       console.error('Error calling server OCR endpoint:', error);
-//       return null;
-//     }
-//   }
-// };
-
-// export default AnalyzeImageService;
-
-
-

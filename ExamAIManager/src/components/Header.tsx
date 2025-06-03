@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import LoginModal from './Login';
 import { authService } from '../services/AuthService';
 import { observer } from 'mobx-react';
-// import { AuthService } from '../services/AuthService';
 
 const Header = observer(() => {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -32,7 +31,7 @@ const Header = observer(() => {
     };
 
     const handleLogout = () => {
-        authService.setLoginStatus(false); // התנתקות
+        authService.setLoginStatus(false); 
         localStorage.removeItem('token')
         console.log(authService.isLogin);
     };
@@ -127,7 +126,6 @@ const Header = observer(() => {
                             api.success({
                                 message: "!You have successfully connected",
                                 description: `!Welcome to the system, ${email}`,
-                                // description: 'ברוך הבא למערכת! ',
                                 placement: 'topRight',
                                 className: 'rtl-notification',
                             })

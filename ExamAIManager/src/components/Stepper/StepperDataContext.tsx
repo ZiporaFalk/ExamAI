@@ -1,32 +1,23 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, Dispatch, SetStateAction } from "react";
 import { Exam, Student, Answer, FileWithProgress } from "../../utils/types";
 
 type StepperDataContextType = {
     exams: Exam[];
-    // setExams: (exams: Exam[]) => void;
-    setExams: React.Dispatch<React.SetStateAction<Exam[]>>
+    setExams: Dispatch<SetStateAction<Exam[]>>
     students: Student[];
-    // setStudents: (students: Student[]) => void;
-    setStudents: React.Dispatch<React.SetStateAction<Student[]>>
+    setStudents: Dispatch<SetStateAction<Student[]>>
     isStudentTest: boolean;
-    // setIsStudentTest: (value: boolean) => void;
-    setIsStudentTest: React.Dispatch<React.SetStateAction<boolean>>
-    // files: File[];
+    setIsStudentTest: Dispatch<SetStateAction<boolean>>
     files: (FileWithProgress | null)[];
-    // setFiles: (files: File[]) => void;
-    // setFiles: (files: (FileWithProgress | null)[]) => void;
-    setFiles: React.Dispatch<React.SetStateAction<(FileWithProgress | null)[]>>
+    setFiles: React.Dispatch<SetStateAction<(FileWithProgress | null)[]>>
     scores: number[];
-    // setScores: (scores: number[]) => void;
-    setScores: React.Dispatch<React.SetStateAction<number[]>>
+    setScores: Dispatch<SetStateAction<number[]>>
     answersList: Answer[][];
-    // setAnswersList: (answers: Answer[][]) => void;
-    setAnswersList: React.Dispatch<React.SetStateAction<Answer[][]>>
+    setAnswersList: Dispatch<SetStateAction<Answer[][]>>
     selectedImages: string[];
-    // setSelectedImages: (images: string[]) => void;
-    setSelectedImages: React.Dispatch<React.SetStateAction<string[]>>
+    setSelectedImages: Dispatch<SetStateAction<string[]>>
     isAbleNext: boolean;
-    setIsAbleNext: React.Dispatch<React.SetStateAction<boolean>>
+    setIsAbleNext: Dispatch<SetStateAction<boolean>>
 };
 
 const StepperDataContext = createContext<StepperDataContextType | undefined>(undefined);
@@ -35,7 +26,6 @@ export const StepperDataProvider = ({ children }: { children: ReactNode }) => {
     const [exams, setExams] = useState<Exam[]>([]);
     const [students, setStudents] = useState<Student[]>([]);
     const [isStudentTest, setIsStudentTest] = useState(false);
-    // const [files, setFiles] = useState<File[]>([]);
     const [files, setFiles] = useState<(FileWithProgress | null)[]>([]);
     const [scores, setScores] = useState<number[]>([]);
     const [answersList, setAnswersList] = useState<Answer[][]>([]);

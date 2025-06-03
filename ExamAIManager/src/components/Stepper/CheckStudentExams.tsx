@@ -1,4 +1,4 @@
-import {  extractAnswersAfterHu, extractDateAndSubject, extractHebrewLettersWithDot, extractStudent } from "../../utils/DataExtraction";
+import { extractAnswersAfterHu, extractDateAndSubject, extractHebrewLettersWithDot, extractStudent } from "../../utils/DataExtraction";
 import { Answer, Exam, Student } from "../../utils/types";
 import { useContext, useState } from "react";
 import StepperDataContext from "./StepperDataContext";
@@ -14,12 +14,12 @@ import StudentSheetService from "../../services/StudentSheetService";
 import AnalyzeImageService from "../../services/AnalyzeImagService";
 const CheckStudentExams = () => {
   const { selectedImages, setExams, setAnswersList, setStudents, setScores, setIsAbleNext } = useContext(StepperDataContext)!
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [progress, setProgress] = useState<number>(0);
   const [averageMark, setAverageMark] = useState<number | null>(null);
   const [currentProcessing, setCurrentProcessing] = useState<string>("");
-  const [unregisteredStudents, ] = useState<{ name: string }[]>([]);
+  const [unregisteredStudents,] = useState<{ name: string }[]>([]);
   const [hasError, setHasError] = useState<boolean>(false);
   const [click, setClick] = useState(false)
 
@@ -65,7 +65,7 @@ const CheckStudentExams = () => {
 
   const handleAnalyze = async () => {
     setClick(true)
-    setIsLoading(true); 
+    setIsLoading(true);
     setIsFinished(false);
     const exams: Exam[] = []
     const students: Student[] = []
@@ -86,55 +86,9 @@ const CheckStudentExams = () => {
       const fileurl = url + student.name + `.jpg`
       console.log(feedbackurl);
       console.log(fileurl);
-      // const studentId = await GetStudentId(result);
-      // const email = (await axios.get(`${apiUrl}/Student/${studentId}`)).data.email
-      // const email = await studentStore.getEmailByStudentId(studentId)
-      // student.email = email
-      // ....................................................................................................
-      //   try {
-      // const studentByName = await studentStore.getStudentByClassAndName(student.studentClass, student.name);
-      //     await SubmissionService.create({
-      //       studentId: studentByName.id,
-      //       examId: exam.id,
-      //       score: newMark,
-      //       fileUrl: fileExamUrl,
-      //       fileUrlFeedback: fileFeedbackUrl
-      //     });
-      //     allExams.push(exam);
-      //     allMarks.push(newMark);
-      //     allAnswers.push(answer);
-      //     allStudents.push(student);
-      //   }
-      //   catch (e: any) {
-      //     console.log("the pupil is not exist");
-      //     // הסר את הקובץ מהקבצים בצורה תקינה
-      //     updatedFiles[i] = null;
-      //     // הוסף לסטודנטים שלא רשומים
-      //     notRegisteredStudents.push({
-      //       firstName: student.firstName,
-      //       lastName: student.lastName
-      //     });
-      //     // שלח מייל
-      //     const email = await StudentSheetService.getStudentEmail(student.firstName, student.lastName, student.class);
-      //     await EmailService.sendAnEmail(
-      //       `${student.firstName} ${student.lastName}`,
-      //       email,
-      //       " לרישום נה להכנס ללינק הבא : \nעליך להרשם בהקדם\n 📑שלום וברוך הבא למערכת בדיקת המבחנים שלנו!"
-      //     );
-      //     setHasError(true);
-      //   }
-      // }
-      // ....................................................................................................
-      // בודקת אם נמצא בנתונים=בטרי....
-      // אם נפל בקטש
-      // ..ושולחת מייל
-      // בקטש: 1 2 שליחת מייל
-      // ....על פי שם וכיתה שולפת המייל מהגוגל שיט
-
       try {
         const studentByName: Student = await studentStore.getStudentByClassAndName(student.studentClass, student.name);
         await SaveStudentExam(score, exam_id, feedbackurl, fileurl, studentByName.id!);
-        // const email = await studentStore.getEmailByStudentId(studentId)
         const email = await studentStore.getEmailByStudentId(studentByName.id!)
         student.email = email
         exams.push(exam)
@@ -249,25 +203,7 @@ const CheckStudentExams = () => {
   );
 
   return (
-    // <div style={{ textAlign: "center", marginTop: "50px" }}>
-    //   <h1>בדיקת מבחנים</h1>
-    //   {isLoading ? (
-    //     <Stack direction="column" alignItems="center" spacing={2}>
-    //       <CircularProgress />
-    //       <Typography>מחשב ציון...</Typography>
-    //     </Stack>
-    //   ) : isFinished ? (
-    //     <Typography color="success.main" fontWeight="bold">
-    //       ✔ המבחנים נבדקו!
-    //     </Typography>
-    //   ) : (
-    //     <Button variant="contained" onClick={handleAnalyze}>
-    //       בדוק את כל המבחנים
-    //     </Button>
-    //   )}
-    // </div>
     <>
-      <h1>CheckStudentExams</h1>
       <Outlet />
       <div className="student-tests-container">
         {!click &&
@@ -318,177 +254,3 @@ const CheckStudentExams = () => {
 };
 
 export default CheckStudentExams;
-
-// import { useEffect, useState } from "react"
-// import UpdateFileCV from "./UpdateCV"
-// import { useNavigate } from "react-router-dom"
-// import axios from "axios"
-// import "../styles/CVs.css"
-
-// const CVs = () => {
-//   const baseUrl = process.env.REACT_APP_API_BASE_URL
-//   const navigate = useNavigate()
-//   const [files, setFiles] = useState<any[]>([])
-//   const [loading, setLoading] = useState(true)
-//   const [error, setError] = useState<string | null>(null)
-//   const [selectedFileData, setSelectedFileData] = useState<any | null>(null)
-//   const [selectedPdf, setSelectedPdf] = useState<string | null>(null)
-
-//   const checkIfBlocked = async () => {
-//     const userId = localStorage.getItem("userId")
-//     if (!userId) {
-//       console.warn("⚠️ אין userId - מניחים שהמשתמש חסום")
-//       return true
-//     }
-//     try {
-//       const response = await axios.get(`${baseUrl}/api/Users/is-blocked/${userId}`)
-//       return response.data === true
-//     } catch (err) {
-//       return true
-//     }
-//   }
-
-//   const fetchUserFiles = async () => {
-//     const token = localStorage.getItem("token")
-//     const userId = localStorage.getItem("userId")
-//     if (!token || !userId) {
-//       setError("לא נמצא אסימון התחברות או userId")
-//       setLoading(false)
-//       navigate("/")
-//       return
-//     }
-//     try {
-//       const response = await axios.get(`${baseUrl}/file-cv/user-files`, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json",
-//         },
-//         timeout: 5000,
-//       })
-//       setFiles(response.data)
-//     } catch (err: any) {
-//       setError("שגיאה בטעינת הקבצים")
-//     } finally {
-//       setLoading(false)
-//     }
-//   }
-
-//   useEffect(() => {
-//     fetchUserFiles()
-//   }, [])
-
-//   const handleCreateNewCV = async () => {
-//     const isBlocked = await checkIfBlocked()
-//     if (isBlocked) {
-//       alert("הגישה נחסמה. אינך יכול ליצור קבצים מכיוון שאתה חסום על ידי המערכת.")
-//       return
-//     }
-//     if (files.length >= 5) {
-//       alert("ניתן ליצור עד 5 קבצי קורות חיים בלבד.")
-//       return
-//     }
-//     navigate("/all-templates")
-//   }
-
-//   return (
-//     <>
-//       <div className="cvs-container">
-//         <div className="geometric-decoration square"></div>
-//         <div className="geometric-decoration rectangle"></div>
-//         <div className="geometric-decoration triangle"></div>
-
-//         <div className="cvs-header">
-//           <h2 className="cvs-title">קורות החיים שלי</h2>
-//           <button className="create-cv-button" onClick={handleCreateNewCV}>
-//             יצירת קו"ח חדשים <span>+</span>
-//           </button>
-//         </div>
-
-//         {selectedFileData ? (
-//           <div className="update-section">
-//             <UpdateFileCV file={selectedFileData} onClose={() => setSelectedFileData(null)} onUpdate={fetchUserFiles} />
-//           </div>
-//         ) : (
-//           <div>
-//             {loading ? (
-//               <div className="loading-container">
-//                 <div className="loading-spinner"></div>
-//                 <p>טוען קבצים...</p>
-//               </div>
-//             ) : error ? (
-//               <div className="error-container">שגיאה: {error}</div>
-//             ) : (
-//               <div className="files-section">
-//                 <h3>קבצים שלך:</h3>
-//                 {files.length > 0 ? (
-//                   <ul className="files-list">
-//                     {files.map((file) => (
-//                       <li key={file.id ?? file.path} className="file-item">
-//                         <p className="file-path">{file.path}</p>
-//                         <div className="file-actions">
-//                           <button
-//                             className="update-button"
-//                             onClick={async () => {
-//                               const isBlocked = await checkIfBlocked()
-//                               if (isBlocked) {
-//                                 alert("הגישה נחסמה. אינך יכול לעדכן קבצים מכיוון שאתה חסום על ידי המערכת.")
-//                                 return
-//                               }
-//                               console.log("נבחר קובץ לעדכון:", file)
-//                               setSelectedFileData(file)
-//                             }}
-//                           >
-//                             עדכן
-//                           </button>
-//                           <button
-//                             className="delete-button"
-//                             onClick={async () => {
-//                               const isBlocked = await checkIfBlocked()
-//                               if (isBlocked) {
-//                                 alert("הגישה נחסמה. אינך יכול למחוק קבצים מכיוון שאתה חסום על ידי המערכת.")
-//                                 return
-//                               }
-//                               navigate(`/delete/${file.id}`)
-//                             }}
-//                           >
-//                             🗑 מחק
-//                           </button>
-//                         </div>
-//                         <img
-//                           src={`https://cvfilebuilder.s3.amazonaws.com/${file.path}`}
-//                           alt={`תצוגה מקדימה של ${file.path}`}
-//                           className="small-preview-image"
-//                         />
-//                       </li>
-//                     ))}
-//                   </ul>
-//                 ) : (
-//                   <div className="no-files">אין קבצים זמינים</div>
-//                 )}
-//               </div>
-//             )}
-//           </div>
-//         )}
-
-//         {selectedPdf && (
-//           <div className="pdf-viewer">
-//             <h3>הצגת PDF:</h3>
-//             <iframe
-//               src={`https://cvfilebuilder.s3.amazonaws.com/${selectedPdf}`}
-//               className="file-preview-frame"
-//               title={`Preview of ${selectedPdf}`}
-//               width="400"
-//               height="300"
-//             ></iframe>
-//             <button className="close-button" onClick={() => setSelectedPdf(null)}>
-//               סגור
-//             </button>
-//           </div>
-//         )}
-//       </div>
-//     </>
-//   )
-// }
-
-// export default CVs
-

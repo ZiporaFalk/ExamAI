@@ -11,7 +11,6 @@ const GetStarted = () => {
 
     return (
         <>
-            <h1>1</h1>
             <button onClick={ChooseTestType}>Get Started</button>
         </>
     )

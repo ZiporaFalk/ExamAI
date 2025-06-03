@@ -6,7 +6,6 @@ import CheckStudentExams from "./CheckStudentExams";
 import StepperDataContext from "./StepperDataContext";
 import ExamUploader from "../Uploading files to AWS/ExamUploader";
 import { CheckCircle, ArrowLeft, ArrowRight } from "lucide-react"
-// import "../stylies/Steps.css"
 import "../../stylies/Steps.css"
 import { useNavigate } from "react-router-dom";
 import WordFeedbackUploader from "../Uploading files to AWS/WordFeedbackUploader";
@@ -17,31 +16,26 @@ const Stepper_upload = () => {
     const navigate = useNavigate()
     const steps = [
         {
-            // label: "בחר סוג מבחן",
             label: "Select test type",
             component: <TestType />,
         },
         {
-            // label: "העלה קובץ",
             label: "Upload a file",
             component: <Decoding />,
         },
         {
-            // label: isStudentTest ? "בדיקת מבחן" : "פיענוח תשובות",
             label: isStudentTest ? "Test Check" : "Decoding Answers",
-            component: isStudentTest ? <CheckStudentExams /> : <ExampleExam />,//הוספה לשרת 
+            component: isStudentTest ? <CheckStudentExams /> : <ExampleExam />, 
         },
         ...(isStudentTest ? [ 
             {
-                // label: "צור פידבק",
                 label: "Create Feedback",
-                component: <WordFeedbackUploader />///פה מעלה פידבק לAWS
+                component: <WordFeedbackUploader />
             }
         ] : []),
         {
-            // label: "אישור ושליחה",
             label: "Confirm and send",
-            component: <ExamUploader />//פה מעלה קובץ מבחן תלמיד או דוגמא 
+            component: <ExamUploader />
         }
     ];
 
@@ -61,34 +55,7 @@ const Stepper_upload = () => {
     };
 
     return (
-        // <Box sx={{ width: "100%" }}>
-
-        //     <Stepper activeStep={activeStep} alternativeLabel>
-        //         {steps.map((step, index) => (
-        //             <Step key={index}>
-        //                 <StepLabel>{step.label}</StepLabel>
-        //             </Step>
-        //         ))}
-        //     </Stepper>
-        //     <Box sx={{ mt: 4 }}>
-        //         {steps[activeStep].component}
-        //     </Box>
-        //     <Box sx={{ display: "flex", justifyContent: "space-between", mt: 4 }}>
-        //         <Button disabled={activeStep === 0} onClick={handleBack}>
-        //             הקודם
-        //         </Button>
-        //         <Button onClick={handleNext} disabled={activeStep === steps.length - 1}>
-        //             הבא
-        //         </Button>
-        //     </Box>
-        // </Box>
         <div className="stepper-container">
-            {/* <div className="stepper-header">
-                <button className="back-button">
-                    <ArrowLeft size={16} />
-                    Back to Options
-                </button>
-            </div> */}
 
             <div className="stepper-wrapper">
                 <div className="stepper-progress">
@@ -103,7 +70,6 @@ const Stepper_upload = () => {
                             </div>
                             <div className="step-label">
                                 <div className="step-label-main">{step.label}</div>
-                                {/* <div className="step-label-arabic">{step.arabicLabel}</div> */}
                             </div>
                             {index < steps.length - 1 && (
                                 <div className={`step-connector ${activeStep > index ? 'completed' : ''}`} />
@@ -126,7 +92,6 @@ const Stepper_upload = () => {
                         Previous
                     </button>
                     <button
-                        // className={`stepper-btn stepper-btn-primary ${activeStep === steps.length - 1 || !isAbleNext ? 'disabled' : ''}`}
                         className={`stepper-btn stepper-btn-primary ${!isAbleNext ? 'disabled' : ''}`}
                         disabled={!isAbleNext}
                         onClick={handleNext}

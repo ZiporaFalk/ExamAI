@@ -1,19 +1,17 @@
-import type React from "react"
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { Bar, Pie } from "react-chartjs-2"
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from "chart.js"
 import "../stylies/statistics.css"
 import ExamService from "../services/examService"
 import { DashBoardService } from "../services/DashBoardService"
 import studentStore from "./Dashboard/StudentStore"
-// import  StudentService  from "../services/StudentService"
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement)
 
 interface StatisticsProps {
     className?: string
 }
 
-const StatisticsDashboard: React.FC<StatisticsProps> = ({ className }) => {
+const StatisticsDashboard: FC<StatisticsProps> = ({ className }) => {
     const [stats, setStats] = useState({
         averageScore: 0,
         averageScoreChange: 0,
@@ -34,7 +32,7 @@ const StatisticsDashboard: React.FC<StatisticsProps> = ({ className }) => {
                 const uniqueSubjects: string[] = Array.from(
                     new Set(response.map((exam: any) => exam.subject))
                 )
-                console.log(uniqueSubjects) // ["Math", "English", "Biology", ...]
+                console.log(uniqueSubjects) 
                 setSubjects(uniqueSubjects)
             } catch (error) {
                 console.error("Error retrieving subjects", error)

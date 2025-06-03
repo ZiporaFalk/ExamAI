@@ -39,25 +39,7 @@ const HomePage = () => {
     };
   }, []);
 
-  // const showLoginModal = () => {
-  //   setIsLoginModalOpen(true);
-  // };
-
-  // const handleLoginCancel = () => {
-  //   setIsLoginModalOpen(false);
-  // };
-
-  // const responseGoogle = (response: any) => {
-  //   console.log("Google login response:", response);
-  //   setIsLoginModalOpen(false);
-  //   api.success({
-  //     message: 'התחברת בהצלחה עם Google',
-  //     description: 'ברוך הבא למערכת ExamAI!',
-  //     placement: 'topRight',
-  //     className: 'rtl-notification',
-  //   });
-  // };
-
+ 
   useEffect(() => {
     const interval = setInterval(() => {
       const icons = document.querySelectorAll('.floating-icon');
@@ -72,70 +54,6 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      {/* <img src={myImg} id="imgBackground" alt="background"></img> */}
-      {/* {contextHolder}
-
-      <motion.div
-        className={`nav-container ${scrolled ? 'scrolled' : ''}`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 100, damping: 15 }}
-      >
-        <div className="logo-container">
-          <div className="logo-glow"></div>
-          <motion.div
-            className="logo"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <FaRegLightbulb className="logo-icon" />
-            ExamAI
-          </motion.div>
-        </div>
-
-        <motion.nav
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="main-nav"
-        >
-          <ul>
-            <motion.li whileHover={{ scale: 1.1, color: "#64ffda" }} onClick={() => navigate('/dashboard')}
-            >
-              <FaTachometerAlt className="nav-icon" />
-              Dashboard
-            </motion.li>
-
-            <motion.li whileHover={{ scale: 1.1, color: "#64ffda" }}>
-              <FaChartBar className="nav-icon" />
-              Statistics
-            </motion.li>
-            <motion.li whileHover={{ scale: 1.1, color: "#64ffda" }}>
-              <FaClipboardCheck className="nav-icon" />
-              Tests
-            </motion.li>
-          </ul>
-        </motion.nav>
-
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="auth-buttons"
-        >
-          <motion.button
-            className="sign-in-btn"
-            onClick={showLoginModal}
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            Sign In
-          </motion.button>
-        </motion.div>
-      </motion.div> */}
-
       <div className="hero-section">
         <motion.div
           className="floating-icon icon-1"
@@ -235,30 +153,6 @@ const HomePage = () => {
             </div>
           </motion.div>
         </div>
-        {/* .................................... */}
-        {/* {isLoginModalOpen && (
-          <LoginModal
-            isOpen={isLoginModalOpen}
-            onClose={handleLoginCancel}
-            onSuccessLogin={(email, messageType, message) => {
-              setIsLoginModalOpen(false);
-              messageType === 'success' ?
-                api.success({
-                  message: "You have successfully connected!",
-                  description: 'ברוך הבא למערכת! ' + { email },
-                  placement: 'topRight',
-                  className: 'rtl-notification',
-                })
-                : api.error({
-                  message: 'Login failed!',
-                  description: message,
-                  placement: 'topRight',
-                  className: 'rtl-notification',
-                });
-            }
-            }
-          />
-        )} */}
       </AnimatePresence>
 
       <div className="features-section" id="features">
@@ -284,7 +178,6 @@ const HomePage = () => {
             <p>Upload scanned exams and let the system automatically analyze, grade.</p>
             <ul className="feature-list">
               <li><FaCheckCircle className="feature-check" /> Smart scan & recognition & providing immediate scoring</li>
-              {/* <li><FaCheckCircle className="feature-check" /> Instant grading and scoring</li> */}
               <li><FaCheckCircle className="feature-check" /> Grade storage in student database</li>
               <li><FaCheckCircle className="feature-check" /> Optional email notifications to students</li>
             </ul>
@@ -380,70 +273,6 @@ const HomePage = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* Footer component similar to the one in the first image */}
-      {/* <footer className="app-footer">
-        <div className="footer-container">
-          <div className="footer-logo-section">
-            <div className="footer-logo">
-              <FaRegLightbulb className="footer-logo-icon" />
-              ExamAI
-            </div>
-            <p className="footer-description">
-              Advanced exam management system for educational institutions and organizations.
-            </p>
-          </div>
-
-          <div className="footer-links-section">
-            <div className="footer-links-column">
-              <h3>Quick Links</h3>
-              <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-              </ul>
-            </div>
-
-            <div className="footer-links-column">
-              <h3>Resources</h3>
-              <ul>
-                <li><a href="#">Documentation</a></li>
-                <li><a href="#">Tutorials</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Support</a></li>
-              </ul>
-            </div>
-
-            <div className="footer-links-column">
-              <h3>Contact</h3>
-              <ul className="contact-list">
-                <li>
-                  <FaEnvelope className="contact-icon" />
-                  <a href="mailto:info@examai.com">info@examai.com</a>
-                </li>
-                <li>
-                  <FaPhone className="contact-icon" />
-                  <a href="tel:+11234567890">+1 (123) 456-7890</a>
-                </li>
-                <li>
-                  <FaMapMarkerAlt className="contact-icon" />
-                  <span>123 Education St, Learning City</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          <p>© 2025 ExamAI. All rights reserved.</p>
-          <div className="footer-policies">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookie Policy</a>
-          </div>
-        </div>
-      </footer> */}
     </div>
   );
 };

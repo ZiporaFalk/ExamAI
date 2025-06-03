@@ -2,31 +2,9 @@ import { ChangeEvent, useContext, useRef, useState, DragEvent } from "react";
 import StepperDataContext from "./StepperDataContext";
 import { FileWithProgress } from "../../utils/types";
 import "../../stylies/Decoding.css"
- 
+
 const Decoding = () => {
     const { setSelectedImages, setFiles, files, setIsAbleNext } = useContext(StepperDataContext)!
-    // useEffect(() => {
-    //     setIsAbleNext(false)
-    // }, [])
-    // const [progress, setProgress] = useState<{ [key: string]: number }>({});
-    // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     if (event.target.files) {
-    //         const fileArray = Array.from(event.target.files);
-    //         setFiles(fileArray);
-    //         const analizeimages: string[] = []
-    //         fileArray.map((file) => {
-    //             if (file && file.type.startsWith("image")) {
-    //                 const reader = new FileReader();
-    //                 reader.readAsDataURL(file);
-    //                 reader.onloadend = () => {
-    //                     analizeimages.push(reader.result?.toString().split(",")[1] || "");
-    //                 };
-    //             }
-    //         });
-    //         setSelectedImages(analizeimages)
-    //     }
-    // };
-    // const { files, setFiles, setSelectedImages,setIsAbleNext } = useContext(StepperContext)!;
     const [isDragOver, setIsDragOver] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -92,11 +70,11 @@ const Decoding = () => {
                 }
             })
         );
-        
+
         const base64Array = await Promise.all(base64Promises);
         setSelectedImages?.(base64Array);
-    
-        
+
+
         newFiles.forEach((_, index) => {
             const fileIndex = files.length + index;
             setTimeout(() => simulateFileUpload(fileIndex), index * 500);
@@ -120,21 +98,7 @@ const Decoding = () => {
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
     };
     return (
-        // <div style={{ textAlign: "center", marginTop: "50px" }}>
-        //     <h1>3</h1>
-        //     <h1>Decoding</h1>
-        //     <h3>בחירת מבחן</h3>
-        //     <input type="file" multiple onChange={handleFileChange} />
-
-        //     {files.map((file) => (
-        //         <div key={file.name}>
-        //             {file.name}: {progress[file.name] || 0}%
-        //         </div>
-        //     ))}
-        // </div>
-
         <div className="upload-container">
-            <h1>Decoding</h1>
             <div
                 className={`upload-area ${isDragOver ? "drag-over" : ""}`}
                 onDragOver={(e) => {
@@ -150,8 +114,6 @@ const Decoding = () => {
                 <div className="upload-content">
                     <div className={`upload-icon ${isDragOver ? "icon-drag-over" : ""}`}>
                         <svg
-                            // width="32"
-                            // height="32"
                             width="20"
                             height="20"
                             viewBox="0 0 24 24"

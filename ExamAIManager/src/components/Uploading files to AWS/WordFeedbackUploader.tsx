@@ -6,7 +6,7 @@ import StepperDataContext from "../Stepper/StepperDataContext";
 import "../../stylies/WordFeedbackUploader.css"
 import ExamUploadService from "../../services/ExamUploadService";
 const WordFeedbackUploader = () => {
-    const { students, exams, scores, answersList, setIsAbleNext } = useContext(StepperDataContext)! // במקום props
+    const { students, exams, scores, answersList, setIsAbleNext } = useContext(StepperDataContext)! 
     const [teacherNote, ] = useState("");
     const [signature, setSignature] = useState<string | null>(null);
     const [isGenerating, setIsGenerating] = useState<boolean>(false);
@@ -106,40 +106,7 @@ const WordFeedbackUploader = () => {
             }
         }
         setIsAbleNext(true);
-        setIsGenerating(false);
-        // for (let i = 0; i < students.length; i++) {
-        //     try {
-        //         const fileName = `${students[i].name.replace(/\s/g, "_")}_feedback.docx`;
-        //         const matchedGrade = grades.find(g => scores[i] >= g.min);
-        //         const feedback = matchedGrade?.text ?? 'ציון לא חוקי';
-        //         const wordBlob = await createWordFile(students[i].name, scores[i], feedback, answersList[i], teacherNote, signature, exams[i]);
-        //         const response = await axios.get(`${apiUrl}/ExamUpload/presigned-url`, {
-        //             params: {
-        //                 fileName,
-        //                 IsStudentTest: true,
-        //                 subject: exams[i].subject,
-        //                 date: exams[i].dateExam,
-        //                 class: students[i].studentClass,
-        //                 contentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        //             },
-        //         });
-        //         const uploadUrl = response.data.url;
-        //         await axios.put(uploadUrl, wordBlob, {
-        //             headers: {
-        //                 "Content-Type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        //                 "x-amz-acl": "bucket-owner-full-control",
-        //             },
-        //         });
-        //         alert("הקובץ הועלה בהצלחה ל־S3!");
-        //         setIsAbleNext(true)
-        //     } catch (error) {
-        //         console.error(error);
-        //         alert("אירעה שגיאה בהעלאת הקובץ.");
-        //     }
-        // setIsGenerating(false);
-        // }
-        // });
-
+        setIsGenerating(false);  
     };
 
     const studentCards = students && students.length > 0 ? (
@@ -165,46 +132,8 @@ const WordFeedbackUploader = () => {
             ))}
         </div>
     ) : null;
-    /////////////////////////////////////////// הורדת קובץ הפידבק///////////////////////////////////////////////////////////
-    // const handleDownload = async () => {
-    //     try {
-    //         const fileName = `${studentName.replace(/\s/g, "_")}_feedback.docx`;
-    //         const response = await axios.get(`${apiUrl}/ExamUpload/download-url`, {
-    //             params: {
-    //                 fileName,
-    //                 IsStudentTest: true,
-    //                 subject: exam.subject,
-    //                 date: exam.dateExam,
-    //                 class: student.studentClass,
-    //             }
-    //         });
-    //         const url = response.data.url; // גישה נכונה לנתון מתוך התגובה
-    //         const link = document.createElement('a');
-    //         link.href = url;
-    //         link.download = fileName; // שם הקובץ שיישמר בהורדה
-    //         document.body.appendChild(link);
-    //         link.click();
-    //         document.body.removeChild(link);
-    //     } catch (error) {
-    //         console.error("שגיאה בהורדת הקובץ:", error);
-    //     }
-    // }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     return (
-        // <div>
-        //     <h2>העלאת משוב ב-Word</h2>
-        //     <div>
-        //         <label>הערה מהמורה:</label><br />
-        //         <textarea
-        //             value={teacherNote}
-        //             onChange={(e) => setTeacherNote(e.target.value)}
-        //             rows={4}
-        //             cols={50}
-        //             placeholder="הקלידי כאן את ההערה..." />
-        //     </div>
-        //     <SignatureSection onSave={setSignature} signature={signature} />
-        //     <button onClick={handleUploadWord}>צור קובץ feedback</button>
-        // </div>
         <div className="word-uploader-container">
             <h1>WordFeedbackUploader</h1>
             <div className="word-uploader-header">
@@ -213,7 +142,6 @@ const WordFeedbackUploader = () => {
             </div>
             {studentCards}
             <div className="signature-container">
-                {/* <Signature onSignature={setSignature} /> */}
                 <SignatureSection onSave={setSignature} signature={signature} />
             </div>
             <div className="actions-container">

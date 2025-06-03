@@ -4,22 +4,9 @@ import { useNavigate } from "react-router-dom";
 import "../../stylies/TestType.css"
 
 const TestType = () => {
-    const { setIsStudentTest, setIsAbleNext } = useContext(StepperDataContext)!;
- 
+    const { setIsStudentTest, setIsAbleNext } = useContext(StepperDataContext)!; 
     const navigate = useNavigate()
-    // const sendMail = async () => {
-    //     try {
-    //         await axios.post(`${apiUrl}/Email/send`, {
-    //             to: "z0548498935@gmail.com",
-    //             subject: "ברוך הבא!",
-    //             body: "שלום וברוך הבא למערכת שלנו!",
-    //         });
-    //         alert("הדוא״ל נשלח בהצלחה!");
-    //     } catch (err) {
-    //         console.error(err);
-    //         alert("שליחת הדוא״ל נכשלה.");
-    //     }
-    // };
+
     return (
         <>
             <div id="upload-container">
@@ -32,7 +19,6 @@ const TestType = () => {
                 <div className="options-container">
                     <div
                         className="option-card"
-                        // onClick={() => navigate('students-test')}
                         onClick={() => { setIsStudentTest(true); setIsAbleNext(true); }}
                     >
                         <div className="icon-circle">
@@ -47,7 +33,6 @@ const TestType = () => {
 
                     <div
                         className="option-card"
-                        // onClick={() => navigate('test-results')}
                         onClick={() => { setIsStudentTest(false); setIsAbleNext(true); }}
                     >
                         <div className="icon-circle">
