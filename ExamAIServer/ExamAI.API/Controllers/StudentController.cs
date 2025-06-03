@@ -13,7 +13,7 @@ using CSharpFunctionalExtensions;
 
 namespace ExamAI.API.Controllers
 {
-    [Authorize(Policy = "StudentOrAdmin")]
+    //[Authorize(Policy = "StudentOrAdmin")]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ControllerBase

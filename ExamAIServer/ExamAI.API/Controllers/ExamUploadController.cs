@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExamAI.API.Controllers
 {
-    [Authorize(Policy = "AdminOnly")]
+    //[Authorize(Policy = "AdminOnly")]
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize(Roles = "Admin")]

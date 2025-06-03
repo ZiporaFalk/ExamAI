@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ExamAI.API.Controllers
 {
-    [Authorize(Policy = "StudentOrAdmin")]
+    //[Authorize(Policy = "StudentOrAdmin")]
     [ApiController]
     [Route("api/[controller]")]
     public class EmailController : ControllerBase

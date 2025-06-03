@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ExamAI.API.Controllers
 {
     //[Authorize(Roles = "Student")]
-    [Authorize(Policy = "StudentOrAdmin")]
+    //[Authorize(Policy = "StudentOrAdmin")]
 
     //[Authorize(Policy = "StudentOnly")]
     [Route("api/[controller]")]

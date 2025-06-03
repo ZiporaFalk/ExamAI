@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace ExamAI.API.Controllers
 {
     //[Authorize(Roles = "Admin")]
-    [Authorize(Policy = "AdminOnly")]
+    //[Authorize(Policy = "AdminOnly")]
     [Route("api/[controller]")]
     [ApiController]
     public class AnswerController : ControllerBase
