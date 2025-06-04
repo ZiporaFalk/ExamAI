@@ -2,7 +2,6 @@ import axiosInstance from "../utils/axiosInstance";
 import { Exam, Student } from "../utils/types";
 import { handleAxiosError } from "../utils/handleAxiosError";
 import axios from "axios";
-// const apiUrl = 'https://localhost:7083/api';
 
 const ExamUploadService = {
 
@@ -45,7 +44,7 @@ const ExamUploadService = {
                 await axios.put(presignedUrl, renamedFile, {
                     headers: {
                         'Content-Type': renamedFile.type,
-                        'x-amz-acl': 'bucket-owner-full-control'
+                        // 'x-amz-acl': 'bucket-owner-full-control'
                     },
                     onUploadProgress: (e) => {
                         const percent = Math.round((e.loaded * 100) / (e.total || 1));
@@ -83,7 +82,7 @@ const ExamUploadService = {
             await axios.put(uploadUrl, wordBlob, {
                 headers: {
                     "Content-Type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                    "x-amz-acl": "bucket-owner-full-control",
+                    // "x-amz-acl": "bucket-owner-full-control",
                 },
             });
         }

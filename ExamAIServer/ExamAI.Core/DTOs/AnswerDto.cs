@@ -9,9 +9,7 @@ namespace ExamAI.Core.DTOs
 {
     public class AnswerDto
     {
-        //public int Id { get; set; }
         public int ExamId { get; set; }
-        //public Exam Exam { get; set; }
         public char QuestionNumber { get; set; }//מספר שאלה
         public int CorrectAnswer { get; set; }//התשובה הנכונה
 

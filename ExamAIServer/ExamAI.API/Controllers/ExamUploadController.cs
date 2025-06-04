@@ -41,7 +41,7 @@ namespace ExamAI.API.Controllers
                 //ContentType = "application/octet-stream"
 
             };
-            request.Headers["x-amz-acl"] = "bucket-owner-full-control";
+            //request.Headers["x-amz-acl"] = "bucket-owner-full-control";
 
             try
             {
