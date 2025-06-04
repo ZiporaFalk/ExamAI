@@ -4,7 +4,6 @@ import { useContext, useState } from "react";
 import StepperDataContext from "./StepperDataContext";
 import { Link, Outlet } from "react-router-dom";
 import "../../stylies/CheckStudentExam.css"
-import { ClipboardList } from 'lucide-react';
 import "../../stylies/UnregisteredStudentMessage.css"
 import SubmissionService from "../../services/SubmissionService";
 import ExamService from "../../services/examService";
