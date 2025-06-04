@@ -11,16 +11,6 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          },
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/exam-ai-manager",
@@ -75,21 +65,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true
+              "buildTarget": "examAI-manager:build:production"
             },
             "development": {
               "buildTarget": "examAI-manager:build:development"
