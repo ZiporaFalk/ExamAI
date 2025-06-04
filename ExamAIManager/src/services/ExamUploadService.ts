@@ -6,21 +6,24 @@ import axios from "axios";
 
 const ExamUploadService = {
 
-    // async uploadAll
-    // (renamedFile:File,exam:Exam,student:Student,isStudentTest:boolean): Promise<void> {
     async uploadAll(
-        // files: { file: File }[],
-        files: ({ file: File } | null)[], // שונה כאן
+        files: ({ file: File } | null)[],
         students: Student[],
         exams: Exam[],
         isStudentTest: boolean,
         setProgress: (p: Record<string, number>) => void,
         sendMail: (student: any, exam: any) => void
     ): Promise<void> {
-        for (let i = 0; i < students.length; i++) {
+        console.log("pppppppppppppppppppppp");
+        const loopLength = isStudentTest ? students.length : exams.length;
+
+        for (let i = 0; i < loopLength; i++) {
+            const student = isStudentTest ? students[i] : null;
+            const exam = exams[i];
+
             const nameFile = isStudentTest
-                ? students[i].name
-                : `${exams[i].subject}-${exams[i].dateExam}`;
+                ? student?.name
+                : `${exam.subject}-${exam.dateExam}`;
 
             const renamedFile = this.renameFile(files[i]?.file!, `${nameFile}.jpg`);
 
@@ -28,14 +31,13 @@ const ExamUploadService = {
                 const { data } = await axiosInstance.get("/ExamUpload/presigned-url", {
                     params: {
                         fileName: renamedFile.name,
-                        subject: exams[i].subject,
-                        class: isStudentTest ? students[i].studentClass : "null",
-                        date: exams[i].dateExam,
+                        subject: exam.subject,
+                        class: isStudentTest ? student?.studentClass : "null",
+                        date: exam.dateExam,
                         isStudentTest,
                         contentType: "image/jpeg"
                     },
                 });
-
                 const presignedUrl = data.url;
                 console.log(presignedUrl);
                 console.log("presignedUrl");
@@ -43,14 +45,14 @@ const ExamUploadService = {
                 await axios.put(presignedUrl, renamedFile, {
                     headers: {
                         'Content-Type': renamedFile.type,
-                        // 'x-amz-acl': 'bucket-owner-full-control'
+                        'x-amz-acl': 'bucket-owner-full-control'
                     },
                     onUploadProgress: (e) => {
                         const percent = Math.round((e.loaded * 100) / (e.total || 1));
                         setProgress({ [renamedFile.name]: percent });
                     },
                 });
-                if (isStudentTest) sendMail(students[i], exams[i]);
+                if (isStudentTest) sendMail(student, exam);
                 console.log(`✔️ ${renamedFile.name} uploaded successfully`);
             } catch (error) {
                 console.error(`❌ Error uploading file ${renamedFile.name}:`, error);
@@ -61,6 +63,7 @@ const ExamUploadService = {
     renameFile(file: File, newName: string): File {
         return new File([file], newName, { type: file.type });
     },
+
     uploadStudentWordFeedback: async (student: Student, exam: Exam, wordBlob: Blob) => {
         const fileName = `${student.name.replace(/\s/g, "_")}_feedback.docx`;
         try {
@@ -80,7 +83,7 @@ const ExamUploadService = {
             await axios.put(uploadUrl, wordBlob, {
                 headers: {
                     "Content-Type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                    // "x-amz-acl": "bucket-owner-full-control",
+                    "x-amz-acl": "bucket-owner-full-control",
                 },
             });
         }

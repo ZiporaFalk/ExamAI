@@ -34,11 +34,11 @@ const ExampleExam = () => {
 
         const hebrewLetters = extractHebrewLettersWithDot(DecodedExam)
         const answers = extractAnswersAfterHu(DecodedExam)
-        for (let i = 0; i < answers.length; i++) {
-            await ExamService.addCorrectAnswers(examId, hebrewLetters[i], answers[i])
-        }
         console.log(hebrewLetters);
         console.log(answers);
+        for (let i = 0; i < answers.length; i++) {
+            await ExamService.addCorrectAnswers(examId, hebrewLetters[i], Number(answers[i]))
+        }
     }
     const handleAnalyze = async () => {
         setIsLoading(true);

@@ -30,8 +30,15 @@ const ExamUploader: React.FC = () => {
 
         if (!files.length) return alert("נא לבחור קבצים");
         console.log("uploadAll");
+        console.log("students.length:", students.length);
+        console.log("exams.length:", exams.length);
+        console.log("files.length:", files.length);
+        console.log("files:", files);
+        console.log({ files, students, exams });
+     
+        
         try {
-            await ExamUploadService.uploadAll(
+            const res = await ExamUploadService.uploadAll(
                 files,
                 students,
                 exams,
@@ -39,7 +46,9 @@ const ExamUploader: React.FC = () => {
                 setProgress,
                 sendMail
             );
-            alert("✅ כל הקבצים הועלו!");
+            console.log(res);
+            console.log("res");
+            // alert("✅ כל הקבצים הועלו!"+res);
             setIsAbleNext(true)
         } catch (e) {
             alert("הקבצים לא הועלו!!!!");

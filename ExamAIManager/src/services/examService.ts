@@ -2,21 +2,17 @@ import { Exam } from "../utils/types";
 import axiosInstance from "../utils/axiosInstance";
 import { handleAxiosError } from "../utils/handleAxiosError";
 
-// const apiUrl = 'https://localhost:7083/api';
-
 const ExamService = {
     create: async (exam: Partial<Exam>) => {
         try {
             const res = await axiosInstance.post(`/Exam`, exam);
             alert("המבחן נוסף בהצלחה");
-            //console.log(res.data)
             return res.data;
         } catch (e: any) {
             handleAxiosError(e, "הוספת המבחן נכשלה");
             throw e;
         }
     },
-    // const exam = (await axios.get(`${apiUrl}/Exam/BySubjectAndDate/${dateAndSubject.dateExam}/${dateAndSubject.subject}`)).data;
 
     getBySubjectAndDate: async (dateAndSubject: { dateExam: string, subject: string; }) => {
         try {
@@ -51,7 +47,6 @@ const ExamService = {
         }
     },
     getCorrectAnswers: async (exam: Exam) => {
-        //const CorrectAnswers=(await axios.get(`${apiUrl}/Answer`, { params: { exam_id: exam.id } })).data;
         try {
             const res = await axiosInstance.get(`/Answer`, { params: { exam_id: exam.id } })
             console.log(res.data);
@@ -65,7 +60,8 @@ const ExamService = {
         const response = await axiosInstance.post(`/Exam`, { class: classs, dateExam, subject, file_Url: urlNewExam })
         return response
     },
-    addCorrectAnswers: async (examId: number, questionNumber: string, correctAnswer: string) => {
+
+    addCorrectAnswers: async (examId: number, questionNumber: string, correctAnswer: number) => {
         await axiosInstance.post(`/Answer`, { examId, questionNumber, correctAnswer })
     }
 
