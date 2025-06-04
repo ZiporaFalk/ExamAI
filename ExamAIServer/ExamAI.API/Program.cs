@@ -1,4 +1,7 @@
 
+using Amazon.Extensions.NETCore.Setup;
+using Amazon.Runtime;
+using Amazon;
 using Amazon.S3;
 using AutoMapper;
 using ExamAI.API.Controllers;
@@ -14,7 +17,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,69 +65,23 @@ app.MapGet("/", () => "AuthServer API is running!");
 app.Run();
 
 
-
-
-
-//using Amazon.S3;
-//using AutoMapper;
-//using ExamAI.API.Controllers;
-//using ExamAI.API.Extensions;
-//using ExamAI.Core;
-//using ExamAI.Core.Repositories;
-//using ExamAI.Core.Services;
-//using ExamAI.Data;
-//using ExamAI.Data.Repositories;
-//using ExamAI.Service.Services;
-//using Microsoft.AspNetCore.Authentication.JwtBearer;
-//using Microsoft.AspNetCore.Builder;
-//using Microsoft.IdentityModel.Tokens;
-//using Microsoft.OpenApi.Models;
-//using System.Text;
-
-//using System.Text.Json.Serialization;
-
-//var builder = WebApplication.CreateBuilder(args);
-
-//builder.Services.AddCors(options =>
+//// הגדרת AWS S3
+//builder.Services.AddDefaultAWSOptions(new AWSOptions
 //{
-//    options.AddPolicy("AllowAnyOrigin",
-//        builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+//    BasicCredentials = new AWSCredentials(
+//        configuration["AWS:AccessKey"],
+//        configuration["AWS:SecretKey"]
+//    ),
+//    Region = RegionEndpoint.GetBySystemName(configuration["AWS:Region"])
 //});
-//builder.Services.AddHttpClient();
-
-//builder.Services.AddControllers();
-//builder.Services.AddOpenApi();
-//builder.Services.ConfigureSwagger();
-
-//builder.Services.ConfigureServices();
-////builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
-
-//builder.Services.ConfigureJwt(builder.Configuration);
-//builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-
-////JWT
-//// הוספת הרשאות מבוססות-תפקידים
-//builder.Services.AddAuthorization(options =>
+//builder.Services.AddAWSService<IAmazonS3>();
+//// הגדרת AWS S3
+//builder.Services.AddDefaultAWSOptions(new AWSOptions
 //{
-//    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
-//    options.AddPolicy("StudentOnly", policy => policy.RequireRole("Student"));
+//    BasicCredentials = new AWSCredentials(
+//        configuration["AWS:AccessKey"],
+//        configuration["AWS:SecretKey"]
+//    ),
+//    Region = RegionEndpoint.GetBySystemName(configuration["AWS:Region"])
 //});
-
-//var app = builder.Build();
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//    app.MapOpenApi();
-//}
-//app.UseCors("AllowAnyOrigin");
-
-//app.UseHttpsRedirection();
-//app.UseAuthentication();//JWT
-
-//app.UseAuthorization();
-
-//app.MapControllers();
-
-//app.Run();
-
+//builder.Services.AddAWSService<IAmazonS3>();
