@@ -3,7 +3,6 @@ import axiosInstance from "../utils/axiosInstance";
 import { handleAxiosError } from "../utils/handleAxiosError";
 
 
-// export const DashBoardService = {
 export const DashBoardService = {
     /**
      * מקבל את ממוצע הכיתה לפי שם כיתה ונושא (אופציונלי)

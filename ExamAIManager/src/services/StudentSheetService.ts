@@ -10,9 +10,7 @@ const StudentSheetService = {
             });
             console.log(response);
             console.log(response.data);
-            
             return response.data
-            // const data = await response.json();
 
         } catch (err) {
             handleAxiosError(err, "");

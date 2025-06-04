@@ -51,7 +51,6 @@ const ExamUploader: React.FC = () => {
             );
             console.log(res);
             console.log("res");
-            // alert("✅ כל הקבצים הועלו!"+res);
             setIsAbleNext(true)
         } catch (e) {
             alert("הקבצים לא הועלו!!!!");

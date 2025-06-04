@@ -43,7 +43,6 @@ Chart.register(...registerables);
 })
 export class StudentDashboardComponent implements OnInit {
   activeTab: string = 'performance';
-  // studentId = 1024;
   studentId: number = 0;
   student?: Student;
   studentExams: StudentExamView[] = [];
@@ -69,13 +68,15 @@ export class StudentDashboardComponent implements OnInit {
   private subjectChart: any;
   private progressChart: any;
   private skillChart: any;
+
   ngOnInit() {
+
     this.examsService.getStudentById(this.studentId).subscribe(student => {
       this.student = student;
       console.log(this.student);
     });
 
-    this.examsService.loadStudentExams(this.studentId);
+    this.examsService.loadStudentExams(this.studentId);  
     this.examsService.exams$.subscribe((exams) => {
       this.studentExams = exams;
       // כאן תעדכן את הגרפים לפי הנתונים האמיתיים

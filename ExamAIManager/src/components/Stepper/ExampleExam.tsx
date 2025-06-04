@@ -67,8 +67,8 @@ const ExampleExam = () => {
         })
         setExams(allExams);
         setTimeout(() => {
-            setIsLoading(false);
-            setIsFinished(true);
+            setIsLoading(false)
+            setIsFinished(true)
             setIsAbleNext(true)
         }, 5000);
     };
