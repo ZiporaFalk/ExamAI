@@ -43,7 +43,7 @@ const ExamUploadService = {
                 await axios.put(presignedUrl, renamedFile, {
                     headers: {
                         'Content-Type': renamedFile.type,
-                        'x-amz-acl': 'bucket-owner-full-control'
+                        // 'x-amz-acl': 'bucket-owner-full-control'
                     },
                     onUploadProgress: (e) => {
                         const percent = Math.round((e.loaded * 100) / (e.total || 1));
@@ -80,7 +80,7 @@ const ExamUploadService = {
             await axios.put(uploadUrl, wordBlob, {
                 headers: {
                     "Content-Type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                    "x-amz-acl": "bucket-owner-full-control",
+                    // "x-amz-acl": "bucket-owner-full-control",
                 },
             });
         }
