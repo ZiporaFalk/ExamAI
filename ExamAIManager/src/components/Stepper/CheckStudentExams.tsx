@@ -120,7 +120,14 @@ const CheckStudentExams = () => {
         updatedFiles[i] = null;
         const email = await StudentSheetService.getStudentEmail(student.name, student.studentClass);
         await EmailService.sendMail(
-          " :לרישום נא להיכנס ללינק הבא : \nעליך להרשם בהקדם\n 📑שלום וברוך הבא למערכת בדיקת המבחנים שלנו!",
+          // " :לרישום נא להיכנס ללינק הבא : \nעליך להרשם בהקדם\n 📑שלום וברוך הבא למערכת בדיקת המבחנים שלנו!",
+          // `שלום לך ${student.name}!`,
+          `
+          📑 שלום וברוך הבא למערכת בדיקת המבחנים שלנו!<br><br>
+          עליך להירשם בהקדם<br>
+          לרישום נא להיכנס ללינק הבא:<br>
+          <a href="https://examaiclient.onrender.com/auth">לחץ כאן להרשמה</a>
+          `,
           `שלום לך ${student.name}!`,
           email,
         );

@@ -17,15 +17,19 @@ const ExamUploader: React.FC = () => {
     const { students, exams, isStudentTest, files, setIsAbleNext } = useContext(StepperDataContext)!
 
     const sendMail = async (student: Student, exam: Exam) => {
-        const body = `📑שלום וברוך הבא למערכת בדיקת המבחנים שלנו!
-                 רצינו לעדכן שהמבחן שעשית ב:${exam.subject} נבדק ונכנס למערכת😂
-                 את מוזמנת להיכנס ולצפות בו🔭🔭
-                 בהצלחה!!!🎉`;
-        const subject = `שלום לך ${student.name}!`
-        const email = student.email!
-        await EmailService.sendMail(body, subject, email)
+        const link = `https://examaiclient.onrender.com`; 
+        const body = `
+            📑 שלום וברוך הבא למערכת בדיקת המבחנים שלנו!<br><br>
+            רצינו לעדכן שהמבחן שעשית ב-${exam.subject} נבדק ונכנס למערכת 😂<br>
+            את מוזמנת להיכנס ולצפות בו 🔭🔭<br><br>
+            <a href="${link}">לחצי כאן לצפייה במבחן שלך</a><br><br>
+            בהצלחה!!! 🎉
+        `;
+        const subject = `שלום לך ${student.name}!`;
+        const email = student.email!;
+        await EmailService.sendMail(body, subject, email);
     };
-
+    
     const handleUpload = async () => {
 
         if (!files.length) return alert("נא לבחור קבצים");
@@ -35,7 +39,6 @@ const ExamUploader: React.FC = () => {
         console.log("files.length:", files.length);
         console.log("files:", files);
         console.log({ files, students, exams });
-     
         
         try {
             const res = await ExamUploadService.uploadAll(

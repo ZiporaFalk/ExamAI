@@ -11,9 +11,8 @@ namespace ExamAI.Core.Models
         public int Id { get; set; }
         public int ExamId { get; set; }
         public Exam Exam { get; set; }
-        public char QuestionNumber { get; set; }//מספר שאלה
-        //public int CorrectValue { get; set; }//התשובה הנכונה
-        public int CorrectAnswer { get; set; }//התשובה הנכונה
+        public char QuestionNumber { get; set; }
+        public int CorrectAnswer { get; set; }
         public DateTime Created_at { get; set; } = DateTime.UtcNow;
 
         public Answer()
