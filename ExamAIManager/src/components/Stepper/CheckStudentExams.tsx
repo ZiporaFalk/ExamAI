@@ -27,7 +27,7 @@ const CheckStudentExams = () => {
     if (isFinished) {
       setIsAbleNext(true);
     }
-  }, [isFinished]);
+  }, [isFinished])
 
 
   const SaveStudentExam = async (score: number, examId: number, feedbackUrl: string, fileUrl: string, studentId: number) => {
@@ -98,12 +98,10 @@ const CheckStudentExams = () => {
       console.log(feedbackurl);
       console.log(fileurl);
       try {
-        student.name = 'hgovl'
-        student.studentClass = 'hgovl'
         const studentByName: Student = await studentStore.getStudentByClassAndName(student.studentClass, student.name);
         await SaveStudentExam(score, exam_id, feedbackurl, fileurl, studentByName.id!);
         const email = await studentStore.getEmailByStudentId(studentByName.id!)
-        student.email = email
+        student.email = email 
         exams.push(exam)
         students.push(student)
         scores.push(score)
@@ -127,7 +125,7 @@ const CheckStudentExams = () => {
           email,
         );
         // setHasError(true);
-        // setHasError(err)
+        // setHasError(err);
       }
     }
     setExams(exams)

@@ -6,7 +6,6 @@ import { Student } from '../../models/Student';
 import { StudentService } from '../student/student.service';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { environment } from '../../environments/environment';
 
 interface LoginResponse {
   token: string;
@@ -18,7 +17,6 @@ interface GoogleJwtPayload {
   name: string;
   email: string;
   picture: string;
-  // sub: string;
 }
  
 @Injectable({
