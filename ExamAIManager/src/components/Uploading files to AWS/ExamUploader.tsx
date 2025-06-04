@@ -13,7 +13,7 @@ interface FileIconProps {
 const ExamUploader: React.FC = () => {
     const [progress, setProgress] = useState<{ [key: string]: number }>({});
     const [isUploading,] = useState<boolean>(false);
-    const [uploadComplete, ] = useState<boolean>(false);
+    const [uploadComplete,] = useState<boolean>(false);
     const { students, exams, isStudentTest, files, setIsAbleNext } = useContext(StepperDataContext)!
 
     const sendMail = async (student: Student, exam: Exam) => {
@@ -22,28 +22,30 @@ const ExamUploader: React.FC = () => {
                  את מוזמנת להיכנס ולצפות בו🔭🔭
                  בהצלחה!!!🎉`;
         const subject = `שלום לך ${student.name}!`
-        const email=student.email!
-        await EmailService.sendMail(body,subject,email)
+        const email = student.email!
+        await EmailService.sendMail(body, subject, email)
     };
 
     const handleUpload = async () => {
 
         if (!files.length) return alert("נא לבחור קבצים");
         console.log("uploadAll");
-
-        await ExamUploadService.uploadAll(
-            files,
-            students,
-            exams,
-            isStudentTest,
-            setProgress,
-            sendMail
-        );
-    
-        alert("✅ כל הקבצים הועלו!");
-        setIsAbleNext(true)
+        try {
+            await ExamUploadService.uploadAll(
+                files,
+                students,
+                exams,
+                isStudentTest,
+                setProgress,
+                sendMail
+            );
+            alert("✅ כל הקבצים הועלו!");
+            setIsAbleNext(true)
+        } catch (e) {
+            alert("הקבצים לא הועלו!!!!");
+        }
     };
-            
+
 
     const getFileIcon = (fileName: string): FileIconProps['type'] => {
         const extension = fileName.split('.').pop()?.toLowerCase() || '';

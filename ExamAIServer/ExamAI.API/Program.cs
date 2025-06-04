@@ -24,6 +24,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAnyOrigin",
         builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
+
 builder.Services.AddHttpClient();
 
 builder.Services.AddControllers();
@@ -45,12 +46,11 @@ builder.Services.AddAuthorization(options =>
 });
 
 var app = builder.Build();
-//if (app.Environment.IsDevelopment())
-//{
+
     app.UseSwagger();
     app.UseSwaggerUI();
     app.MapOpenApi();
-//}
+
 app.UseCors("AllowAnyOrigin");
 
 app.UseHttpsRedirection();

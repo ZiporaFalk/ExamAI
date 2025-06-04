@@ -14,46 +14,23 @@
   background-color: #050e27;
 }
 
-/* body {
-  background-color: #4fe0b6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
 
-/* #imgBackground {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  opacity: 0.35;
-} */
-
-/* Base Styles */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Main Container */
 .student-dashboard {
   width: 100%;
   max-width: 1200px;
-  /* margin: 0 auto; */
-  /* margin: auto; */
   margin: 1rem 4rem 6rem 4rem;
-  /* margin: 50px; */
   padding: 20px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   direction: rtl;
   color: var(--text-color);
-  /* background: var(--primary-gradient); */
   border-radius: 20px;
   box-shadow: 0 10px 30px var(--shadow-color);
-  /* overflow: hidden; */
   position: relative;
   top: 35px;
   left: 130px;
@@ -71,7 +48,6 @@
   pointer-events: none;
 }
 
-/* Dashboard Header */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -530,6 +506,15 @@
 
   .filter-container {
     width: 100%;
+  }
+
+  .student-dashboard {
+    max-width: 900px;
+    margin: 4rem 0;
+    /* position: relative; */
+    /* top: 35px; */
+    left: 50px;
+    /* align-items: center; */
   }
 }
 

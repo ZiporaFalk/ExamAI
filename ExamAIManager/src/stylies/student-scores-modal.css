@@ -189,7 +189,6 @@
   transform: translateY(-2px);
 }
 
-/* מודל תצוגת קובץ */
 .preview-modal-paper {
   background: linear-gradient(135deg, #0a1929 0%, #0f2942 100%);
   color: white;

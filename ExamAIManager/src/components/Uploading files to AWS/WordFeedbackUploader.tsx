@@ -98,6 +98,7 @@ const WordFeedbackUploader = () => {
                     signature,
                     exam
                 );
+                
                 await ExamUploadService.uploadStudentWordFeedback(student, exam, wordBlob);
                 console.log("✔️ קובץ הועלה בהצלחה");
             } catch (error) {

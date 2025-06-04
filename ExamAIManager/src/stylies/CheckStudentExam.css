@@ -1,13 +1,14 @@
-
-.iconCheck{
+.iconCheck {
     margin: 15px
 }
-.divButton{
+
+.divButton {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
 }
+
 .buttonCheck {
     background-color: #334155;
     border-radius: 0.75rem;
@@ -30,7 +31,7 @@
     background-color: #475569;
     border-color: #64748b;
     transform: translateY(-2px);
-    box-shadow: 
+    box-shadow:
         0 8px 25px rgba(51, 65, 85, 0.4),
         0 4px 12px rgba(0, 0, 0, 0.3);
 }
@@ -54,7 +55,7 @@
 /* אנימציה בזמן לחיצה */
 .buttonCheck:active {
     transform: translateY(1px) scale(0.98);
-    box-shadow: 
+    box-shadow:
         0 2px 8px rgba(51, 65, 85, 0.3),
         inset 0 2px 4px rgba(0, 0, 0, 0.2);
     background-color: #475569;
@@ -63,7 +64,7 @@
 /* אפקט פוקוס */
 .buttonCheck:focus {
     outline: none;
-    box-shadow: 
+    box-shadow:
         0 0 0 3px rgba(100, 116, 139, 0.5),
         0 4px 12px rgba(51, 65, 85, 0.3);
 }
@@ -77,9 +78,11 @@
     0% {
         box-shadow: 0 8px 25px rgba(51, 65, 85, 0.4), 0 0 0 0 rgba(100, 116, 139, 0.4);
     }
+
     70% {
         box-shadow: 0 8px 25px rgba(51, 65, 85, 0.4), 0 0 0 8px rgba(100, 116, 139, 0);
     }
+
     100% {
         box-shadow: 0 8px 25px rgba(51, 65, 85, 0.4), 0 0 0 0 rgba(100, 116, 139, 0);
     }
@@ -102,6 +105,7 @@
     font-size: 14px;
     opacity: 0.7;
 }
+
 /* .................................. */
 .student-tests-container {
     display: flex;
@@ -115,18 +119,6 @@
 }
 
 .buttonCheck {
-    /* background-color: #334155;
-    border-radius: 0.75rem;
-    padding: 1.5rem;
-    border: 1px solid #475569;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #334155;
-    border-radius: 0.75rem;
-    padding: 1rem;
-    gap: 1rem;
-    transition: background-color 0.2s ease; */
     background-color: #334155;
     border-radius: 0.75rem;
     padding: 1.5rem;
@@ -134,7 +126,6 @@
 
 }
 
-/* Processing State */
 .processing-container {
     width: 100%;
     max-width: 500px;
@@ -402,5 +393,352 @@
 
     .score-value {
         font-size: 1.5rem;
+    }
+}
+
+/* ץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץ */
+
+
+/* קומפוננטת בדיקת מבחנים */
+.exam-check-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.exam-check-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* אייקון מרכזי עם אנימציות */
+.icon-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.icon-background2 {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+.check-icon {
+    width: 50px;
+    height: 50px;
+    color: white;
+    animation: iconScale 2s ease-in-out infinite;
+}
+
+.check-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* טבעות דולק */
+.pulse-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border: 3px solid rgba(102, 126, 234, 0.4);
+    border-radius: 50%;
+    animation: pulseRing 2s ease-out infinite;
+}
+
+.pulse-ring-delayed {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border: 3px solid rgba(118, 75, 162, 0.4);
+    border-radius: 50%;
+    animation: pulseRing 2s ease-out infinite 0.5s;
+}
+
+/* כותרות */
+.exam-check-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    animation: titleSlideIn 1s ease-out 0.3s both;
+}
+
+.exam-check-description {
+    font-size: 1.1rem;
+    color: #8892b0;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+    animation: descriptionSlideIn 1s ease-out 0.5s both;
+}
+
+/* כפתור ראשי */
+.exam-check-button {
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    animation: buttonSlideIn 1s ease-out 0.7s both;
+    min-width: 250px;
+    font-family: inherit;
+}
+
+.exam-check-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+}
+
+.exam-check-button:active {
+    transform: translateY(-1px);
+}
+
+.button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 2;
+}
+
+.button-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.exam-check-button:hover .button-icon {
+    transform: rotate(360deg);
+}
+
+.button-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* אפקט ריפל לכפתור */
+.button-ripple {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+    border-radius: 50px;
+    transform: scale(0);
+    transition: transform 0.6s ease;
+}
+
+.exam-check-button:active .button-ripple {
+    transform: scale(1);
+}
+
+/* נקודות מעטרות */
+.decorative-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.floating-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.dot-1 {
+    top: 20%;
+    left: 15%;
+    animation: floatDot 4s ease-in-out infinite;
+}
+
+.dot-2 {
+    top: 30%;
+    right: 20%;
+    animation: floatDot 4s ease-in-out infinite 1s;
+}
+
+.dot-3 {
+    bottom: 25%;
+    left: 25%;
+    animation: floatDot 4s ease-in-out infinite 2s;
+}
+
+.dot-4 {
+    bottom: 35%;
+    right: 15%;
+    animation: floatDot 4s ease-in-out infinite 3s;
+}
+
+/* אנימציות */
+@keyframes iconFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes iconScale {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes titleSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes descriptionSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes buttonSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes floatDot {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+/* רספונסיביות */
+@media (max-width: 768px) {
+    .exam-check-title {
+        font-size: 2rem;
+    }
+
+    .exam-check-description {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    .exam-check-button {
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+        min-width: 220px;
+    }
+
+    .icon-background2 {
+        width: 100px;
+        height: 100px;
+    }
+
+    .check-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .pulse-ring,
+    .pulse-ring-delayed {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .exam-check-container {
+        padding: 1rem;
+    }
+
+    .exam-check-title {
+        font-size: 1.75rem;
+    }
+
+    .exam-check-button {
+        padding: 0.75rem 1.5rem;
+        min-width: 200px;
     }
 }

@@ -210,9 +210,42 @@ const CheckStudentExams = () => {
       <Outlet />
       <div className="student-tests-container">
         {!click &&
-          <div className="divButton">
-            <ClipboardList size={150} className="iconCheck" />
-            <button className="buttonCheck" onClick={handleAnalyze}>בדוק את כל המבחנים</button>
+          <div className="exam-check-container">
+            <div className="exam-check-content">
+              <div className="icon-wrapper">
+                <div className="icon-background2">
+                  <div className="check-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M9 11l3 3 8-8" />
+                      <path d="M21 12c0 1.66-.046 3.32-.14 4.92a5 5 0 01-4.78 4.78c-8.8.3-16.04.182-20.84-.14a5 5 0 01-4.78-4.78c-.32-4.8-.47-12.04-.14-20.84A5 5 0 015.06.86c1.6-.094 3.26-.14 4.92-.14" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="pulse-ring"></div>
+                <div className="pulse-ring-delayed"></div>
+              </div>
+
+              <h2 className="exam-check-title">Test The checking</h2>
+              <p className="exam-check-description">Click to review and analyze all uploaded tests</p>
+
+              <button className="exam-check-button" onClick={handleAnalyze}>
+                <span className="button-content">
+                  <svg className="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 12l2 2 4-4" />
+                    <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.395 0 4.575.927 6.188 2.438" />
+                  </svg>
+                  <span className="button-text">Check all tests Now</span>
+                </span>
+                <div className="button-ripple"></div>
+              </button>
+
+              <div className="decorative-elements">
+                <div className="floating-dot dot-1"></div>
+                <div className="floating-dot dot-2"></div>
+                <div className="floating-dot dot-3"></div>
+                <div className="floating-dot dot-4"></div>
+              </div>
+            </div>
           </div>
         }
         {isLoading ? (

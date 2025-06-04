@@ -54,7 +54,7 @@ namespace ExamAI.API.Controllers
             }
             else
             {
-               await _authService.AddUserAdminAsync(newUser);
+                await _authService.AddUserAdminAsync(newUser);
             }
             // יצירת טוקן עבור המשתמש
             var token = _authService.GenerateJwtToken(newUser);
@@ -90,11 +90,7 @@ namespace ExamAI.API.Controllers
                         Password = null,
                         studentClass = "A" // ברירת מחדל – אפשר לשנות
                     };
-                    //var result = await _userService.AddStudentAsync((Student)user); // שימי לב ל-await
-                    //if (result.IsFailure)
-                    //    return BadRequest(result.Error);
                     Console.WriteLine(user.Email);
-                    //await _authService.AddUserAsync(user);
                     var result = await _authService.AddUserAsync(user);
 
                     if (!result.IsSuccess)
@@ -113,6 +109,27 @@ namespace ExamAI.API.Controllers
                 return Unauthorized("Google token validation failed");
             }
         }
+        //[HttpPost("google")]
+        //public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginModel model)
+        //{
+        //    try
+        //    {
+        //        var payload = await GoogleJsonWebSignature.ValidateAsync(model.Token);
+        //        var user = await _authService.GetUserByEmailAsync(payload.Email);
+        //        if (user == null)
+        //        {
+        //                return BadRequest(new { message = "Please Register!!!" });
+        //        }
+        //        
+        //        var jwt = _authService.GenerateJwtToken(user);
+        //        return Ok(new { Token = jwt, UserId = user.Id });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("Token validation error: " + ex.Message);
+        //        return Unauthorized("Google token validation failed");
+        //    }
+        //}
     }
 
 
