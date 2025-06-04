@@ -115,7 +115,8 @@ const CheckStudentExams = () => {
       } catch (err: any) {
         setHasError(true);
         console.error("the pupil is not exist" + err);
-        unregisteredStudents.push({ name: student.name })
+        // unregisteredStudents.push({ name: student.name })
+        setUnregisteredStudents(prev => [...prev, { name: student.name }]);
         console.log(unregisteredStudents);
         console.log("unregisteredStudents");
         updatedFiles[i] = null;
@@ -125,7 +126,7 @@ const CheckStudentExams = () => {
           `שלום לך ${student.name}!`,
           email,
         );
-        setHasError(true);
+        // setHasError(true);
         // setHasError(err)
       }
     }
