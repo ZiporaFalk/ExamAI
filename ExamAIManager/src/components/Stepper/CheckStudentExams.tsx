@@ -1,16 +1,17 @@
 import { extractAnswersAfterHu, extractDateAndSubject, extractHebrewLettersWithDot, extractStudent } from "../../utils/DataExtraction";
 import { Answer, Exam, Student } from "../../utils/types";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import StepperDataContext from "./StepperDataContext";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import "../../stylies/CheckStudentExam.css"
-import "../../stylies/UnregisteredStudentMessage.css"
 import SubmissionService from "../../services/SubmissionService";
 import ExamService from "../../services/examService";
 import studentStore from "../Dashboard/StudentStore";
 import EmailService from "../../services/EmailService";
 import StudentSheetService from "../../services/StudentSheetService";
 import AnalyzeImageService from "../../services/AnalyzeImagService";
+import UnregisteredStudentMessage from "../../components/AuxiliaryComponents/UnregisteredStudentMessage"
+import EnhancedEmptyState from "../AuxiliaryComponents/EnhancedEmptyState";
 const CheckStudentExams = () => {
   const { selectedImages, files, setFiles, setExams, setAnswersList, setStudents, setScores, setIsAbleNext } = useContext(StepperDataContext)!
   const [isLoading, setIsLoading] = useState(false);
@@ -21,6 +22,13 @@ const CheckStudentExams = () => {
   const [unregisteredStudents, setUnregisteredStudents] = useState<{ name: string }[]>([]);
   const [hasError, setHasError] = useState<boolean>(false);
   const [click, setClick] = useState(false)
+
+  useEffect(() => {
+    if (isFinished) {
+      setIsAbleNext(true);
+    }
+  }, [isFinished]);
+
 
   const SaveStudentExam = async (score: number, examId: number, feedbackUrl: string, fileUrl: string, studentId: number) => {
     try {
@@ -73,7 +81,8 @@ const CheckStudentExams = () => {
     const scores: number[] = []
     const answersStudents: Answer[][] = []
     const updatedFiles = [...files]
-    selectedImages.forEach(async (image, i) => {
+    for (let i = 0; i < selectedImages.length; i++) {
+      const image = selectedImages[i];
       const progressPercentage = Math.round(((i + 1) / selectedImages.length) * 100);
       setProgress(progressPercentage);
       setCurrentProcessing(`Processing exam ${i + 1} of ${selectedImages.length}...`);
@@ -89,6 +98,8 @@ const CheckStudentExams = () => {
       console.log(feedbackurl);
       console.log(fileurl);
       try {
+        student.name = 'hgovl'
+        student.studentClass = 'hgovl'
         const studentByName: Student = await studentStore.getStudentByClassAndName(student.studentClass, student.name);
         await SaveStudentExam(score, exam_id, feedbackurl, fileurl, studentByName.id!);
         const email = await studentStore.getEmailByStudentId(studentByName.id!)
@@ -102,8 +113,9 @@ const CheckStudentExams = () => {
         setProgress(100);
         setCurrentProcessing("Processing completed successfully!");
       } catch (err: any) {
+        setHasError(true);
         console.error("the pupil is not exist" + err);
-        unregisteredStudents.push({ name: student.name })//////////////////////////////////////////////////////////////
+        unregisteredStudents.push({ name: student.name })
         console.log(unregisteredStudents);
         console.log("unregisteredStudents");
         updatedFiles[i] = null;
@@ -114,14 +126,9 @@ const CheckStudentExams = () => {
           email,
         );
         setHasError(true);
-        setHasError(err)
+        // setHasError(err)
       }
-      finally {
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 1000);
-      }
-    })
+    }
     setExams(exams)
     console.log(averageMark);
     console.log(exams);
@@ -130,85 +137,17 @@ const CheckStudentExams = () => {
     setScores(scores)
     setFiles(updatedFiles)
     setIsFinished(true);
-    setIsAbleNext(true)
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   };
-  const UnregisteredStudentMessage = ({ students }: { students: { name: string }[] }) => (
-    <div className="error-container" style={{
-      padding: "24px",
-      backgroundColor: "#fef2f2",
-      borderRadius: "8px",
-      border: "1px solid #fecaca",
-      marginBottom: "20px",
-      textAlign: "center",
-      maxWidth: "600px",
-      margin: "20px auto"
-    }}>
-      <div style={{
-        display: "flex",
-        justifyContent: "center",
-        marginBottom: "16px"
-      }}>
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" style={{ marginRight: "8px" }}>
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="8" x2="12" y2="12"></line>
-          <line x1="12" y1="16" x2="12.01" y2="16"></line>
-        </svg>
-      </div>
-      <h3 style={{
-        fontSize: "18px",
-        fontWeight: "600",
-        color: "#b91c1c",
-        marginBottom: "12px"
-      }}>
-        Registration Error
-      </h3>
-      {students.map((student, index) => (
-        <div key={index} id="exam">
-          <p id="exam_p"> The student <strong>{student.name}</strong> is not registered.<br />
-            An email with a registration link has been sent to the student.</p>
-          <p id="error-msg">A reminder will be sent to you.</p> </div>))}
-      <div style={{ marginTop: "20px" }}>
-        <Link id="return-home-link" to="/" onMouseOver={(e) => { e.currentTarget.style.backgroundColor = "#4338ca"; }}
-          onMouseOut={(e) => { e.currentTarget.style.backgroundColor = "#4f46e5"; }} >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginRight: "8px" }}>
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          Return to homepage
-        </Link>
-      </div>
-    </div>
-  );
-  const EnhancedEmptyState = () => (
-    <div className="empty-state"   >
-      <div className="empty-icon" >
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-          <polyline points="14,2 14,8 20,8" />
-          <line x1="16" y1="13" x2="8" y2="13" />
-          <line x1="16" y1="17" x2="8" y2="17" />
-          <polyline points="10,9 9,9 8,9" />
-        </svg>
-      </div>
-      <h3 className="empty-title">No exams submitted for processing</h3>
-      <p className="empty-subtitle"  >Upload exam files to begin processing</p>
-      <Link id="upload-exams-link" to="/upload" onMouseOver={(e) => { e.currentTarget.style.backgroundColor = "#4338ca"; }}
-        onMouseOut={(e) => { e.currentTarget.style.backgroundColor = "#4f46e5"; }}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginRight: "10px" }}>
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="17 8 12 3 7 8" />
-          <line x1="12" y1="3" x2="12" y2="15" />
-        </svg>
-        Upload Exams
-      </Link>
-    </div>
-  );
-
+ 
   return (
     <>
       <Outlet />
       <div className="student-tests-container">
-        {!click &&
+        {files.length === 0 ? (<EnhancedEmptyState />) :
+          !click &&
           <div className="exam-check-container">
             <div className="exam-check-content">
               <div className="icon-wrapper">
@@ -223,10 +162,8 @@ const CheckStudentExams = () => {
                 <div className="pulse-ring"></div>
                 <div className="pulse-ring-delayed"></div>
               </div>
-
               <h2 className="exam-check-title">Test The checking</h2>
               <p className="exam-check-description">Click to review and analyze all uploaded tests</p>
-
               <button className="exam-check-button" onClick={handleAnalyze}>
                 <span className="button-content">
                   <svg className="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -237,7 +174,6 @@ const CheckStudentExams = () => {
                 </span>
                 <div className="button-ripple"></div>
               </button>
-
               <div className="decorative-elements">
                 <div className="floating-dot dot-1"></div>
                 <div className="floating-dot dot-2"></div>
@@ -245,8 +181,7 @@ const CheckStudentExams = () => {
                 <div className="floating-dot dot-4"></div>
               </div>
             </div>
-          </div>
-        }
+          </div>  }
         {isLoading ? (
           <div className="processing-container">
             <div className="processing-card">
@@ -254,8 +189,8 @@ const CheckStudentExams = () => {
                 <div className="progress-bar">
                   <div
                     className="progress-fill"
-                    style={{ width: `${progress}%` }}
-                  ></div>
+                    style={{ width: `${progress}%` }}>
+                  </div>
                 </div>
                 <div className="progress-text">
                   {currentProcessing} {progress}%
@@ -281,7 +216,7 @@ const CheckStudentExams = () => {
               <span className="score-value">{averageMark}%</span>
             </div>
           </div>
-        ) : click ? (<EnhancedEmptyState />) : <></>
+        ) : click && files.length === 0 ? (<EnhancedEmptyState />) : <></>
         }
       </div>
     </>

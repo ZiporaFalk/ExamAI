@@ -1,0 +1,40 @@
+.empty-state {
+    text-align: center;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background-color: #f9fafb09;
+    border-radius: 8px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    margin: 40px auto;
+}
+.empty-icon {
+    width: 5rem;
+    height: 5rem;
+    background-color: #374151;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: #6b7280;
+    margin-Bottom: "16px"
+
+}
+
+.empty-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #e5e7eb;
+    margin-bottom: 0.5rem;
+}
+
+.empty-subtitle {
+    font-size: 16px;
+    text-align: center;
+    color: #9ca3af;
+    margin: 0;
+}

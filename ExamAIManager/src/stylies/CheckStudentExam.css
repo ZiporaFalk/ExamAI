@@ -284,7 +284,7 @@
 }
 
 /* Empty State */
-.empty-state {
+/* .empty-state {
     text-align: center;
     max-width: 500px;
     display: flex;
@@ -325,7 +325,7 @@
     text-align: center;
     color: #9ca3af;
     margin: 0;
-}
+} */
 
 #upload-exams-link {
     background-color: #4f46e5;
