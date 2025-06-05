@@ -50,13 +50,14 @@ namespace ExamAI.API.Extensions
                 };
                 return new AmazonS3Client(credentials, clientConfig);
             });
+
+            var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>(); //my
+            var connectionString = configuration.GetConnectionString("ExamAIDB");
             services.AddDbContext<DataContext>(options =>
             {
-                var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
-                var connectionString = configuration.GetConnectionString("ExamAIDB");
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             });
-     
+
             //services.AddDbContext<DataContext>(options =>
             //options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 

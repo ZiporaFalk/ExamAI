@@ -6,7 +6,9 @@ import {
   FaTachometerAlt, FaChartBar, FaClipboardCheck, FaArrowRight, FaCheckCircle,
   FaFileAlt, FaChartLine, FaUsers, FaChevronDown
 } from 'react-icons/fa';
+import { useLocation } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import MyAlert from './My-Alert';
 
 const HomePage = () => {
   const [, setScrolled] = useState(false);
@@ -24,7 +26,18 @@ const HomePage = () => {
     },
     tap: { scale: 0.95 }
   };
+  ///////////
+  const location = useLocation();
+  const [showLoginMessage, setShowLoginMessage] = useState(false);
 
+  useEffect(() => {
+    if (location.state?.showLoginMessage) {
+      setShowLoginMessage(true);
+      // מסתיר את ההודעה אחרי 3 שניות
+      setTimeout(() => setShowLoginMessage(false), 3000);
+    }
+  }, [location.state]);
+  ///////////////
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -39,7 +52,7 @@ const HomePage = () => {
     };
   }, []);
 
- 
+
   useEffect(() => {
     const interval = setInterval(() => {
       const icons = document.querySelectorAll('.floating-icon');
@@ -54,6 +67,9 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
+      {showLoginMessage && (
+        <div className='login-message'>  !אתה צריך להתחבר כדי לצפות בתוכן</div>
+      )}
       <div className="hero-section">
         <motion.div
           className="floating-icon icon-1"

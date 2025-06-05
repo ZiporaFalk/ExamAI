@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { extractAnswersAfterHu, extractHebrewLettersWithDot } from "../../utils/DataExtraction";
 import { Exam } from "../../utils/types";
 import StepperDataContext from "./StepperDataContext";
@@ -47,30 +47,46 @@ const ExampleExam = () => {
         setProgress(0);
         // setProcessedCount(0);
         const allExams: Exam[] = [];
-        selectedImages.map(async (image, index) => {
+        // selectedImages.map(async (image, index) => {
+        //     try {
+        //         const result = await AnalyzeImageService.analyzeImage(image);
+        //         console.log("פלט OCR:", result);
+        //         const newExam = await AddNewExam(result);
+        //         console.log("נוצר מבחן חדש עם ID:", newExam.id);
+        //         await AddNewAnswers(result, newExam.id);
+        //         allExams.push(newExam);
+        //         const newProcessedCount = index + 1;
+        //         setProcessedCount(newProcessedCount);
+        //         setProgress((newProcessedCount / selectedImages.length) * 100);
+        //     } catch (error) {
+        //         console.error("שגיאה בפענוח מבחן:", error);
+        //         const newProcessedCount = index + 1;
+        //         setProcessedCount(newProcessedCount);
+        //         setProgress((newProcessedCount / selectedImages.length) * 100);
+        //     }
+        // })
+        const promises = selectedImages.map(async (image) => {
             try {
                 const result = await AnalyzeImageService.analyzeImage(image);
-                console.log("פלט OCR:", result);
                 const newExam = await AddNewExam(result);
-                console.log("נוצר מבחן חדש עם ID:", newExam.id);
                 await AddNewAnswers(result, newExam.id);
                 allExams.push(newExam);
-                const newProcessedCount = index + 1;
-                setProcessedCount(newProcessedCount);
-                setProgress((newProcessedCount / selectedImages.length) * 100);
             } catch (error) {
                 console.error("שגיאה בפענוח מבחן:", error);
-                const newProcessedCount = index + 1;
-                setProcessedCount(newProcessedCount);
-                setProgress((newProcessedCount / selectedImages.length) * 100);
+            } finally {
+                // const newProcessedCount = index + 1;
+                setProcessedCount(prev => prev + 1); // ← זה נכון גם אם הבטחות רצות במקביל
+                setProgress((prev) => ((prev + 1) / selectedImages.length) * 100);
             }
-        })
+        });
+        await Promise.all(promises); // ← מחכה שכל הבדיקות יסתיימו
+
         setExams(allExams);
-        setTimeout(() => {
-            setIsLoading(false)
-            setIsFinished(true)
-            setIsAbleNext(true)
-        }, 5000);
+        // setTimeout(() => {
+        setIsLoading(false)
+        setIsFinished(true)
+        setIsAbleNext(true)
+        // }, 5000);
     };
 
     return (

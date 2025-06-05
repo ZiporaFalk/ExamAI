@@ -712,3 +712,119 @@
         justify-content: center;
     }
 }
+
+.login-message {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: linear-gradient(135deg, #07012f 0%, #0d0128 25%, #14042d 50%, #1a0a0a 75%, #0a0a0a 100%);
+    background-size: 400% 400%;
+    width: 400px;
+    border: 2px solid transparent;
+    border-radius: 25px;
+
+    color: #ff4444;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow:
+        0 0 10px rgba(255, 0, 0, 0.8),
+        0 0 20px rgba(255, 0, 0, 0.6),
+        0 0 30px rgba(255, 0, 0, 0.4);
+    padding: 20px 30px;
+    animation:
+        crazyEntrance 1s ease-out,
+        glowPulse 2s ease-in-out infinite alternate,
+        backgroundShift 4s ease-in-out infinite,
+        floatingMove 3s ease-in-out infinite,
+        borderGlow 1.5s linear infinite;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes crazyEntrance {
+    0% {
+        transform: translateX(-50%) translateY(-100px) rotate(-10deg) scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(20px) rotate(5deg) scale(1.1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes backgroundShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes floatingMove {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0px) rotate(0deg);
+    }
+
+    25% {
+        transform: translateX(-50%) translateY(-5px) rotate(1deg);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(5px) rotate(-1deg);
+    }
+
+    75% {
+        transform: translateX(-50%) translateY(-3px) rotate(0.5deg);
+    }
+}
+
+@keyframes borderGlow {
+    0% {
+        border-color: rgba(255, 0, 0, 0.5);
+    }
+
+    25% {
+        border-color: rgba(255, 50, 50, 0.8);
+    }
+
+    50% {
+        border-color: rgba(255, 100, 100, 1);
+    }
+
+    75% {
+        border-color: rgba(255, 50, 50, 0.8);
+    }
+
+    100% {
+        border-color: rgba(255, 0, 0, 0.5);
+    }
+}
+
+@keyframes rotateBorder {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -1,20 +1,29 @@
 import { Outlet } from "react-router"
 import Footer from "./Footer"
 import Header from "./Header"
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { authService } from "../services/AuthService";
 
 const AppLayout = () => {
     const location = useLocation();
     const isHome = location.pathname === "/";
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate()
     useEffect(() => {
-        console.log(isHome);
-        
-        if (localStorage.getItem('token'))
-            authService.setLoginStatus(true)
-    }, [])
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            authService.setLoginStatus(true);
+            setIsLoggedIn(true);
+        }
+        ///
+        if (!token && !isHome) {
+            console.log("navigating")
+            navigate("/", { state: { showLoginMessage: true } });
+        }
+//},[]
+    }, [location.pathname]); // <-- חשוב!
 
     return (
         <>
@@ -23,7 +32,7 @@ const AppLayout = () => {
             )}
             <Header />
             <div >
-                { isHome || authService.isLogin ? <Outlet /> : <>אתה צריך להתחבר!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</>}
+                {isHome || isLoggedIn ? <Outlet /> : <>אתה צריך להתחבר!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</>}
             </div>
             <Footer />
         </>)
