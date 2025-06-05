@@ -96,7 +96,7 @@ export class ExamsComponent implements OnInit {
     const name = JSON.parse(localStorage.getItem('profile') || '{}').name
     const emailRequest: EmailRequest = {
       subject: `${name} | ${this.selectedSubmission?.subject} | ${this.selectedSubmission?.dateExam} `,
-      to: 'z0548498935@gmail.com',
+      to: 'examai.system@gmail.com',
       body: `${text}`
     };
     this.emailService.sendEmail(emailRequest).subscribe(response => {

@@ -115,12 +115,12 @@ export class HeaderComponent implements OnInit {
     this.authService.clearUserProfile(); // איפוס הפרופיל
     this.router.navigate(['/auth']);
   }
-  signIn():void{
+  signIn(): void {
     this.router.navigate(['/auth']);
   }
   sendEmail() {
     console.log("sendemail");
-    const email = 'z0548498935@gmail.com';
+    const email = 'examai.system@gmail.com';
     const subject = 'שלום המורה';
     const body = 'שלום, הנה תוכן ההודעה.';
     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
