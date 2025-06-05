@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { extractAnswersAfterHu, extractHebrewLettersWithDot } from "../../utils/DataExtraction";
 import { Exam } from "../../utils/types";
 import StepperDataContext from "./StepperDataContext";

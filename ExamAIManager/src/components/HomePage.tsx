@@ -8,7 +8,6 @@ import {
 } from 'react-icons/fa';
 import { useLocation } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import MyAlert from './My-Alert';
 
 const HomePage = () => {
   const [, setScrolled] = useState(false);
