@@ -12,6 +12,7 @@ interface StatisticsProps {
 }
 
 const StatisticsDashboard: FC<StatisticsProps> = ({ className }) => {
+    const [isLoading, setIsLoading] = useState(true)
     const [stats, setStats] = useState({
         averageScore: 0,
         averageScoreChange: 0,
@@ -32,7 +33,7 @@ const StatisticsDashboard: FC<StatisticsProps> = ({ className }) => {
                 const uniqueSubjects: string[] = Array.from(
                     new Set(response.map((exam: any) => exam.subject))
                 )
-                console.log(uniqueSubjects) 
+                console.log(uniqueSubjects)
                 setSubjects(uniqueSubjects)
             } catch (error) {
                 console.error("Error retrieving subjects", error)
@@ -43,7 +44,10 @@ const StatisticsDashboard: FC<StatisticsProps> = ({ className }) => {
 
     useEffect(() => {
         const fetchStats = async () => {
+            setIsLoading(true)
             try {
+                await new Promise(resolve => setTimeout(resolve, 1000))
+
                 let average = 0
                 let passRate = 0
                 let totalExams = 0
@@ -69,6 +73,8 @@ const StatisticsDashboard: FC<StatisticsProps> = ({ className }) => {
                 })
             } catch (error) {
                 console.error("Error retrieving statistics", error)
+            } finally {
+                setTimeout(() => setIsLoading(false), 500)
             }
         }
 
@@ -141,7 +147,33 @@ const StatisticsDashboard: FC<StatisticsProps> = ({ className }) => {
             },
         },
     }
-
+    if (isLoading) {
+        return (
+            <div className="loading-overlay">
+                <div className="loading-container">
+                    <div className="loading-spinner">
+                        <div className="spinner-ring"></div>
+                        <div className="spinner-ring"></div>
+                        <div className="spinner-ring"></div>
+                    </div>
+                    <div className="loading-text">
+                        Loading Statistics
+                        <div className="loading-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div className="loading-stats-preview">
+                        <div className="loading-card shimmer"></div>
+                        <div className="loading-card shimmer"></div>
+                        <div className="loading-card shimmer"></div>
+                        <div className="loading-card shimmer"></div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
     return (
         <div className={`statistics-container ${className || ""}`}>
             <div className="statistics-header">
@@ -152,7 +184,7 @@ const StatisticsDashboard: FC<StatisticsProps> = ({ className }) => {
                             type="text"
                             value={selectedClass}
                             onChange={(e) => setSelectedClass(e.target.value)}
-                            placeholder="הכנס כיתה"
+                            placeholder="Enter a class"
                             className="styled-input"
                         />
                     </div>
@@ -196,7 +228,19 @@ const StatisticsDashboard: FC<StatisticsProps> = ({ className }) => {
                     <div className="stat-change">Across all classes</div>
                 </div>
             </div>
-
+            {/* .......................... */}
+            {/* <div className="tab-navigation">
+                {["overview"].map((tab) => (
+                    <button
+                        key={tab}
+                        className={`tab-button ${activeTab === tab ? "active" : ""}`}
+                        onClick={() => setActiveTab(tab)}
+                    >
+                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                    </button>
+                ))}
+            </div> */}
+            {/* .......................... */}
             <div className="charts-container">
                 <div className="chart-card">
                     <div className="chart-header">
@@ -232,3 +276,4 @@ const StatisticsDashboard: FC<StatisticsProps> = ({ className }) => {
 }
 
 export default StatisticsDashboard
+
