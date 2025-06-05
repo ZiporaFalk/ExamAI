@@ -15,7 +15,7 @@ namespace ExamAI.API.Extensions
 {
     public static class ServiceExtensions
     {
-        public static void ConfigureServices(this IServiceCollection services)
+        public static void ConfigureServices(this IServiceCollection services,IConfiguration configuration)
         {
             services.AddScoped<IRepositoryManager, RepositoryManager>();
 
@@ -51,7 +51,7 @@ namespace ExamAI.API.Extensions
                 return new AmazonS3Client(credentials, clientConfig);
             });
 
-            var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>(); //my
+            //var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>(); //my
             var connectionString = configuration.GetConnectionString("ExamAIDB");
             services.AddDbContext<DataContext>(options =>
             {
@@ -65,18 +65,3 @@ namespace ExamAI.API.Extensions
 
     }
 }
-//services.AddSingleton<IAmazonS3>(sp =>
-//{
-//    var configuration = sp.GetRequiredService<IConfiguration>();
-//    var credentials = new BasicAWSCredentials(
-//    //configuration["AWS:AccessKey"],
-//    //configuration["AWS:SecretKey"]
-//    Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID"),
-//    Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY")
-//    );
-//    var clientConfig = new AmazonS3Config
-//    {
-//        RegionEndpoint = RegionEndpoint.GetBySystemName(configuration["AWS:Region"])
-//    };
-//    return new AmazonS3Client(credentials, clientConfig);
-//});

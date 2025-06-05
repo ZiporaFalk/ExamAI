@@ -33,7 +33,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.ConfigureSwagger();
-builder.Services.ConfigureServices();
+builder.Services.ConfigureServices(builder.Configuration);
 
 builder.Services.ConfigureJwt(builder.Configuration);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);

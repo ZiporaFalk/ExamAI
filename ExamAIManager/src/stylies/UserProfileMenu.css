@@ -226,7 +226,16 @@
     background: rgba(255, 118, 117, 0.08);
     color: #ff9f9f;
   }
+  .menu-item.sign-in {
+    color: #75ff75;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: 8px;
+  }
   
+  .menu-item.sign-in:hover {
+    background: rgba(255, 118, 117, 0.08);
+    color: #b1ff9f;
+  }
   .menu-icon {
     width: 18px;
     height: 18px;
@@ -377,7 +386,7 @@
     
     .user-info-section {
       background: linear-gradient(135deg, 
-        rgba(100, 255, 218, 0.06) 0%, 
+        rgba(8, 90, 31, 0.06) 0%, 
         rgba(100, 255, 218, 0.02) 50%,
         transparent 100%
       );

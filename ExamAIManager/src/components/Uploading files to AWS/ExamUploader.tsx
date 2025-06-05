@@ -53,7 +53,7 @@ const ExamUploader: React.FC = () => {
             console.log("res");
             setIsAbleNext(true)
         } catch (e) {
-            alert("הקבצים לא הועלו!!!!");
+            console.log("הקבצים לא הועלו!!!!");
         }
     };
 

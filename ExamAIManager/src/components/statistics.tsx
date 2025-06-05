@@ -185,7 +185,7 @@ const StatisticsDashboard: FC<StatisticsProps> = ({ className }) => {
                             value={selectedClass}
                             onChange={(e) => setSelectedClass(e.target.value)}
                             placeholder="Enter a class"
-                            className="styled-input"
+                            className="styled-input2"
                         />
                     </div>
                     <div className="select-wrapper">

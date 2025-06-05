@@ -15,7 +15,6 @@ namespace ExamAI.Data.Repositories
         public IUserRepository Users { get; }
         public IExamRepository Exams { get; }
         public IAnswerRepository Answers { get; }
-        //public IStudentRepository Students { get; }
         public ISubmissionRepository Submissions { get; }
 
         public RepositoryManager(DataContext context, IUserRepository users, IExamRepository exams, IAnswerRepository answers, ISubmissionRepository submissions)
@@ -24,14 +23,8 @@ namespace ExamAI.Data.Repositories
             Users = users;
             Exams = exams;
             Answers = answers;
-            //Students = students;
             Submissions = submissions;
         }
-
-        //public void Save()
-        //{
-        //    _context.SaveChanges();
-        //}
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();

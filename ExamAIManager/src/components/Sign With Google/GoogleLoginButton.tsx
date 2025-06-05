@@ -73,7 +73,6 @@ const GoogleLoginButton = () => {
       />
 
       {/* {islogin &&
-
         <MyAlert message={message} type={typeMessage!} onClose={() => navigate('/')} duration={3000} isVisible={true}/>} */}
     </div>
   );

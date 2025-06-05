@@ -103,7 +103,7 @@ const WordFeedbackUploader = () => {
                 console.log("✔️ קובץ הועלה בהצלחה");
             } catch (error) {
                 console.error("❌ שגיאה בהעלאת הקובץ:", error);
-                alert("אירעה שגיאה בהעלאת הקובץ.");
+                console.log("אירעה שגיאה בהעלאת הקובץ.");
             }
         }
         setIsAbleNext(true);

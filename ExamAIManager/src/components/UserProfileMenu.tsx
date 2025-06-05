@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaUser, FaSignOutAlt, FaChevronDown } from 'react-icons/fa';
+import { FaUser, FaSignOutAlt, FaChevronDown, FaSignInAlt } from 'react-icons/fa';
 //  import '../styles/UserProfileMenuProps .css';
 import "../stylies/UserProfileMenu.css"
 import { authService } from '../services/AuthService';
@@ -139,12 +139,12 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({
                                 <span>Sign Out</span>
                             </motion.button>
                             <motion.button
-                                className="menu-item sign-out"
+                                className="menu-item sign-in"
                                 onClick={showLoginModal}
                                 whileHover={{ backgroundColor: 'rgba(255, 107, 107, 0.1)' }}
                                 whileTap={{ scale: 0.98 }}
                             >
-                                <FaSignOutAlt className="menu-icon" />
+                                <FaSignInAlt className="menu-icon" />
                                 <span>Sign In</span>
                             </motion.button>
                         </div>

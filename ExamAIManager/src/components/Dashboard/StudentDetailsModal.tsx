@@ -1,15 +1,7 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogActions, 
-  Button, 
-  TextField,
-  IconButton,
-  Typography,
-  Box,
-  Paper,
-  InputAdornment
+import {
+    Dialog, DialogContent, DialogActions, Button, TextField, IconButton,
+    Typography, Box, Paper, InputAdornment
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import PersonIcon from '@mui/icons-material/Person';
@@ -27,7 +19,7 @@ interface StudentModalProps {
     open: boolean;
     onClose: () => void;
     student?: Student | null;
-} 
+}
 
 const StudentDetailsModal: React.FC<StudentModalProps> = ({ open, onClose, student }) => {
     const [formData, setFormData] = useState<Student>(student || { id: 0, name: "", email: "", studentClass: "", password: "" });
@@ -63,10 +55,10 @@ const StudentDetailsModal: React.FC<StudentModalProps> = ({ open, onClose, stude
     };
 
     return (
-        <Dialog 
-            open={open} 
-            onClose={onClose} 
-            fullWidth 
+        <Dialog
+            open={open}
+            onClose={onClose}
+            fullWidth
             maxWidth="sm"
             dir="rtl"
             className="student-dialog"
@@ -79,7 +71,7 @@ const StudentDetailsModal: React.FC<StudentModalProps> = ({ open, onClose, stude
                     <CloseIcon />
                 </IconButton>
             </Box>
-            
+
             <DialogContent sx={{ padding: 0 }}>
                 <Box className="content-container">
                     <Paper className="input-container" elevation={0}>
@@ -142,7 +134,7 @@ const StudentDetailsModal: React.FC<StudentModalProps> = ({ open, onClose, stude
                     </Paper>
                 </Box>
             </DialogContent>
-            
+
             <DialogActions sx={{ padding: 3, paddingTop: 0, justifyContent: 'flex-start', gap: 2 }}>
                 <Button onClick={handleSubmit} variant="contained" className="save-button">
                     Save

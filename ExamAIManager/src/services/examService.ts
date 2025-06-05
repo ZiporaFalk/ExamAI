@@ -6,7 +6,8 @@ const ExamService = {
     create: async (exam: Partial<Exam>) => {
         try {
             const res = await axiosInstance.post(`/Exam`, exam);
-            alert("המבחן נוסף בהצלחה");
+            console.log("המבחן נוסף בהצלחה");
+            
             return res.data;
         } catch (e: any) {
             handleAxiosError(e, "הוספת המבחן נכשלה");
@@ -28,7 +29,8 @@ const ExamService = {
         try {
             console.log("------------")
             const res = await axiosInstance.delete(`/Exam/${id}`);
-            alert("המבחן נמחק בהצלחה");
+            console.log("המבחן נמחק בהצלחה");
+            
             return res.data;
         } catch (e: any) {
             console.log("------------")

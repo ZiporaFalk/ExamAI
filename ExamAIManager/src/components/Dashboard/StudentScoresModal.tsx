@@ -48,7 +48,6 @@ const StudentScoresModal = observer(({ open, onClose, student }: any) => {
             setPreviewUrl(presignedUrl)
         } catch (error) {
             console.error("שגיאה בקבלת הקישור:", error)
-            alert("אירעה שגיאה בעת ניסיון לפתוח את הקובץ.")
         }
     }
 
