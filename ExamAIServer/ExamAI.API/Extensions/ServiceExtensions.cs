@@ -39,10 +39,10 @@ namespace ExamAI.API.Extensions
             {
                 var configuration = sp.GetRequiredService<IConfiguration>();
                 var credentials = new BasicAWSCredentials(
-                //configuration["AWS:AccessKey"],
-                //configuration["AWS:SecretKey"]
-                Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID"),
-                Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY")
+                configuration["AWS:AccessKey"],
+                configuration["AWS:SecretKey"]
+                //Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID"),
+                //Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY")
                 );
                 var clientConfig = new AmazonS3Config
                 {
@@ -50,22 +50,13 @@ namespace ExamAI.API.Extensions
                 };
                 return new AmazonS3Client(credentials, clientConfig);
             });
-            services.AddAutoMapper(typeof(MappingProfile));
-            //services.AddDbContext<DataContext>();
             services.AddDbContext<DataContext>(options =>
             {
                 var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
                 var connectionString = configuration.GetConnectionString("ExamAIDB");
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             });
-            /////
-            ///
-            //builder.Services.AddDbContext<DataContext>(options =>
-            //{
-            //    var configuration = builder.Configuration;
-            //    var connectionString = configuration.GetConnectionString("CheckPointDB");
-            //    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-            //});
+     
             //services.AddDbContext<DataContext>(options =>
             //options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
@@ -73,3 +64,18 @@ namespace ExamAI.API.Extensions
 
     }
 }
+//services.AddSingleton<IAmazonS3>(sp =>
+//{
+//    var configuration = sp.GetRequiredService<IConfiguration>();
+//    var credentials = new BasicAWSCredentials(
+//    //configuration["AWS:AccessKey"],
+//    //configuration["AWS:SecretKey"]
+//    Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID"),
+//    Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY")
+//    );
+//    var clientConfig = new AmazonS3Config
+//    {
+//        RegionEndpoint = RegionEndpoint.GetBySystemName(configuration["AWS:Region"])
+//    };
+//    return new AmazonS3Client(credentials, clientConfig);
+//});

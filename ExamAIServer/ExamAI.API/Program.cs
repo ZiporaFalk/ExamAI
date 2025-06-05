@@ -34,29 +34,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.ConfigureSwagger();
 builder.Services.ConfigureServices();
-//builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
-//õõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõ
-// äâãøú AWS S3-úäéìä
-//builder.Services.AddDefaultAWSOptions(new AWSOptions
-//{
-//    BasicCredentials = new AWSCredentials(
-//        configuration["AWS:AccessKey"],
-//        configuration["AWS:SecretKey"]
-//    ),
-//    Region = RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"])
-//});
-//builder.Services.AddAWSService<IAmazonS3>();
-builder.Services.AddDefaultAWSOptions(new AWSOptions
-{
-    Credentials = new BasicAWSCredentials(
-        builder.Configuration["AWS:AccessKey"],
-        builder.Configuration["AWS:SecretKey"]
-    ),
-    Region = RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"])
-});
-builder.Services.AddAWSService<IAmazonS3>();
 
-//õõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõõ
 builder.Services.ConfigureJwt(builder.Configuration);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 

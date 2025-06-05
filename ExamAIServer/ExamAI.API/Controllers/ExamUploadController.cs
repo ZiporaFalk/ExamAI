@@ -18,8 +18,8 @@ namespace ExamAI.API.Controllers
         public ExamUploadController(IAmazonS3 s3Client, IConfiguration configuration)
         {
             _s3Client = s3Client;
-            _bucketName = Environment.GetEnvironmentVariable("AWS_S3_BUCKET_NAME");
-            //_bucketName = configuration["AWS:BucketName"];
+            //_bucketName = Environment.GetEnvironmentVariable("AWS_S3_BUCKET_NAME");
+            _bucketName = configuration["AWS:AWS_S3_BUCKET_NAME"];
         }
 
         [HttpGet("presigned-url")]
