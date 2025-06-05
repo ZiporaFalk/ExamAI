@@ -4,6 +4,8 @@ import { FaUser, FaSignOutAlt, FaChevronDown } from 'react-icons/fa';
 //  import '../styles/UserProfileMenuProps .css';
 import "../stylies/UserProfileMenu.css"
 import { authService } from '../services/AuthService';
+import { notification } from 'antd';
+import LoginModal from './Login';
 interface UserProfileMenuProps {
     onSignOut: () => void;
     onProfileClick: () => void;
@@ -18,7 +20,14 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({
     const [userEmail, setUserEmail] = useState("student@example.com");
     const [userAvatar, setUserAvatar] = useState<string | null>(null);
     const menuRef = useRef<HTMLDivElement>(null);
-
+    //////////////////////
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [api, contextHolder] = notification.useNotification();
+    const [, setUserInfo] = useState({
+        name: 'אנונימי',
+        email: 'student@example.com',
+        avatar: undefined
+    });
     useEffect(() => {
         try {
             const profileStr = localStorage.getItem("profile");
@@ -52,11 +61,19 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({
         onSignOut();
     };
 
+    const showLoginModal = () => {
+        setIsOpen(false);
+        setIsLoginModalOpen(true);
+    };
 
+    const handleLoginCancel = () => {
+        setIsLoginModalOpen(false);
+    };
 
     return (
         <div className="user-profile-menu" ref={menuRef}>
             {/* Profile Button */}
+            {contextHolder}
             <motion.button
                 className="profile-button"
                 onClick={toggleMenu}
@@ -112,7 +129,6 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({
                         </div>
 
                         <div className="menu-items">
-
                             <motion.button
                                 className="menu-item sign-out"
                                 onClick={handleSignOut}
@@ -122,11 +138,54 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({
                                 <FaSignOutAlt className="menu-icon" />
                                 <span>Sign Out</span>
                             </motion.button>
+                            <motion.button
+                                className="menu-item sign-out"
+                                onClick={showLoginModal}
+                                whileHover={{ backgroundColor: 'rgba(255, 107, 107, 0.1)' }}
+                                whileTap={{ scale: 0.98 }}
+                            >
+                                <FaSignOutAlt className="menu-icon" />
+                                <span>Sign In</span>
+                            </motion.button>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
+            {isLoginModalOpen && (
+                <LoginModal
+                    isOpen={isLoginModalOpen}
+                    onClose={handleLoginCancel}
+                    onSuccessLogin={(email, messageType, message) => {
+                        setIsLoginModalOpen(false);
+                        if (messageType === 'success') {
+                            // setIsLoggedIn(true);
+                            authService.setLoginStatus(true)
+                            setUserInfo({
+                                name: 'משתמש',
+                                email: email,
+                                avatar: undefined
+                            });
+
+                            api.success({
+                                message: "!You have successfully connected",
+                                description: `!Welcome to the system, ${email}`,
+                                placement: 'topRight',
+                                className: 'rtl-notification',
+                            })
+                        }
+                        else {
+                            api.error({
+                                message: '!Login failed',
+                                description: message,
+                                placement: 'topRight',
+                                className: 'rtl-notification',
+                            });
+                        }
+                    }}
+                />
+            )}
         </div>
+
     );
 };
 
