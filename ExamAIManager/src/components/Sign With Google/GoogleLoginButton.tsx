@@ -2,20 +2,25 @@ import { GoogleLogin } from '@react-oauth/google';
 import axiosInstance from '../../utils/axiosInstance';
 import { jwtDecode } from 'jwt-decode';
 import { authService } from '../../services/AuthService';
-// import { useState } from 'react';
-// import MyAlert from '../My-Alert';
-// import { useNavigate } from 'react-router-dom';
+import { notification } from 'antd';
 
+interface GoogleJwtPayload {
+  id: number;
+  name: string;
+  email: string;
+  picture: string;
+}
 const GoogleLoginButton = () => {
-  // const [islogin, setIsLogin] = useState(false)
-  // const [message, setMessage] = useState("")
-  // const [typeMessage, setTypeMessage] = useState<'success' | 'error'>()
-  // const navigate = useNavigate()
+
+  const [api, contextHolder] = notification.useNotification();
   const handleLogin = async (credentialResponse: any) => {
     const tokenId = credentialResponse.credential;
     console.log("window.origin:", window.origin);
     console.log("window.location.origin:" + window.location.origin);
     console.log("window.location.href:", window.location.href);
+    const decodedToken: GoogleJwtPayload = jwtDecode(tokenId);
+    console.log(decodedToken);
+
     try {
       const response = await axiosInstance.post(`/auth/google`, {
         token: tokenId,
@@ -29,25 +34,38 @@ const GoogleLoginButton = () => {
       if (role === "Admin") {
         localStorage.setItem("token", token);
         authService.setLoginStatus(true);
-        window.location.href = "/";
-        alert("התחברת בהצלחה!");
-        // setIsLogin(true)
-        // setMessage("Login successful With Google")
-        // setTypeMessage('success')
+        const profile = {
+          email: decodedToken.email,
+          name: decodedToken.name,
+          picture: decodedToken.picture
+        }
+        localStorage.setItem("profile", JSON.stringify(profile));
+        // window.location.href = "/";
+
+        api.success({
+          message: 'Sign With Google success',
+          description: `!Welcome to the system, ${decodedToken.name}`,
+          placement: 'topRight',
+          className: 'rtl-notification',
+        });
       } else {
-        // setMessage("Unauthorized: Admin access required.")
-        // setTypeMessage('error')
+        api.error({
+          message: 'Sign With Google faild',
+          description: 'Check with your administrator if you are allowed to connect.',
+          placement: 'topRight',
+          className: 'rtl-notification',
+        });
       }
 
     } catch (error) {
       console.error("Login with Google failed", error);
-      // setTypeMessage('error')
-      // setMessage("Login with Google failed.")
     }
+
   };
 
   return (
     <div>
+      {contextHolder}
       <br></br>
       <GoogleLogin
         onSuccess={handleLogin}

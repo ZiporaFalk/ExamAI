@@ -1,0 +1,390 @@
+/* UserProfileMenuProps.css */
+.user-profile-menu {
+    position: relative;
+    display: inline-block;
+    z-index: 999;
+  }
+  
+  /* Profile Button */
+  .profile-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(15px);
+    min-width: 180px;
+    font-family: inherit;
+    outline: none;
+  }
+  
+  .profile-button:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(100, 255, 218, 0.4);
+    box-shadow: 0 4px 20px rgba(100, 255, 218, 0.15);
+    transform: translateY(-1px);
+  }
+  
+  .profile-button:active {
+    transform: translateY(0);
+  }
+  
+  /* Avatar */
+  .profile-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 2px solid rgba(100, 255, 218, 0.3);
+    flex-shrink: 0;
+  }
+  
+  .avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .avatar-placeholder {
+    color: white;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Profile Info */
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .user-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+  }
+  
+  .user-role {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+  }
+  
+  /* Chevron Icon */
+  .chevron-icon {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+  }
+  
+  .profile-button:hover .chevron-icon {
+    color: rgba(100, 255, 218, 0.8);
+  }
+  
+  /* Dropdown Menu */
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+    min-width: 300px;
+    overflow: hidden;
+    z-index: 1000;
+  }
+  
+  /* User Info Section */
+  .user-info-section {
+    padding: 24px 20px 20px;
+    background: linear-gradient(135deg, 
+      rgba(100, 255, 218, 0.08) 0%, 
+      rgba(100, 255, 218, 0.03) 50%,
+      transparent 100%
+    );
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .user-avatar-large {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 3px solid rgba(100, 255, 218, 0.3);
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.2);
+  }
+  
+  .avatar-image-large {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .avatar-placeholder-large {
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .user-details {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .user-name-large {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 6px 0;
+    text-align: right;
+    direction: rtl;
+    line-height: 1.2;
+  }
+  
+  .user-email {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+    text-align: right;
+    direction: ltr;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 400;
+  }
+  
+  /* Menu Items */
+  .menu-items {
+    padding: 12px 0;
+  }
+  
+  .menu-item {
+    width: 100%;
+    padding: 14px 20px;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    text-align: left;
+    font-family: inherit;
+    outline: none;
+  }
+  
+  .menu-item:hover {
+    background: rgba(100, 255, 218, 0.08);
+    color: rgba(100, 255, 218, 0.9);
+    padding-right: 24px;
+  }
+  
+  .menu-item.sign-out {
+    color: #ff7675;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: 8px;
+  }
+  
+  .menu-item.sign-out:hover {
+    background: rgba(255, 118, 117, 0.08);
+    color: #ff9f9f;
+  }
+  
+  .menu-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    opacity: 0.8;
+  }
+  
+  .menu-item:hover .menu-icon {
+    opacity: 1;
+  }
+  
+  /* RTL Support */
+  .user-profile-menu[dir="rtl"] .dropdown-menu {
+    right: auto;
+    left: 0;
+  }
+  
+  .user-profile-menu[dir="rtl"] .menu-item {
+    text-align: right;
+    flex-direction: row-reverse;
+  }
+  
+  .user-profile-menu[dir="rtl"] .profile-info {
+    align-items: flex-end;
+  }
+  
+  .user-profile-menu[dir="rtl"] .menu-item:hover {
+    padding-left: 24px;
+    padding-right: 14px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .dropdown-menu {
+      min-width: 280px;
+      right: -10px;
+      border-radius: 16px;
+    }
+    
+    .profile-button {
+      min-width: 160px;
+      padding: 6px 14px;
+      gap: 10px;
+    }
+    
+    .user-name {
+      max-width: 80px;
+    }
+    
+    .user-info-section {
+      padding: 20px 16px 16px;
+      gap: 14px;
+    }
+    
+    .user-avatar-large {
+      width: 48px;
+      height: 48px;
+    }
+    
+    .avatar-placeholder-large {
+      font-size: 20px;
+    }
+    
+    .user-name-large {
+      font-size: 16px;
+    }
+    
+    .menu-item {
+      padding: 12px 16px;
+      font-size: 14px;
+    }
+    
+    .menu-item:hover {
+      padding-right: 20px;
+    }
+    
+    .user-profile-menu[dir="rtl"] .menu-item:hover {
+      padding-left: 20px;
+      padding-right: 12px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .dropdown-menu {
+      min-width: 260px;
+      right: -20px;
+    }
+    
+    .profile-button {
+      min-width: 140px;
+    }
+    
+    .user-name {
+      max-width: 60px;
+    }
+  }
+  
+  /* Animation Enhancement */
+  .dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    width: 16px;
+    height: 16px;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none;
+    border-right: none;
+    transform: rotate(45deg);
+    backdrop-filter: blur(25px);
+  }
+  
+  .user-profile-menu[dir="rtl"] .dropdown-menu::before {
+    right: auto;
+    left: 20px;
+  }
+  
+  /* Focus States for Accessibility */
+  .profile-button:focus {
+    outline: 2px solid rgba(100, 255, 218, 0.5);
+    outline-offset: 2px;
+  }
+  
+  .menu-item:focus {
+    background: rgba(100, 255, 218, 0.1);
+    outline: none;
+  }
+  
+  .menu-item.sign-out:focus {
+    background: rgba(255, 118, 117, 0.1);
+  }
+  
+  /* Smooth transitions */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Dark theme optimizations */
+  @media (prefers-color-scheme: dark) {
+    .dropdown-menu {
+      background: rgba(10, 15, 30, 0.98);
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+    
+    .user-info-section {
+      background: linear-gradient(135deg, 
+        rgba(100, 255, 218, 0.06) 0%, 
+        rgba(100, 255, 218, 0.02) 50%,
+        transparent 100%
+      );
+      border-bottom-color: rgba(255, 255, 255, 0.06);
+    }
+    
+    .dropdown-menu::before {
+      background: rgba(10, 15, 30, 0.98);
+    }
+  }

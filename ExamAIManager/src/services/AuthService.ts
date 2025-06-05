@@ -25,9 +25,11 @@ class AuthService {
                 const token = response.data.token
                 const decoded: any = jwtDecode(token);
                 const role = decoded["role"] || decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-
+                const UserName = decoded["name"] || decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
                 if (role === "Admin") {
                     localStorage.setItem("token", token);
+                    const profile = { email:email, name:UserName, picture: null }
+                    localStorage.setItem("profile", JSON.stringify(profile));
                     this.setLoginStatus(true);
                     return { success: true, message: "Login successful" };
                 } else {

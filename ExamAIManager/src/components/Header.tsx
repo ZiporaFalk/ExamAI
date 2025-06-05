@@ -7,11 +7,17 @@ import { useNavigate } from 'react-router-dom';
 import LoginModal from './Login';
 import { authService } from '../services/AuthService';
 import { observer } from 'mobx-react';
+import UserProfileMenu from './UserProfileMenu';
 
 const Header = observer(() => {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [api, contextHolder] = notification.useNotification();
-    const [scrolled, ] = useState(false);
+    const [scrolled,] = useState(false);
+    const [, setUserInfo] = useState({
+        name: 'אנונימי',
+        email: 'student@example.com',
+        avatar: undefined
+    });
     const navigate = useNavigate()
     const buttonVariants = {
         hover: {
@@ -30,10 +36,26 @@ const Header = observer(() => {
         setIsLoginModalOpen(false);
     };
 
-    const handleLogout = () => {
-        authService.setLoginStatus(false); 
+    const handleSignOut = () => {
+        authService.setLoginStatus(false);
         localStorage.removeItem('token')
-        console.log(authService.isLogin);
+        setUserInfo({
+            name: 'אנונימי',
+            email: 'student@example.com',
+            avatar: undefined
+        });
+
+        api.info({
+            message: 'התנתקת בהצלחה',
+            description: 'להתראות!',
+            placement: 'topRight',
+            className: 'rtl-notification',
+        });
+    };
+    ////
+
+    const handleProfileClick = () => {
+        navigate('/profile');
     };
     return (
         <>
@@ -82,22 +104,28 @@ const Header = observer(() => {
                     </ul>
                 </motion.nav>
 
-                {authService.isLogin ?
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="auth-buttons">
-                        <motion.button
-                            className="sign-in-btn"
-                            onClick={handleLogout}
-                            variants={buttonVariants}
-                            whileHover="hover"
-                            whileTap="tap">
-                            Sign Out
-                        </motion.button>
-                    </motion.div>
-                    :
+                {/* {authService.isLogin ?( */}
+                {/* {isLoggedIn ? ( */}
+                {authService.isLogin ? (
+                    // <motion.div
+                    //     initial={{ opacity: 0, x: 20 }}
+                    //     animate={{ opacity: 1, x: 0 }}
+                    //     transition={{ duration: 0.5 }}
+                    //     className="auth-buttons">
+                    //     <motion.button
+                    //         className="sign-in-btn"
+                    //         onClick={handleLogout}
+                    //         variants={buttonVariants}
+                    //         whileHover="hover"
+                    //         whileTap="tap">
+                    //         Sign Out
+                    //     </motion.button>
+                    // </motion.div>
+                    <UserProfileMenu
+                        onSignOut={handleSignOut}
+                        onProfileClick={handleProfileClick}
+                    />
+                ) : (
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -112,7 +140,7 @@ const Header = observer(() => {
                             Sign In
                         </motion.button>
                     </motion.div>
-
+                )
                 }
 
             </motion.div>
@@ -122,19 +150,30 @@ const Header = observer(() => {
                     onClose={handleLoginCancel}
                     onSuccessLogin={(email, messageType, message) => {
                         setIsLoginModalOpen(false);
-                        messageType === 'success' ?
+                        if (messageType === 'success') {
+                            // setIsLoggedIn(true);
+                            authService.setLoginStatus(true)
+                            setUserInfo({
+                                name: 'משתמש',
+                                email: email,
+                                avatar: undefined
+                            });
+
                             api.success({
                                 message: "!You have successfully connected",
                                 description: `!Welcome to the system, ${email}`,
                                 placement: 'topRight',
                                 className: 'rtl-notification',
                             })
-                            : api.error({
+                        }
+                        else {
+                            api.error({
                                 message: '!Login failed',
                                 description: message,
                                 placement: 'topRight',
                                 className: 'rtl-notification',
                             });
+                        }
                     }}
                 />
             )}
