@@ -72,8 +72,6 @@ const GoogleLoginButton = () => {
         onError={() => console.log("Google login error")}
       />
 
-      {/* {islogin &&
-        <MyAlert message={message} type={typeMessage!} onClose={() => navigate('/')} duration={3000} isVisible={true}/>} */}
     </div>
   );
 };

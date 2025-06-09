@@ -17,6 +17,7 @@ namespace ExamAI.Data
         public DbSet<Submission> Submissions { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
+            //Console.WriteLine("=== DbContext נוצר === " + DateTime.Now.ToString("HH:mm:ss.fff"));
         }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
@@ -24,6 +25,7 @@ namespace ExamAI.Data
         //    //var connectionString = _configuration.GetConnectionString("ExamAIDB");
         //    //optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         //}
+ 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

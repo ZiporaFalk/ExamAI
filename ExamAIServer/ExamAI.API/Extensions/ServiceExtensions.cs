@@ -41,8 +41,6 @@ namespace ExamAI.API.Extensions
                 var credentials = new BasicAWSCredentials(
                 configuration["AWS:AccessKey"],
                 configuration["AWS:SecretKey"]
-                //Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID"),
-                //Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY")
                 );
                 var clientConfig = new AmazonS3Config
                 {

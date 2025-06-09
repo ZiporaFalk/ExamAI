@@ -81,7 +81,6 @@ namespace ExamAI.Service.Services
                 if (!string.IsNullOrEmpty(subject))
                 {
                     studentSubmissions = studentSubmissions
-                        //.Where(s => s.Exam != null && s.Exam.Subject?.Equals(subject, StringComparison.OrdinalIgnoreCase) == true)
                         .Where(s => s.Exam.Subject?.Equals(subject, StringComparison.OrdinalIgnoreCase) == true)
                         .ToList();
                 }

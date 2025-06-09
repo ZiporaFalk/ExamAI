@@ -41,6 +41,10 @@ export class AuthService {
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`/Auth/login`, { email, password }).pipe(
       tap(res => {
+        if (!res || !res.token) {
+          console.error('No token in response:', res);
+          return;
+        }
         const decodedToken: any = jwtDecode(res.token);
         console.log(decodedToken);
         const userId = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
@@ -63,30 +67,6 @@ export class AuthService {
         };
         localStorage.setItem('profile', JSON.stringify(profile));
         this.userProfileSubject.next(profile);
-        // this.studentService.getStudentById(userId).subscribe((student: Student) => {
-        //   const profile = {
-        //     id:userId,
-        //     name: student.name,
-        //     email: student.email||'',
-        //     picture: '/images/background.jpg', // אין תמונה בלוגין רגיל
-        //   };
-        //   localStorage.setItem('profile', JSON.stringify(profile));
-        //   this.userProfileSubject.next(profile);
-        // });
-
-        // return this.studentService.getStudentById(userId).pipe(
-        //   tap((student: Student) => {
-        //     const profile = {
-        //       id: userId,
-        //       name: student.name,
-        //       email: student.email || '',
-        //       picture: '/images/background.jpg',
-        //     };
-        //     console.log(profile);
-        //     localStorage.setItem('profile', JSON.stringify(profile));
-        //     this.userProfileSubject.next(profile);
-        //   })
-        // );
       })
     );
   }
@@ -136,40 +116,6 @@ export class AuthService {
     );
   }
 
-
-  // ..................
-  // googleLogin(Token: string): Observable<LoginResponse> {
-  //   const decodedToken: GoogleJwtPayload = jwtDecode(Token);
-  //   const email = decodedToken.email;
-
-  //   return this.http.get<{ exists: boolean }>(
-  //     `${this.baseUrl}/GoogleSheets/email-exists?email=${encodeURIComponent(email)}`
-  //   ).pipe(
-  //     switchMap(response => {
-  //       if (!response.exists) {
-  //         // זריקת שגיאה כדי לעצור את ההתחברות
-  //         return throwError(() => new Error('This email is not authorized to log in.'));
-  //       }
-  //       // המשך להתחברות רגילה
-  //       const profile = {
-  //         id: decodedToken.id,
-  //         name: decodedToken.name,
-  //         email: decodedToken.email,
-  //         picture: decodedToken.picture
-  //       };
-  //       localStorage.setItem('profile', JSON.stringify({ profile }));
-  //       this.userProfileSubject.next(profile);
-
-  //       return this.http.post<LoginResponse>(`${this.baseUrl}/Auth/google`, { Token }).pipe(
-  //         tap(res => {
-  //           localStorage.setItem("token", res.token);
-  //           localStorage.setItem("userId", JSON.stringify(decodedToken.id!));
-  //           this.isLoggedInSubject.next(true);
-  //         })
-  //       );
-  //     })
-  //   );
-  // }
   googleLogin(Token: string): Observable<LoginResponse> {
     const decodedToken: GoogleJwtPayload = jwtDecode(Token);
 
@@ -202,31 +148,6 @@ export class AuthService {
       })
     );
   }
-
-  // googleLogin(Token: string): Observable<LoginResponse> {
-
-  //   const decodedToken: GoogleJwtPayload = jwtDecode(Token);
-  //   ////////////////פה לעשות אותו בידהק אם המייל נמצא, אבל כאן נבדוק על מייל ומשהו אחר כי אין כיתה
-  //   ////אולי נשנה שיבדוק לפי מייל ומשהו אחר
-  //   ////רק אם נמצא בגוגל שיט ניתן להמשיך להתחבר כמו הרשמה!
-  //   const profile = {
-  //     id:decodedToken.id,
-  //     name: decodedToken.name,
-  //     email: decodedToken.email,
-  //     picture: decodedToken.picture
-  //   };
-  //   localStorage.setItem('profile', JSON.stringify({profile}));
-  //   this.userProfileSubject.next(profile);
-
-  //   return this.http.post<LoginResponse>(`${this.baseUrl}/Auth/google`, { Token }).pipe(
-  //     tap(res => {
-  //       const decodedToken: GoogleJwtPayload = jwtDecode(Token)
-  //       localStorage.setItem("token", res.token);
-  //       localStorage.setItem("userId", JSON.stringify(decodedToken.id!));
-  //       this.isLoggedInSubject.next(true);
-  //     })
-  //   );
-  // }
 
   logout(): void {
     localStorage.removeItem("token");

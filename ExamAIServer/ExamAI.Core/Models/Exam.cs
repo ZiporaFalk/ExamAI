@@ -9,7 +9,6 @@ namespace ExamAI.Core.Models
     public class Exam
     {
         public int Id { get; set; }
-        //public string Class { get; set; }
         public string Subject { get; set; }
         public string File_Url { get; set; }
         public string DateExam { get; set; }
@@ -21,14 +20,5 @@ namespace ExamAI.Core.Models
             Created_at = DateTime.UtcNow;
         }
 
-        //public Exam(int id, string @class, int subject, string title, List<Answer> answers, List<Submission> submissions)
-        //{
-        //    Id = id;
-        //    Class = @class;
-        //    Subject = subject;
-        //    Title = title;
-        //    Answers = answers;
-        //    Submissions = submissions;
-        //}
     }
 }

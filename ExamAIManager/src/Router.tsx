@@ -5,6 +5,7 @@ import Stepper_upload from "./components/Stepper/Steps";
 import HomePage from "./components/HomePage";
 import StudentTable from "./components/Dashboard/StudentTable";
 import StatisticsDashboard from "./components/statistics";
+import ScannedTestsGallery from "./components/ScannedTestsGallery";
 
 
 export const myRouter = createBrowserRouter([
@@ -32,6 +33,10 @@ export const myRouter = createBrowserRouter([
             {
                 path: 'tests',
                 element: <Stepper_upload />
+            },
+            {
+                path:'testsTeacher',
+                element:<ScannedTestsGallery/>
             }
         ]
     }

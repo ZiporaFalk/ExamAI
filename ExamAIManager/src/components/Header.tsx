@@ -1,7 +1,7 @@
 import { notification } from 'antd';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { FaHome } from 'react-icons/fa';
+import { FaFileAlt, FaHome } from 'react-icons/fa';
 import { FaRegLightbulb, FaTachometerAlt, FaChartBar, FaClipboardCheck } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import LoginModal from './Login';
@@ -75,6 +75,7 @@ const Header = observer(() => {
                         transition={{ duration: 0.5 }}
                     >
                         <FaRegLightbulb className="logo-icon" />
+
                         ExamAI
                     </motion.div>
                 </div>
@@ -97,30 +98,19 @@ const Header = observer(() => {
                             <FaChartBar className="nav-icon" />
                             Statistics
                         </motion.li>
+
+                        <motion.li whileHover={{ scale: 1.1, color: "#64ffda" }} onClick={() => { navigate('/testsTeacher') }} >
+                            <FaFileAlt className="logo-icon" />
+                            Tests
+                        </motion.li>
                         <motion.li whileHover={{ scale: 1.1, color: "#64ffda" }} onClick={() => { navigate('/tests') }} >
                             <FaClipboardCheck className="nav-icon" />
-                            Tests
+                            GetStarted
                         </motion.li>
                     </ul>
                 </motion.nav>
 
-                {/* {authService.isLogin ?( */}
-                {/* {isLoggedIn ? ( */}
                 {authService.isLogin ? (
-                    // <motion.div
-                    //     initial={{ opacity: 0, x: 20 }}
-                    //     animate={{ opacity: 1, x: 0 }}
-                    //     transition={{ duration: 0.5 }}
-                    //     className="auth-buttons">
-                    //     <motion.button
-                    //         className="sign-in-btn"
-                    //         onClick={handleLogout}
-                    //         variants={buttonVariants}
-                    //         whileHover="hover"
-                    //         whileTap="tap">
-                    //         Sign Out
-                    //     </motion.button>
-                    // </motion.div>
                     <UserProfileMenu
                         onSignOut={handleSignOut}
                         onProfileClick={handleProfileClick}
