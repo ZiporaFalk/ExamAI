@@ -12,8 +12,8 @@ export interface Exam {
     id?: number;
     subject: string;
     dateExam: string;
-    file_Url:string;
-    created_at:string;
+    file_Url?:string;
+    created_at?:string;
 }
 
 export interface Submission {

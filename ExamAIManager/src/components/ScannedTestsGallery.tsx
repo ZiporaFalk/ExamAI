@@ -236,7 +236,7 @@ const ScannedTestsGallery = () => {
                                     <Eye size={20} />
                                 </button>
                                 <button
-                                    onClick={() => downloadImage(image.file_Url, `${image.dateExam}.jpg`)}
+                                    onClick={() => downloadImage(image.file_Url!, `${image.dateExam}.jpg`)}
                                     className="overlay-btn download-btn"
                                 >
                                     <Download size={20} />
@@ -335,7 +335,7 @@ const ScannedTestsGallery = () => {
                             </div>
                             <button
                                 className="download-full-btn"
-                                onClick={() => downloadImage(selectedImage.file_Url, `${selectedImage.dateExam}.jpg`)}
+                                onClick={() => downloadImage(selectedImage.file_Url!, `${selectedImage.dateExam}.jpg`)}
                             >
                                 <Download size={16} />
                                 הורד מבחן
