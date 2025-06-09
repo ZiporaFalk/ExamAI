@@ -1,4 +1,5 @@
 ﻿using ExamAI.Core.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,9 @@ namespace ExamAI.Core.Services
     {
         Task<List<Submission>> GetAllByStudentAsync(int student_id);
         Task<List<Submission>> GetAllAsync();
+        ///////
+        Task<List<Submission>> GetAllSubmissionsAsync();
+        ///////
         Task<Submission> GetAsync(int student_id, int exam_id);
         Task<List<Submission>> GetAllByIdAsync(int id);
         Task PostAsync(Submission newSubmission);

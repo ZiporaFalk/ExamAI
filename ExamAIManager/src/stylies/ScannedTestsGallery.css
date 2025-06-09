@@ -631,7 +631,7 @@
     }
 }
 
-.modal-content {
+.modal-content2 {
     /* background: rgba(255, 255, 255, 0.05); */
     backdrop-filter: blur(30px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -758,6 +758,7 @@
     object-fit: contain;
     transition: transform 0.3s ease;
     user-select: none;
+    margin-top: 410px;
 }
 
 .modal-details {
@@ -840,7 +841,7 @@
         gap: 1.5rem;
     }
 
-    .modal-content {
+    .modal-content2 {
         max-width: 95vw;
         max-height: 95vh;
     }

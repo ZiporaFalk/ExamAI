@@ -23,6 +23,16 @@ namespace ExamAI.Service.Services
         {
             return await _submissionRepository.GetAllAsync();
         }
+        public async Task<List<Submission>> GetAllSubmissionsAsync()
+        {
+            //return await _context.Submissions
+            //    .AsNoTracking()
+            //    .Include(s => s.Student)
+            //    .Include(s => s.Exam)
+            //    .ToListAsync();
+            return await _submissionRepository.GetAllSubmissionsAsync();
+        }
+
         public async Task<List<Submission>> GetAllByStudentAsync(int student_id)
         {
             return await _submissionRepository.GetAllByStudentAsync(student_id);

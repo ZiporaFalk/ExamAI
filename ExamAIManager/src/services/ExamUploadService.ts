@@ -90,22 +90,28 @@ const ExamUploadService = {
             handleAxiosError(e, "Error upload Student Feedback")
         }
     },
+    
     getUrl: async (url: string) => {
-        try {
+        try {            
             const response = await axiosInstance.get(`/ExamUpload/download-url`, {
                 params: {
                     Url: encodeURIComponent(url),
-                    IsStudentTest: true,
+                    // IsStudentTest: true,
+                    IsDownload: true,
                 },
             })
             return response.data.url
         }
         catch (e: any) {
             handleAxiosError(e, "Error download-url")
-
         }
     }
 
+    // const params = {
+    //     Url: encodeURIComponent(url),
+    //     IsStudentTest: true,
+    //     IsDownload: IsDownload,
+    //   };
 }
 
 

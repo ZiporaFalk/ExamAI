@@ -138,7 +138,7 @@
   font-size: 1.2rem;
 }
 
-.search-input {
+.search-input2 {
   width: 100%;
   padding: 12px 15px 12px 45px;
   border: 2px solid var(--border-color);
@@ -149,7 +149,7 @@
   transition: all 0.3s ease;
 }
 
-.search-input:focus {
+.search-input2:focus {
   outline: none;
   border-color: var(--accent-color);
   box-shadow: 0 0 0 2px var(--glow-color);

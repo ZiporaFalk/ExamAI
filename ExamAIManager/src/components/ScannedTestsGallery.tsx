@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import {
     Download, Eye, Search, Grid, List, FileText, Calendar, User, X, ArrowRight, ZoomIn, ZoomOut, RotateCcw
 } from 'lucide-react';
-import axiosInstance from '../utils/axiosInstance';
 import { Exam } from '../utils/types';
 import ExamService from '../services/examService';
 import "../stylies/ScannedTestsGallery.css"
+import ExamUploadService from '../services/ExamUploadService';
 const ScannedTestsGallery = () => {
     const [selectedImage, setSelectedImage] = useState<Exam | null>(null);
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -23,9 +23,14 @@ const ScannedTestsGallery = () => {
     const init = async () => {
         setIsLoading(true);
         try {
-            const exams = await ExamService.getAll();
+            const exams1 = await ExamService.getAll();
+            const exams = exams1.map((exam: Exam) => ({
+                ...exam,
+                created_at: exam.created_at!.split('T')[0]
+            }));
+
             setTestImages(exams);
-            console.log('exams', exams.data);
+            console.log('exams', exams);
             const subjectsList: string[] = Array.from(
                 new Set(exams.map((img: { subject: string; }) => String(img.subject)))
             );
@@ -34,7 +39,7 @@ const ScannedTestsGallery = () => {
             const urlMap: Record<string, string> = {};
             await Promise.all(exams.map(async (exam: Exam) => {
                 if (exam.file_Url) {
-                    const url = await getUrl(exam.file_Url);
+                    const url = await ExamUploadService.getUrl(exam.file_Url);
                     if (exam.id) {
                         urlMap[exam.id] = url;
                     }
@@ -48,15 +53,8 @@ const ScannedTestsGallery = () => {
         }
     };
 
-    const getUrl = async (imageUrl: string) => {
-        const response = await axiosInstance.get("/upload/download-url", {
-            params: { url: encodeURIComponent(imageUrl) },
-        });
-        return response.data.url;
-    };
-
     const downloadImage = async (imageUrl: string, filename: string) => {
-        const url = await getUrl(imageUrl);
+        const url = await ExamUploadService.getUrl(imageUrl);
         const link = document.createElement('a');
         link.href = url;
         link.download = filename;
@@ -146,7 +144,7 @@ const ScannedTestsGallery = () => {
                             ))}
                         </div>
                     </div>
-                    <h2 className="loading-text">טוען מבחנים...</h2>
+                    <h2 className="loading-text">Loading tests...</h2>
                     <div className="loading-progress">
                         <div className="progress-bar"></div>
                     </div>
@@ -163,9 +161,9 @@ const ScannedTestsGallery = () => {
                 <div className="header-content">
                     <h1 className="main-title">
                         <FileText className="title-icon" />
-                        גלריית מבחנים סרוקים
+                        Scanned Test Gallery
                     </h1>
-                    <p className="subtitle">צפה, הורד וחפש במבחנים שלך בקלות</p>
+                    <p className="subtitle">View, download and search your tests easily</p>
                 </div>
             </header>
 
@@ -175,7 +173,7 @@ const ScannedTestsGallery = () => {
                         <Search className="search-icon" />
                         <input
                             type="text"
-                            placeholder="חפש מבחן או מקצוע..."
+                            placeholder="      Search for a test or a profession..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="search-input"
@@ -190,7 +188,7 @@ const ScannedTestsGallery = () => {
                         >
                             {subjects.map(subject => (
                                 <option key={subject} value={subject}>
-                                    {subject === 'all' ? 'כל המקצועות' : subject}
+                                    {subject === 'all' ? 'All the Subjects' : subject}
                                 </option>
                             ))}
                         </select>
@@ -248,10 +246,6 @@ const ScannedTestsGallery = () => {
                             <h3 className="card-title">{image.dateExam}</h3>
                             <div className="card-meta">
                                 <div className="meta-item">
-                                    <User size={14} />
-                                    {/* תוכל להוסיף כאן את שם התלמיד בעתיד */}
-                                </div>
-                                <div className="meta-item">
                                     <Calendar size={14} />
                                     <span>{image.created_at}</span>
                                 </div>
@@ -267,15 +261,15 @@ const ScannedTestsGallery = () => {
             {filteredImages.length === 0 && (
                 <div className="no-results">
                     <FileText size={64} className="no-results-icon" />
-                    <h3>לא נמצאו מבחנים</h3>
-                    <p>נסה לשנות את הסינון או החיפוש</p>
+                    <h3>No tests found</h3>
+                    <p>Try changing the filter or search</p>
                 </div>
             )}
 
             {/* Enhanced Modal */}
             {selectedImage && (
                 <div className="modal-overlay" onClick={closeModal}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                    <div className="modal-content2" onClick={(e) => e.stopPropagation()}>
                         {/* Modal Header */}
                         <div className="modal-header">
                             <button className="back-btn" onClick={closeModal}>
@@ -310,7 +304,7 @@ const ScannedTestsGallery = () => {
                         >
                             <img
                                 src={selectedImage.id ? imageUrls[selectedImage.id] : ''}
-                                alt={selectedImage.dateExam}
+                                alt={selectedImage.subject}
                                 className="modal-image"
                                 style={{
                                     transform: `scale(${modalZoom}) translate(${modalPosition.x / modalZoom}px, ${modalPosition.y / modalZoom}px)`,
@@ -326,11 +320,11 @@ const ScannedTestsGallery = () => {
                             <div className="modal-info">
                                 <div className="info-item">
                                     <Calendar size={16} />
-                                    <span>נוצר בתאריך: {selectedImage.created_at}</span>
+                                    <span>Created on: {selectedImage.created_at}</span>
                                 </div>
                                 <div className="info-item">
                                     <FileText size={16} />
-                                    <span>מקצוע: {selectedImage.subject}</span>
+                                    <span>Subject: {selectedImage.subject}</span>
                                 </div>
                             </div>
                             <button
@@ -338,7 +332,7 @@ const ScannedTestsGallery = () => {
                                 onClick={() => downloadImage(selectedImage.file_Url!, `${selectedImage.dateExam}.jpg`)}
                             >
                                 <Download size={16} />
-                                הורד מבחן
+                                Download test
                             </button>
                         </div>
                     </div>

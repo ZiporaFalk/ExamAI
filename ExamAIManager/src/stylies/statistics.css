@@ -13,7 +13,6 @@
   transition: border 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   left: 50px;
-  bottom: 12px;
 }
 
 .styled-input2::placeholder {
@@ -294,9 +293,10 @@
 
 .loading-overlay {
   margin: auto;
-  padding: 120px;
+  /* padding: 120px; */
   background: linear-gradient(135deg, #0c122000 0%, #1a2332ad 50%, #0f1b2d21 100%);
   width: 900px;
+  height: 500px;
   border-radius: 25px;
   display: flex;
   justify-content: center;

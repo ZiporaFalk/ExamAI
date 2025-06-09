@@ -18,7 +18,6 @@ namespace ExamAI.API.Controllers
         public ExamUploadController(IAmazonS3 s3Client, IConfiguration configuration)
         {
             _s3Client = s3Client;
-            //_bucketName = Environment.GetEnvironmentVariable("AWS_S3_BUCKET_NAME");
             _bucketName = configuration["AWS:AWS_S3_BUCKET_NAME"];
         }
 
@@ -55,17 +54,17 @@ namespace ExamAI.API.Controllers
         }
 
         [HttpGet("download-url")]
-        public async Task<IActionResult> GetDownloadPresignedUrl(string Url, bool IsStudentTest, bool IsDownload)
+        //public async Task<IActionResult> GetDownloadPresignedUrl(string Url, bool IsStudentTest, bool IsDownload = true)
+        public async Task<IActionResult> GetDownloadPresignedUrl(string Url, bool IsDownload = true)
         {
             var decodedUrl = Uri.UnescapeDataString(Url);
             var fileName = Path.GetFileName(decodedUrl);
             var encodedFileName = Uri.EscapeDataString(fileName);
 
-            // Content-Disposition לפי צורך: הצגה בדפדפן או הורדה
             string disposition = IsDownload
                 ? $"attachment; filename=\"fallback.jpg\"; filename*=UTF-8''{encodedFileName}"
                 : "inline";
-            //string disposition = IsDownload ? $"attachment; filename=\"{fileName}\"" : "inline";
+
             var request = new GetPreSignedUrlRequest
             {
                 BucketName = _bucketName,

@@ -4,6 +4,7 @@ using ExamAI.Core.DTOs;
 using ExamAI.Core.DTOs.GetDto;
 using ExamAI.Core.Models;
 using ExamAI.Core.Services;
+using ExamAI.Service.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -28,9 +29,17 @@ namespace ExamAI.API.Controllers
         public async Task<ActionResult<IEnumerable<GetSubmissionDto>>> GetAllAsync()
         {
             var list = await _submissionservice.GetAllAsync();
-
             return Ok(_mapper.Map<IEnumerable<GetSubmissionDto>>(list));
         }
+        [HttpGet("all")]
+        public async Task<ActionResult<List<GetSubmissionDto>>> GetAllSubmissionsAsync()
+        {
+            var submissions = await _submissionservice.GetAllSubmissionsAsync();
+            //return Ok(submissions);
+            return Ok(_mapper.Map<List<GetSubmissionDto>>(submissions));
+
+        }
+
         [HttpGet("student/{student_id}")]
         public async Task<ActionResult<List<GetSubmissionDto>>> GetAllByStudent(int student_id)
         {

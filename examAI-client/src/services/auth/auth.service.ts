@@ -40,6 +40,7 @@ export class AuthService {
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`/Auth/login`, { email, password }).pipe(
       tap(res => {
+        console.log(res);
         if (!res || !res.token) {
           console.error('No token in response:', res);
           return;

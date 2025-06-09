@@ -40,19 +40,18 @@ const Header = observer(() => {
         authService.setLoginStatus(false);
         localStorage.removeItem('token')
         setUserInfo({
-            name: 'אנונימי',
+            name: 'Anonymous',
             email: 'student@example.com',
             avatar: undefined
         });
 
         api.info({
-            message: 'התנתקת בהצלחה',
+            message: 'You have logged out successfully',
             description: 'להתראות!',
             placement: 'topRight',
             className: 'rtl-notification',
         });
     };
-    ////
 
     const handleProfileClick = () => {
         navigate('/profile');

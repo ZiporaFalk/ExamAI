@@ -19,10 +19,9 @@ export interface Exam {
 export interface Submission {
     id?: number;
     studentId: number;
+    examId?:number;
     score: number;
-    // urlFile: string;
     file_Url: string;
-    // urlFeedback: string;
     file_Url_FeedBack: string;
 }
 

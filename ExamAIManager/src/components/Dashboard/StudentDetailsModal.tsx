@@ -24,6 +24,7 @@ interface StudentModalProps {
 const StudentDetailsModal: React.FC<StudentModalProps> = ({ open, onClose, student }) => {
     const [formData, setFormData] = useState<Student>(student || { id: 0, name: "", email: "", studentClass: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
+    const [message, setMessage] = useState("")
 
     useEffect(() => {
         if (student) {
@@ -49,8 +50,16 @@ const StudentDetailsModal: React.FC<StudentModalProps> = ({ open, onClose, stude
             await method(url, formData);
             await studentStore.fetchStudents();
             onClose();
-        } catch (error) {
+        } catch (error: any) {
+            setMessage("vchbtydghjMP,;;L,MNMI")
             console.error("Error submitting student data:", error);
+            if (error.response?.status === 400) {
+                setMessage(
+                    `.This student does not exist in the Google Sheets`
+                );
+            } else {
+                setMessage("An unexpected error occurred while submitting the student data.");
+            }
         }
     };
 
@@ -131,6 +140,7 @@ const StudentDetailsModal: React.FC<StudentModalProps> = ({ open, onClose, stude
                                 )
                             }}
                         />
+                        <h4 style={{color:"rgba(168, 8, 8)"}}>{message}</h4>
                     </Paper>
                 </Box>
             </DialogContent>

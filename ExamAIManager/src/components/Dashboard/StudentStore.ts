@@ -12,7 +12,7 @@ class StudentStore {
     openAddDialog: boolean = false;
     openDetailsDialog: boolean = false;
     openScoresDialog: boolean = false;
-    filteredClass: string = ""; 
+    filteredClass: string = "";
 
     constructor() {
         makeAutoObservable(this);
@@ -38,31 +38,74 @@ class StudentStore {
             console.error("Error fetching exams:", error);
         }
     }
-
-    async fetchScores() {
-        const newScores = new Map<number, Map<number, Submission>>();
-        const scorePromises = this.students.flatMap((student) =>
-            this.exams.map((exam) =>
-                axiosInstance.get<Submission>(`/Submission/${student.id}/${exam.id}`)
-                    .then((response) => {
-                        const submission = response.data;
-                        if (!newScores.has(student.id!)) {
-                            newScores.set(student.id!, new Map());
-                        }
-                        newScores.get(student.id!)!.set(exam.id!, submission);
-                        console.log(submission);
-                    })
-                    .catch(() => {
-                        if (!newScores.has(student.id!)) {
-                            newScores.set(student.id!, new Map());
-                        }
-                        newScores.get(student.id!)!.set(exam.id!, { studentId: student.id!, score: 0, file_Url: '', file_Url_FeedBack: '' }); // נכניס "אין ציון"
-                    })
-            )
-        );
-        await Promise.all(scorePromises);
-        this.scores = newScores;
+    // ............................................
+     async fetchScores() {
+       try {
+            const response = await axiosInstance.get<Submission[]>(`/Submission/all`);
+            const newScores = new Map<number, Map<number, Submission>>();
+    
+            // הכנס את מה שהגיע מהשרת
+            for (const submission of response.data) {
+                const studentId = submission.studentId;
+                const examId = submission.examId;
+    
+                if (!newScores.has(studentId)) {
+                    newScores.set(studentId, new Map());
+                }
+                newScores.get(studentId)!.set(examId!, submission);
+            }
+            // נוודא שכל צירוף של תלמיד+מבחן קיים גם אם אין ציון בפועל
+            // for (const student of this.students) {
+            //     for (const exam of this.exams) {
+            //         if (!newScores.has(student.id!)) {
+            //             newScores.set(student.id!, new Map());
+            //         }
+            //         const studentScores = newScores.get(student.id!)!;
+            //         if (!studentScores.has(exam.id!)) {
+            //             studentScores.set(exam.id!, {
+            //                 studentId: student.id!,
+            //                 examId: exam.id!,
+            //                 score: 0,
+            //                 file_Url: '',
+            //                 file_Url_FeedBack: '',
+            //                 id: 0,
+            //             });
+            //         }
+            //     }
+            // }
+    
+            this.scores = newScores;
+        } catch (error) {
+            console.error("Error fetching all scores:", error);
+        }
     }
+    // ............................................
+    
+    // async fetchScores() {
+    //     const newScores = new Map<number, Map<number, Submission>>();
+    //     const scorePromises = this.students.flatMap((student) =>
+    //         this.exams.map((exam) =>
+    //             axiosInstance.get<Submission>(`/Submission/${student.id}/${exam.id}`)
+    //                 .then((response) => {
+    //                     const submission = response.data;
+    //                     if (!newScores.has(student.id!)) {
+    //                         newScores.set(student.id!, new Map());
+    //                     }
+    //                     newScores.get(student.id!)!.set(exam.id!, submission);
+    //                     console.log(submission);
+    //                 })
+    //                 .catch(() => {
+    //                     if (!newScores.has(student.id!)) {
+    //                         newScores.set(student.id!, new Map());
+    //                     }
+    //                     newScores.get(student.id!)!.set(exam.id!, { studentId: student.id!, score: 0, file_Url: '', file_Url_FeedBack: '' }); // נכניס "אין ציון"
+    //                 })
+    //         )
+    //     );
+    //     await Promise.all(scorePromises);
+    //     this.scores = newScores;
+    // }
+    
     async fetchData() {
         await this.fetchStudents();
         await this.fetchExams();
@@ -71,6 +114,7 @@ class StudentStore {
 
     async addStudent(newStudent: Student) {
         try {
+            console.log("Student data:", newStudent);
             const response = await axiosInstance.post(`/Student`, newStudent);
             const addedStudent = response.data;
             this.students = [...this.students, addedStudent];

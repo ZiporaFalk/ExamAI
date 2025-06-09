@@ -13,7 +13,6 @@ interface UserProfileMenuProps {
 
 const UserProfileMenu: React.FC<UserProfileMenuProps> = ({
     onSignOut,
-
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [userName, setUserName] = useState("אנונימי");
@@ -24,8 +23,8 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [api, contextHolder] = notification.useNotification();
     const [, setUserInfo] = useState({
-        name: 'אנונימי',
-        email: 'student@example.com',
+        name: 'Anonymous',
+        email: 'teacher@example.com',
         avatar: undefined
     });
     useEffect(() => {
@@ -33,7 +32,7 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({
             const profileStr = localStorage.getItem("profile");
             if (profileStr) {
                 const profile = JSON.parse(profileStr);
-                setUserName(profile.name || "אנונימי");
+                setUserName(profile.name || "Anonymous");
                 setUserEmail(profile.email || "student@example.com");
                 setUserAvatar(profile.picture || null);
             }
@@ -91,7 +90,7 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({
                 </div>
                 <div className="profile-info">
                     <span className="user-name">{userName}</span>
-                    <span className="user-role">Student</span>
+                    <span className="user-role">Teacher</span>
                 </div>
                 <motion.div
                     className="chevron-icon"

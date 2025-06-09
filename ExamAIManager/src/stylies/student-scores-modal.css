@@ -278,3 +278,65 @@
 .preview-modal-paper {
   animation: fadeIn 0.3s ease-out;
 }
+
+
+
+
+/* /////////////////////////0/ */
+.table-container {
+  max-height: 60vh;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  background-color: rgba(15, 41, 66, 0.5);
+}
+
+.scores-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* הופך את tbody לגליל */
+.scores-table tbody {
+  display: block;
+  max-height: 50vh;
+  overflow-y: auto;
+  scrollbar-color: #888 rgba(255, 200, 222, 0.1);
+}
+
+/* משאיר את הכותרת קבועה */
+.scores-table thead,
+.scores-table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+
+
+.no-results2 {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.no-results2-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.no-results2-icon {
+  font-size: 3rem;
+  color: var(--secondary-text);
+  opacity: 0.5;
+}
+
+.no-results2 h3 {
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+
+.no-results2 p {
+  color: var(--secondary-text);
+}

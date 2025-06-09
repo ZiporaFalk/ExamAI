@@ -109,10 +109,10 @@ const StudentTable = observer(() => {
                     <Search className="search-icon" />
                     <input
                         type="text"
-                        placeholder="Search by name, ID, class or email..."
+                        placeholder="      ...Search by name, ID, class or email"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="search-input"
+                        className="search-input2"
                     />
                 </div>
             </motion.div>

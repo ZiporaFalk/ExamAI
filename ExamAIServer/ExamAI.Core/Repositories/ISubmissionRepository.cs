@@ -1,4 +1,5 @@
 ﻿using ExamAI.Core.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,16 +14,13 @@ namespace ExamAI.Core.Repositories
 
         Task<Submission> GetAsync(int student_id, int exam_id);
         Task<List<Submission>> GetAllByIdAsync(int id);
-        Task PostAsync(Submission newSubmission);
         //////////
+        Task<List<Submission>> GetAllSubmissionsAsync();
         ///
+        Task PostAsync(Submission newSubmission);
         Task<Submission> GetByIdAsync(int id);
         Task UpdateAsync(int id, Submission submission);
         Task UpdateScoreAsync(int id, int score);
-
-        //Task UpdateScoreAsync(int studentId, int examId, int newScore);
-        //Task UpdateUrlsAsync(int studentId, int examId, string urlFile, string urlFeedback);
-        //
         Task<List<Submission>> GetAllAsync();
         Task<double> GetAvgAsync(int studentId, string sub = null);
 
