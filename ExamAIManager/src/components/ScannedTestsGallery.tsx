@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
-    Download, Eye, Search, Grid, List, FileText, Calendar, User, X, ArrowRight, ZoomIn, ZoomOut, RotateCcw
+    Download, Eye, Search, Grid, List, FileText, Calendar, X, ArrowRight, ZoomIn, ZoomOut, RotateCcw
 } from 'lucide-react';
 import { Exam } from '../utils/types';
 import ExamService from '../services/examService';
