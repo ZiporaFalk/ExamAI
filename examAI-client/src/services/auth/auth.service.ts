@@ -35,7 +35,6 @@ export class AuthService {
       this.userProfileSubject.next(JSON.parse(storedProfile));
     }
     console.log("kjihj");
-
   }
 
   login(email: string, password: string): Observable<LoginResponse> {
