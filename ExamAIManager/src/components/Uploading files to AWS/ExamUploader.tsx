@@ -17,7 +17,7 @@ const ExamUploader: React.FC = () => {
     const { students, exams, isStudentTest, files, setIsAbleNext } = useContext(StepperDataContext)!
 
     const sendMail = async (student: Student, exam: Exam) => {
-        const link = `https://examaiclient.onrender.com`; 
+        const link = `https://examaiclient.onrender.com`;
         const body = `
             📑 שלום וברוך הבא למערכת בדיקת המבחנים שלנו!<br><br>
             רצינו לעדכן שהמבחן שעשית ב-${exam.subject} נבדק ונכנס למערכת 😂<br>
@@ -29,17 +29,17 @@ const ExamUploader: React.FC = () => {
         const email = student.email!;
         await EmailService.sendMail(body, subject, email);
     };
-    
+
     const handleUpload = async () => {
 
-        if (!files.length) return alert("נא לבחור קבצים");
+        if (!files.length) return console.log("נא לבחור קבצים");
         console.log("uploadAll");
         console.log("students.length:", students.length);
         console.log("exams.length:", exams.length);
         console.log("files.length:", files.length);
         console.log("files:", files);
         console.log({ files, students, exams });
-        
+
         try {
             const res = await ExamUploadService.uploadAll(
                 files,

@@ -106,12 +106,6 @@ const ExamUploadService = {
             handleAxiosError(e, "Error download-url")
         }
     }
-
-    // const params = {
-    //     Url: encodeURIComponent(url),
-    //     IsStudentTest: true,
-    //     IsDownload: IsDownload,
-    //   };
 }
 
 

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Amazon.S3;
 using Amazon;
 using Amazon.Runtime;
-using ExamAI.Data;  // וודא שיש רק using אחד עם DataContext מתאים
+using ExamAI.Data; 
 
 namespace ExamAI.API.Extensions
 {

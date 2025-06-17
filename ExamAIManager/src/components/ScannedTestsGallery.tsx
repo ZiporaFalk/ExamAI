@@ -274,7 +274,7 @@ const ScannedTestsGallery = () => {
                         <div className="modal-header">
                             <button className="back-btn" onClick={closeModal}>
                                 <ArrowRight size={20} />
-                                <span>חזרה לגלריה</span>
+                                <span>Back to gallery</span>
                             </button>
 
                             <div className="modal-controls">

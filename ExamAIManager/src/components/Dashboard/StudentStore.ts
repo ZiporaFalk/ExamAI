@@ -79,7 +79,6 @@ class StudentStore {
             console.error("Error fetching all scores:", error);
         }
     }
-    // ............................................
     
     // async fetchScores() {
     //     const newScores = new Map<number, Map<number, Submission>>();

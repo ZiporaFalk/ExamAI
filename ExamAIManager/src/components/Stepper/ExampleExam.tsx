@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { extractAnswersAfterHu, extractHebrewLettersWithDot } from "../../utils/DataExtraction";
+import { extractAnswersAfterHu, extractDateAndSubject, extractHebrewLettersWithDot } from "../../utils/DataExtraction";
 import { Exam } from "../../utils/types";
 import StepperDataContext from "./StepperDataContext";
 import { Outlet } from "react-router-dom";
@@ -17,10 +17,7 @@ const ExampleExam = () => {
     const AddNewExam = async (DecodedExam: any) => {
         const classIndex = DecodedExam.findIndex((myname: any) => myname.description.includes("כיתה"))
         const classs = DecodedExam[classIndex + 2].description + DecodedExam[classIndex + 3].description;
-        const dateIndex = DecodedExam.findIndex((myname: any) => myname.description.includes("תאריך"))
-        const dateExam = DecodedExam[dateIndex + 2].description + DecodedExam[dateIndex + 3].description + ' ' + DecodedExam[dateIndex + 4].description + ' ' + DecodedExam[dateIndex + 5].description
-        const subjectIndex = DecodedExam.findIndex((myname: any) => myname.description.includes("מקצוע"))
-        const subject = DecodedExam[subjectIndex + 2].description + ' ' + DecodedExam[subjectIndex + 3].description
+        const { subject, dateExam } = await extractDateAndSubject(DecodedExam)
         const urlNewExam = `exams/Results/${subject}/${subject}-${dateExam}.jpg`
         const response = await ExamService.addExam(classs, dateExam, subject, urlNewExam)
         console.log(response);
@@ -45,26 +42,7 @@ const ExampleExam = () => {
         setIsFinished(false);
         setTotalCount(selectedImages.length);
         setProgress(0);
-        // setProcessedCount(0);
         const allExams: Exam[] = [];
-        // selectedImages.map(async (image, index) => {
-        //     try {
-        //         const result = await AnalyzeImageService.analyzeImage(image);
-        //         console.log("פלט OCR:", result);
-        //         const newExam = await AddNewExam(result);
-        //         console.log("נוצר מבחן חדש עם ID:", newExam.id);
-        //         await AddNewAnswers(result, newExam.id);
-        //         allExams.push(newExam);
-        //         const newProcessedCount = index + 1;
-        //         setProcessedCount(newProcessedCount);
-        //         setProgress((newProcessedCount / selectedImages.length) * 100);
-        //     } catch (error) {
-        //         console.error("שגיאה בפענוח מבחן:", error);
-        //         const newProcessedCount = index + 1;
-        //         setProcessedCount(newProcessedCount);
-        //         setProgress((newProcessedCount / selectedImages.length) * 100);
-        //     }
-        // })
         const promises = selectedImages.map(async (image) => {
             try {
                 const result = await AnalyzeImageService.analyzeImage(image);
@@ -74,19 +52,16 @@ const ExampleExam = () => {
             } catch (error) {
                 console.error("שגיאה בפענוח מבחן:", error);
             } finally {
-                // const newProcessedCount = index + 1;
-                setProcessedCount(prev => prev + 1); // ← זה נכון גם אם הבטחות רצות במקביל
+                setProcessedCount(prev => prev + 1);
                 setProgress((prev) => ((prev + 1) / selectedImages.length) * 100);
             }
         });
-        await Promise.all(promises); // ← מחכה שכל הבדיקות יסתיימו
+        await Promise.all(promises); 
 
         setExams(allExams);
-        // setTimeout(() => {
         setIsLoading(false)
         setIsFinished(true)
         setIsAbleNext(true)
-        // }, 5000);
     };
 
     return (

@@ -40,7 +40,7 @@ const CheckStudentExams = () => {
 
   const CheckTheTest = async (data: any[]) => {
     console.log(data);
-    const dateAndSubject = extractDateAndSubject(data);
+    const dateAndSubject =await extractDateAndSubject(data);
     console.log(dateAndSubject);
     const exam = await ExamService.getBySubjectAndDate(dateAndSubject)
     console.log(exam);
