@@ -78,40 +78,32 @@ export class AuthService {
         // טיפול בשגיאה מסוג 400 עם הודעה מותאמת מהשרת
         if (error.status === 400) {
           console.log(error);
-
           const message = error.error || 'Registration failed';
           return throwError(() => ({
             status: 400,
             message
           }));
         }
-        // טיפול בשגיאות אחרות
         return throwError(() => error);
       }),
-      switchMap((res) => {
+      tap(res => {
         const decodedToken: any = jwtDecode(res.token);
         const userId = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
-
+        const name = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]
         if (!userId) {
-          return throwError(() => new Error('User ID not found in token'));
+          throw new Error('User ID not found in token');
         }
-
+        const profile = {
+          id: userId,
+          name: name,
+          email: data.email || '',
+          picture: '/images/background.jpg',
+        };
+        localStorage.setItem('profile', JSON.stringify(profile));
+        localStorage.setItem("token", res.token);
+        localStorage.setItem("userId", userId);
+        this.userProfileSubject.next(profile);
         this.isLoggedInSubject.next(true);
-
-        return this.studentService.getStudentById(userId).pipe(
-          tap((student: Student) => {
-            const profile = {
-              id: student.id || 0,
-              name: student.name,
-              email: student.email || '',
-              picture: '/images/background.jpg',
-            };
-            localStorage.setItem('profile', JSON.stringify(profile));
-            localStorage.setItem("token", res.token);
-            localStorage.setItem("userId", userId);
-            this.userProfileSubject.next(profile);
-          })
-        );
       })
     );
   }
@@ -132,8 +124,6 @@ export class AuthService {
       }),
       tap(res => {
         console.log(res);
-
-        // רק אם הצליח – לשמור פרופיל וטוקן
         const profile = {
           id: res.userId,
           name: decodedToken.name,
