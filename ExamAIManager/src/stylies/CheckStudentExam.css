@@ -195,9 +195,9 @@
     align-items: center;
 }
 
-.spinner {
-    width: 3rem;
-    height: 3rem;
+.spinner-check {
+    width: 4rem;
+    height: 4rem;
     border: 3px solid #475569;
     border-top: 3px solid #3b82f6;
     border-radius: 50%;

@@ -40,7 +40,7 @@ const CheckStudentExams = () => {
 
   const CheckTheTest = async (data: any[]) => {
     console.log(data);
-    const dateAndSubject =await extractDateAndSubject(data);
+    const dateAndSubject = extractDateAndSubject(data);
     console.log(dateAndSubject);
     const exam = await ExamService.getBySubjectAndDate(dateAndSubject)
     console.log(exam);
@@ -199,7 +199,7 @@ const CheckStudentExams = () => {
                 </div>
               </div>
               <div className="loading-animation">
-                <div className="spinner"></div>
+                <div className="spinner-check"></div>
               </div>
             </div>
           </div>

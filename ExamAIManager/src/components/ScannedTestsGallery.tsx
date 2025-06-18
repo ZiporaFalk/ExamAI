@@ -146,7 +146,7 @@ const ScannedTestsGallery = () => {
                     </div>
                     <h2 className="loading-text">Loading tests...</h2>
                     <div className="loading-progress">
-                        <div className="progress-bar"></div>
+                        <div className="progress-bar2"></div>
                     </div>
                 </div>
             </div>
