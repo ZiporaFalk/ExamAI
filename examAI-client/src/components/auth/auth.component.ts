@@ -146,15 +146,7 @@ export class AuthComponent {
         next: () => {
           console.log("נרשמת בהצלחה"),
           this.message = 'register successful'
-          // this.messageType = 'success'
-          // this.router.navigate(['/home']); // או לכל נתיב שתרצי
-          // ....................................................
-          // הצג הודעת הצלחה
           this.showNotification(this.message, 'success');
-          // המתן 2 שניות לפני המעבר כדי שהמשתמש יראה את ההודעה
-          // setTimeout(() => {
-          //   this.router.navigate(['/home']);
-          // }, 2000);
         },
         error: (err) => {
           let errorMessage = '';
@@ -162,12 +154,10 @@ export class AuthComponent {
             errorMessage=   err.message || "Student not found";
           }
           if (err.status == 400) {
-            // errorMessage = "Error, This email does not exist on Google Sheets, you cannot register with the system!";
             errorMessage=   err.message || "Error in register";
           } else {
             errorMessage = "Oops, something went wrong";
             console.log(err.error);
-            
           }          
           this.showNotification(errorMessage, 'error');
           console.error("שגיאה בהרשמה", err);
