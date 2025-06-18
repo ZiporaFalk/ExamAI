@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
-import { Student } from '../../models/Student';
-import { StudentService } from '../student/student.service';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -29,7 +27,7 @@ export class AuthService {
   private userProfileSubject = new BehaviorSubject<GoogleJwtPayload | null>(null);
   userProfile$ = this.userProfileSubject.asObservable();
 
-  constructor(private http: HttpClient, private studentService: StudentService) {
+  constructor(private http: HttpClient) {
     const storedProfile = localStorage.getItem('profile');
     if (storedProfile) {
       this.userProfileSubject.next(JSON.parse(storedProfile));
